@@ -25,15 +25,17 @@ configure do
   end
 
   get '/auth/g/callback' do
+    request.env["omniauth.auth"]['uid']
+
     if auth = request.env['omniauth.auth']
-      if request.env["omniauth.auth"]['extra']['raw_info']['hd'] == "hadashboard.heroku.com"
+      if request.env["omniauth.auth"]['uid'] == "florian.zitzelsberger@gmail.com"
         session[:user_id] = auth['info']['email']
         redirect '/'
-      else
-        redirect '/auth/bad'
+      #else
+        #redirect '/auth/bad'
       end
-    else
-      redirect '/auth/failure'
+    #else
+      #redirect '/auth/failure'
     end
   end
 
