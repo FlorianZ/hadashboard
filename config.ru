@@ -1,3 +1,5 @@
+require 'openid/store/filesystem'
+require 'omniauth/strategies/google_apps'
 require 'dashing'
 
 configure do
@@ -11,11 +13,7 @@ configure do
 
   use Rack::Session::Cookie
   use OmniAuth::Builder do
-    provider
-    	:google_apps,
-    	:store => OpenID::Store::Filesystem.new('./tmp'),
-    	:name => 'g',
-    	:domain => 'hadashboard.heroku.com'
+    provider :google_apps, :store => OpenID::Store::Filesystem.new('./tmp'), :name => 'g', :domain => 'hadashboard.heroku.com'
   end
 
   post '/auth/g/callback' do
