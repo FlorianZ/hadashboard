@@ -8,7 +8,7 @@ configure do
   helpers do
     def protected!
       if ENV["GOOGLE_CLIENT_ID"]
-        redirect '/auth/g' unless session[:user_id]
+        redirect '/auth/google' unless session[:user_id]
       end
     end
   end
