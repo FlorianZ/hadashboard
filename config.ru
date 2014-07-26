@@ -24,7 +24,7 @@ configure do
       :provider_ignores_state => true
   end
 
-  get '/auth/g/callback' do
+  get '/auth/google/callback' do
     request.env["omniauth.auth"]['info']['email']
 
     if auth = request.env['omniauth.auth']
