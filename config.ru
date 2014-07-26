@@ -19,16 +19,16 @@ configure do
       ENV["GOOGLE_CLIENT_ID"],
       ENV["GOOGLE_CLIENT_SECRET"],
       :store => OpenID::Store::Filesystem.new('./tmp'),
-      :name => 'g',
-      :domain => 'radiusnetworks.com',
+      :name => 'google',
+      :scope => 'email',
       :provider_ignores_state => true
   end
 
   get '/auth/g/callback' do
-    request.env["omniauth.auth"]['uid']
+    request.env["omniauth.auth"]['info']['email']
 
     if auth = request.env['omniauth.auth']
-      if request.env["omniauth.auth"]['uid'] == "florian.zitzelsberger@gmail.com"
+      if auth['info']['email'] == "florian.zitzelsberger@gmail.com"
         session[:user_id] = auth['info']['email']
         redirect '/'
       else
@@ -40,11 +40,11 @@ configure do
   end
 
   get '/auth/failure' do
-    request.env
+    "Authentication failure."
   end
 
   get '/auth/bad' do
-    request.env
+    "Access denied."
   end
 end
 
