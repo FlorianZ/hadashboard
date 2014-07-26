@@ -31,20 +31,20 @@ configure do
       if request.env["omniauth.auth"]['uid'] == "florian.zitzelsberger@gmail.com"
         session[:user_id] = auth['info']['email']
         redirect '/'
-      #else
-        #redirect '/auth/bad'
+      else
+        redirect '/auth/bad'
       end
-    #else
-      #redirect '/auth/failure'
+    else
+      redirect '/auth/failure'
     end
   end
 
   get '/auth/failure' do
-    'Authentication failure.'
+    request.env
   end
 
   get '/auth/bad' do
-    'Bad authentication.'
+    request.env
   end
 end
 
