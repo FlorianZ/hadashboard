@@ -3,7 +3,7 @@ require 'omniauth-google-oauth2'
 require 'dashing'
 
 configure do
-  set :auth_token, 'YOUR_AUTH_TOKEN'
+  set :auth_token, ENV["API_AUTH_TOKEN"]
 
   helpers do
     def protected!

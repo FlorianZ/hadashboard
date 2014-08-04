@@ -22,3 +22,11 @@ class Dashing.Number extends Dashing.Widget
         c.replace /\bstatus-\S+/g, ''
       # add new class
       $(@get('node')).addClass "status-#{data.status}"
+
+  onClick: (node, event) ->
+    $.post '/smartthings/dispatch',
+      widgetId: @get('id'),
+      deviceId: 'Console Lamp',
+      command: 'toggle'
+      (data) ->
+        alert data

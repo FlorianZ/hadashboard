@@ -1,4 +1,4 @@
-<% content_for :title do %>My super sweet dashboard<% end %>
+<% content_for :title do %>HADashboard<% end %>
 <div class="gridster">
   <ul>
     <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
@@ -13,13 +13,16 @@
       <div data-id="buzzwords" data-view="List" data-unordered="true" data-title="Buzzwords" data-moreinfo="# of times said around the office"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="valuation" data-view="Number" data-title="Current Valuation" data-moreinfo="In billions" data-prefix="$"></div>
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
+      <div data-id="valuation" data-view="Number" data-title="Current Valuation" data-moreinfo="In billions" data-prefix="$" data-event-click="onClick"></div>
     </li>
 
     <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
       <div data-id="convergence" data-view="Graph" data-title="Convergence" style="background-color:#ff9618"></div>
     </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="officelamp" data-view="Stswitch" data-title="Office Lamp" data-device="Office Lamp" data-event-click="onClick"></div>
+    </li>
   </ul>
-  <center><div style="font-size: 12px">Try this: curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" }' \http://<%=request.host%>:<%=request.port%>/widgets/welcome</div></center>
 </div>

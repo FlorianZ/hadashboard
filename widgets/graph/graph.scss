@@ -37,7 +37,7 @@ $tick-color:        rgba(0, 0, 0, 0.4);
   .more-info {
     color: $moreinfo-color;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 100%;
     margin-top: 0;
   }
 
@@ -45,7 +45,7 @@ $tick-color:        rgba(0, 0, 0, 0.4);
     position: absolute;
     bottom: 0;
     .title {
-      font-size: 20px;
+      font-size: 100%;
       color: $tick-color;
       opacity: 0.5;
       padding-bottom: 3px;
@@ -53,7 +53,7 @@ $tick-color:        rgba(0, 0, 0, 0.4);
   }
 
   .y_ticks {
-    font-size: 20px;
+    font-size: 100%;
     fill: $tick-color;
     fill-opacity: 1;
   }

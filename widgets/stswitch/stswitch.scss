@@ -1,16 +1,14 @@
 // ----------------------------------------------------------------------------
 // Sass declarations
 // ----------------------------------------------------------------------------
-$background-color:  #47bbb3;
-$value-color:       #fff;
-
-$title-color:       rgba(255, 255, 255, 0.7);
-$moreinfo-color:    rgba(255, 255, 255, 0.7);
+$background-color:  #888888;
+$title-color:       #fff;
+$value-color:		#fff;
 
 // ----------------------------------------------------------------------------
-// Widget-number styles
+// Widget styles
 // ----------------------------------------------------------------------------
-.widget-number {
+.widget-stswitch {
 
   background-color: $background-color;
 
@@ -18,22 +16,10 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
     color: $title-color;
   }
 
-  .value {
-    color: $value-color;
-  }
-
-  .change-rate {
+  .on-off-icon {
     font-weight: 500;
     font-size: 150%;
     color: $value-color;
-  }
-
-  .more-info {
-    color: $moreinfo-color;
-  }
-
-  .updated-at {
-    color: rgba(0, 0, 0, 0.3);
   }
 
 }

@@ -117,6 +117,8 @@ PLATFORMS
 
 DEPENDENCIES
   dashing
+  json
   oa-openid
+  oauth2
   omniauth-google-oauth2
   twitter (>= 5.9.0)

@@ -44,7 +44,7 @@ html {
 body {
   margin: 0;
   background-color: $background-color;
-  font-size: 20px;
+  font-size: 15px;
   color: $text-color;
   font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -92,19 +92,19 @@ h1, h2, h3, h4, h5, p {
   margin: 0;
 }
 h1 {
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   text-align: center;
-  font-size: 30px;
+  font-size: 150%;
   font-weight: 400;
 }
 h2 {
   text-transform: uppercase;
-  font-size: 76px;
+  font-size: 380%;
   font-weight: 700;
   color: $text-color;
 }
 h3 {
-  font-size: 25px;
+  font-size: 125%;
   font-weight: 600;
   color: $text-color;
 }
@@ -124,7 +124,7 @@ h3 {
   left: 0;
   top: 0;
   opacity: 0.1;
-  font-size: 275px;
+  font-size: 1375%;
   text-align: center;
   margin-top: 82px;
 }
@@ -144,7 +144,7 @@ h3 {
 }
 
 .widget {
-  padding: 25px 12px;
+  padding: 0px 0px;
   text-align: center;
   width: 100%;
   display: table-cell;
@@ -179,15 +179,15 @@ h3 {
 }
 
 .more-info {
-  font-size: 15px;
+  font-size: 75%;
   position: absolute;
-  bottom: 32px;
+  bottom: 16px;
   left: 0;
   right: 0;
 }
 
 .updated-at {
-  font-size: 15px;
+  font-size: 75%;
   position: absolute;
   bottom: 12px;
   left: 0;
@@ -223,7 +223,7 @@ h3 {
   background: white;
   top: 100px;
   color: black;
-  font-size: 15px;
+  font-size: 75px;
   padding-bottom: 4px;
 
   textarea {
