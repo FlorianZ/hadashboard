@@ -1,14 +1,14 @@
 // ----------------------------------------------------------------------------
 // Sass declarations
 // ----------------------------------------------------------------------------
-$background-color:  #888888;
+$background-color:  #45B4D5;
+
 $title-color:       rgba(255, 255, 255, 0.7);
-$value-color:		#fff;
 
 // ----------------------------------------------------------------------------
-// Widget styles
+// Widget-sttemp styles
 // ----------------------------------------------------------------------------
-.widget-stswitch {
+.widget-sttemp {
 
   background-color: $background-color;
 
@@ -16,10 +16,12 @@ $value-color:		#fff;
     color: $title-color;
   }
 
-  .on-off-icon {
-    font-weight: 500;
-    font-size: 150%;
-    color: $value-color;
+  .value {
+  	color: #fff;
+  }
+
+  .updated-at {
+    color: rgba(0, 0, 0, 0.3);
   }
 
 }

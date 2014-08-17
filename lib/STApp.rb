@@ -38,7 +38,7 @@ class STApp
       verb, @endpoint + '/' + url, {
         body: JSON.generate(data), 
         headers: {'Content-Type'=>"application/json"} })
-    result.parsed()
+    result.body()
   end
 
   def refreshToken()

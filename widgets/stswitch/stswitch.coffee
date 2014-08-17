@@ -1,4 +1,7 @@
 class Dashing.Stswitch extends Dashing.Widget
+  constructor: ->
+    super
+    @queryState()
 
   @accessor 'state',
     get: -> @_state ? "off"
@@ -16,18 +19,30 @@ class Dashing.Stswitch extends Dashing.Widget
     else
       $(@node).css 'background-color', '#888888'
 
+  queryState: ->
+    $.get '/smartthings/dispatch',
+      widgetId: @get('id'),
+      deviceType: 'switch',
+      deviceId: @get('device')
+      (data) =>
+        json = JSON.parse data
+        @set 'state', json.switch
+        @updateBackgroundColor()
+
+  toggleState: ->
+    newState = @get 'stateInverse'
+    @set 'state', newState
+    @updateBackgroundColor()
+    return newState
+
   ready: ->
 
   onData: (data) ->
     @updateBackgroundColor()
 
   onClick: (node, event) ->
+    newState = @toggleState()
     $.post '/smartthings/dispatch',
-      widgetId: @get('id'),
       deviceType: 'switch',
       deviceId: @get('device'),
-      command: @get('stateInverse')
-      (data) =>
-        @set 'state', @get 'stateInverse'
-        @updateBackgroundColor()
-        
+      command: newState

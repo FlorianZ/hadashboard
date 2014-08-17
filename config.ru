@@ -3,12 +3,13 @@ require 'omniauth-google-oauth2'
 require 'dashing'
 
 configure do
-  set :auth_token, ENV["API_AUTH_TOKEN"]
+  set :auth_token, 'YOUR_AUTH_TOKEN'
+  set :user, 'florian.zitzelsberger@gmail.com'
 
   helpers do
     def protected!
       if ENV["GOOGLE_CLIENT_ID"]
-        redirect '/auth/google' unless session[:user_id]
+        redirect '/auth/google' unless session[:user_id] == settings.user
       end
     end
   end
@@ -25,10 +26,8 @@ configure do
   end
 
   get '/auth/google/callback' do
-    request.env["omniauth.auth"]['info']['email']
-
     if auth = request.env['omniauth.auth']
-      if auth['info']['email'] == "florian.zitzelsberger@gmail.com"
+      if auth['info']['email'] == settings.user
         session[:user_id] = auth['info']['email']
         redirect '/'
       else

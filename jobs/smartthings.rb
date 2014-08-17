@@ -13,8 +13,9 @@ end
 
 get '/smartthings/oauth/callback' do
   app.acquireToken(params[:code])
-  # app.request(:post, 'config', {
-  #   eventURI: host_uri, authToken: ENV["API_AUTH_TOKEN"]})
+  app.request(:post, 'config', {
+    dashingURI: host_uri,
+    dashingAuthToken: settings.auth_token})
   redirect '/'
 end
 
@@ -26,6 +27,9 @@ post '/smartthings/dispatch' do
   app.request(:post, params['deviceType'], params)
 end
 
-SCHEDULER.every '1m', :first_in => 0 do |job|
-  send_event('widget_id', { })
+SCHEDULER.every '5m', :first_in => 0 do |job|
+  # temps = app.request(:get, 'temperature', {})
+  # temps.each do |key, value|
+  #   send_event(value[:widgetId], temps.select{|k,v| k != 'widgetId'})
+  # end
 end

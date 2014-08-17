@@ -1,0 +1,58 @@
+$background-color: darkturquoise
+
+.widget-klimato
+  background-color: $background-color
+  transition: background-color 2s linear
+  -moz-transition: background-color 2s linear
+  -o-transition: background-color 2s linear
+  -webkit-transition: background-color 2s linear
+
+  h1
+    display: inline-block
+    vertical-align: middle
+    font-size: 380%
+    font-weight: 700
+
+    &:after
+      content: "\00b0"
+
+  h2
+    display: inline-block
+    vertical-align: middle
+    font-size: 100px
+    font-family: "Climacons-Font"
+
+  h3
+    width: 100%
+    margin-top: -25px
+    text-transform: uppercase
+    font-size: 15px
+    letter-spacing: 2px
+
+  .updated-at
+    text-transform: uppercase
+    letter-spacing: 1px
+    font-size: 10px
+    color: lighten($background-color, 15%)
+
+// background colors
+
+$background-colors: #52a5ff #48efff #4dff5a #ffe33d #ff9d37 #ff5131 #ff2c59
+
+=klimato-background($color, $percentage: 25%)
+  background-color: $color
+
+  .updated-at
+    color: lighten($color, $percentage)
+
+@for $index from 0 through 6
+  .klimato-temperature-#{$index}
+    +klimato-background(nth($background-colors, $index + 1))
+
+// climacons
+
+$climacons: "\e037" "\e009" "\e009" "\e025" "\e025" "\e00f" "\e015" " \e00f" "\e00c" "\e00c" "\e00f" "\e006" "\e006" "\e015" "\e018" "\e018" "\e018" "\e012" "\e00f" "\e01e" "\e01b" "\e01e" "\e01e" "\e01e" "\e021" "\e01b" "\e000" "\e002" "\e001" "\e002" "\e001" "\e02d" "\e028" "\e001" "\e002" "\e012" "\e028" "\e025" "\e025" "\e025" "\e006" "\e036" "\e036" "\e036" "\e000" "\e025" "\e036" "\e025"
+
+@for $index from 0 through 47
+  .klimato-#{$index}:before
+    content: nth($climacons, $index + 1)
