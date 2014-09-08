@@ -27,9 +27,31 @@ post '/smartthings/dispatch' do
   app.request(:post, params['deviceType'], params)
 end
 
-SCHEDULER.every '5m', :first_in => 0 do |job|
-  # temps = app.request(:get, 'temperature', {})
-  # temps.each do |key, value|
-  #   send_event(value[:widgetId], temps.select{|k,v| k != 'widgetId'})
-  # end
+SCHEDULER.every '15m', :first_in => 1 do |job|
+  weather = app.request(:get, 'weather', {
+    feature: 'conditions'})
+  if weather
+    weather = JSON.parse(weather)
+    send_event('weather', {
+      now_temp: weather["current_observation"]["temp_f"],
+      humidity: weather["current_observation"]["relative_humidity"],
+      wind_speed: weather["current_observation"]["wind_mph"],
+      wind_speed_gust: weather["current_observation"]["wind_gust_mph"],
+      wind_dir: weather["current_observation"]["wind_dir"]})
+  end
+
+  forecast = app.request(:get, 'weather', {
+    feature: 'forecast'})
+  if forecast
+    forecast = JSON.parse(forecast)
+    send_event('weather', {
+      temp_low: forecast["forecast"]["simpleforecast"]["forecastday"][0]["low"]["fahrenheit"],
+      temp_high: forecast["forecast"]["simpleforecast"]["forecastday"][0]["high"]["fahrenheit"],
+      icon: forecast["forecast"]["simpleforecast"]["forecastday"][0]["icon"],
+      precip: forecast["forecast"]["simpleforecast"]["forecastday"][0]["pop"],
+      tomorrow_temp_low: forecast["forecast"]["simpleforecast"]["forecastday"][1]["low"]["fahrenheit"],
+      tomorrow_temp_high: forecast["forecast"]["simpleforecast"]["forecastday"][1]["high"]["fahrenheit"],
+      tomorrow_icon: forecast["forecast"]["simpleforecast"]["forecastday"][1]["icon"],
+      tomorrow_precip: forecast["forecast"]["simpleforecast"]["forecastday"][1]["pop"]})
+  end
 end

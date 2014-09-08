@@ -4,7 +4,7 @@ class Dashing.Sttemp extends Dashing.Widget
     @queryState()
 
   @accessor 'value',
-    get: -> @_value ? 0
+    get: -> if @_value then Math.floor(@_value) else 0
     set: (key, value) -> @_value = value
 
   queryState: ->

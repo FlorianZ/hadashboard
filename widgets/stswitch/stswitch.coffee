@@ -4,11 +4,12 @@ class Dashing.Stswitch extends Dashing.Widget
     @queryState()
 
   @accessor 'state',
-    get: -> @_state ? "off"
+    get: -> @_state ? 'off'
     set: (key, value) -> @_state = value
 
-  @accessor 'state-icon', ->
-    if @get('state') == 'on' then 'icon-lightbulb' else 'icon-lightbulb'
+  @accessor 'icon',
+    get: -> @['icon'] ? 'power-off'
+    set: Batman.Property.defaultAccessor.set
 
   @accessor 'stateInverse', ->
     if @get('state') == 'on' then 'off' else 'on'
@@ -18,6 +19,12 @@ class Dashing.Stswitch extends Dashing.Widget
       $(@node).css 'background-color', '#42C873'
     else
       $(@node).css 'background-color', '#888888'
+
+  toggleState: ->
+    newState = @get 'stateInverse'
+    @set 'state', newState
+    @updateBackgroundColor()
+    return newState
 
   queryState: ->
     $.get '/smartthings/dispatch',
@@ -29,11 +36,16 @@ class Dashing.Stswitch extends Dashing.Widget
         @set 'state', json.switch
         @updateBackgroundColor()
 
-  toggleState: ->
-    newState = @get 'stateInverse'
-    @set 'state', newState
-    @updateBackgroundColor()
-    return newState
+  postState: ->
+    newState = @toggleState()
+    $.post '/smartthings/dispatch',
+      deviceType: 'switch',
+      deviceId: @get('device'),
+      command: newState,
+      (data) =>
+        json = JSON.parse data
+        if json.error != 0
+          @toggleState()
 
   ready: ->
 
@@ -41,8 +53,4 @@ class Dashing.Stswitch extends Dashing.Widget
     @updateBackgroundColor()
 
   onClick: (node, event) ->
-    newState = @toggleState()
-    $.post '/smartthings/dispatch',
-      deviceType: 'switch',
-      deviceId: @get('device'),
-      command: newState
+    @postState()

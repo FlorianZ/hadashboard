@@ -1,0 +1,90 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #F5BC00;
+
+$title-color:       rgba(255, 255, 255, 0.7);
+
+// ----------------------------------------------------------------------------
+// Widget-stmode styles
+// ----------------------------------------------------------------------------
+.widget-stweather {
+
+  background-color: $background-color;
+
+  h1 {
+  	margin-bottom: 0px;
+  }
+
+  [class^="primary"] {
+  	display: inline-block;
+  	vertical-align: middle;
+  	padding: 0;
+  	margin-left: 10px;
+  	margin-right: 10px;
+  	margin-top: 0px;
+  	margin-bottom: 0px;
+  }
+
+  [class^="secondary"] {
+  	display: inline-block;
+  	vertical-align: middle;
+  	padding: 0;
+  	margin-left: 0px;
+  	margin-right: 0px;
+  	margin-top: 0px;
+  	margin-bottom: 0px;
+  	color: rgba(255, 255, 255, 0.7);
+  }
+
+  .primary-climacon {
+  	font-family: "Climacons-Font";
+  	font-size: 90px;
+  }
+
+  .primary-info {
+   	font-size: 380%;
+  	font-weight: 700;
+  }
+
+  .primary-unit {
+    font-size: 250%;
+    font-weight: 400;
+    margin-left: 0;
+    margin-top: 15px;
+    vertical-align: top;
+  }
+
+  .secondary-icon {
+  	font-family: "Climacons-Font";
+  	font-size: 40px;
+  	margin-left: 10px;
+  	margin-right: 0px;
+  }
+
+  .secondary-climacon {
+  	font-family: "Climacons-Font";
+  	font-size: 55px;
+  	margin-left: 10px;
+  	margin-right: 10px;
+  }
+
+  .secondary-info {
+   	font-size: 170%;
+  	font-weight: 325;
+  }
+
+  hr {
+  	width: 75%;
+  	border: 0;
+  	height: 1px;
+  	background: rgba(255, 255, 255, 0.5);
+  	margin-top: 15px;
+  	margin-bottom: 15px;
+  }
+
+  .updated-at {
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+}
