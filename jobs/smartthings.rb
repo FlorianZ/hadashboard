@@ -1,6 +1,7 @@
 require 'json'
 
-host_uri = 'http://localhost:3030'
+# host_uri = 'http://localhost:3030'
+host_uri = ENV["DASHING_URI"]
 client_id = 'ef49b1d0-15ec-44cb-ba7e-820d519841fe'
 api_key = '196c0d63-65b2-4ca0-99f7-ca05e7322021'
 redirect_url = 'smartthings/oauth/callback'
