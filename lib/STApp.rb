@@ -43,7 +43,7 @@ class STApp
 
   def refreshToken()
     if @token and @token.expired?
-      @token.refresh!
+      @token = @token.refresh!
     end
   end
 
