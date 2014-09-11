@@ -3,11 +3,11 @@ require 'dashing'
 
 configure do
   set :auth_token, ENV["DASHING_AUTH_TOKEN"]
-  set :user, ENV["HEROKU_AUTH_EMAIL"]
+  set :user, ENV["HEROKU_OAUTH_EMAIL"]
 
   helpers do
     def protected!
-      if ENV["HEROKU_AUTH_EMAIL"]
+      if ENV["HEROKU_OAUTH_EMAIL"]
         redirect '/auth/heroku' unless session[:user_id] == settings.user
       end
     end
@@ -17,7 +17,7 @@ configure do
   use OmniAuth::Builder do
     provider :heroku,
       ENV["HEROKU_OAUTH_ID"],
-      ENV["HEROKU_OUTH_SECRET"],
+      ENV["HEROKU_OAUTH_SECRET"],
       fetch_info: true
   end
 
