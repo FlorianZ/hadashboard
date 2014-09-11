@@ -4,7 +4,7 @@ gem 'dashing'
 
 # Authentication
 gem 'oa-openid'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-heroku'
 gem 'oauth2'
 
 # JSON
