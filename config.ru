@@ -1,35 +1,30 @@
-require 'openid/store/filesystem'
-require 'omniauth-google-oauth2'
+require 'omniauth-heroku'
 require 'dashing'
 
 configure do
-  # set :auth_token, 'YOUR_AUTH_TOKEN'
   set :auth_token, ENV["DASHING_AUTH_TOKEN"]
-  set :user, 'florian.zitzelsberger@gmail.com'
+  set :user, ENV["HEROKU_AUTH_EMAIL"]
 
   helpers do
     def protected!
-      if ENV["GOOGLE_CLIENT_ID"]
-        redirect '/auth/google' unless session[:user_id] == settings.user
+      if ENV["HEROKU_AUTH_EMAIL"]
+        redirect '/auth/heroku' unless session[:user_id] == settings.user
       end
     end
   end
 
   use Rack::Session::Cookie
   use OmniAuth::Builder do
-    provider OmniAuth::Strategies::GoogleOauth2,
-      ENV["GOOGLE_CLIENT_ID"],
-      ENV["GOOGLE_CLIENT_SECRET"],
-      :store => OpenID::Store::Filesystem.new('./tmp'),
-      :name => 'google',
-      :scope => 'email',
-      :provider_ignores_state => true
+    provider :heroku,
+      ENV["HEROKU_OAUTH_ID"],
+      ENV["HEROKU_OUTH_SECRET"],
+      fetch_info: true
   end
 
-  get '/auth/google/callback' do
+  get '/auth/heroku/callback' do
     if auth = request.env['omniauth.auth']
       if auth['info']['email'] == settings.user
-        session[:user_id] = auth['info']['email']
+        session[:user_id] = settings.user
         redirect '/'
       else
         redirect '/auth/bad'
