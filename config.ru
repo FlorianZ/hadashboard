@@ -29,7 +29,8 @@ configure do
         session[:user_id] = settings.user
         redirect '/'
       else
-        redirect '/auth/bad'
+        # redirect '/auth/bad'
+        auth['info']['email']
       end
     else
       redirect '/auth/failure'
