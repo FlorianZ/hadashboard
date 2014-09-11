@@ -7,8 +7,10 @@ configure do
 
   helpers do
     def protected!
-      if ENV["HEROKU_OAUTH_EMAIL"]
+      if settings.user
         redirect '/auth/heroku' unless session[:user_id] == settings.user
+      else
+        redirect '/auth/notset'
       end
     end
   end
@@ -40,6 +42,10 @@ configure do
 
   get '/auth/bad' do
     "Access denied."
+  end
+
+  get '/auth/notset' do
+    "Credentials not set."
   end
 end
 
