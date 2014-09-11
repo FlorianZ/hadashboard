@@ -1,4 +1,4 @@
-require 'omniauth-heroku'
+require 'omniauth/strategies/heroku'
 require 'dashing'
 
 configure do
