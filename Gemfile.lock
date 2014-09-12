@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/heroku/omniauth-heroku.git
+  revision: fe91550d7cb036dd4f12c0505925e0086176d0cf
+  specs:
+    omniauth-heroku (0.2.0.pre)
+      omniauth (~> 1.2)
+      omniauth-oauth2 (~> 1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -7,7 +15,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.7.1)
+    coffee-script-source (1.8.0)
     daemons (1.1.9)
     dashing (1.3.4)
       coffee-script (~> 2.2.0)
@@ -27,7 +35,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     hashie (3.3.1)
     hike (1.2.3)
-    http (0.6.1)
+    http (0.6.2)
       http_parser.rb (~> 0.6.0)
     http_parser.rb (0.6.0)
     json (1.8.1)
@@ -52,9 +60,6 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
-    omniauth-heroku (0.1.1)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.0)
     omniauth-oauth2 (1.2.0)
       faraday (>= 0.8, < 0.10)
       multi_json (~> 1.3)
@@ -109,7 +114,7 @@ GEM
       memoizable (~> 0.4.0)
       naught (~> 1.0)
       simple_oauth (~> 0.2.0)
-    tzinfo (1.2.1)
+    tzinfo (1.2.2)
       thread_safe (~> 0.1)
 
 PLATFORMS
@@ -120,5 +125,5 @@ DEPENDENCIES
   json
   oa-openid
   oauth2
-  omniauth-heroku
+  omniauth-heroku!
   twitter (>= 5.9.0)
