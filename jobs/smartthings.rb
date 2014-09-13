@@ -1,16 +1,23 @@
 require 'json'
 
+# URI to the installed app root
 host_uri = ENV["DASHING_URI"] || 'http://localhost:3030'
-client_id = 'ef49b1d0-15ec-44cb-ba7e-820d519841fe'
-api_key = '196c0d63-65b2-4ca0-99f7-ca05e7322021'
-redirect_url = 'smartthings/oauth/callback'
 
-app = STApp.new(client_id, api_key, host_uri + '/' + redirect_url)
+# SmartApp credentials
+client_Id = ENV["ST_CLIENT_ID"]
+api_key = ENV["ST_API_KEY"]
 
+# Create a new STApp instance for communication with the SmartApp
+app = STApp.new(
+  client_id, api_key,
+  host_uri + '/smartthings/oauth/callback')
+
+# Must be called to authenticate with SmartThings, at least once
 get '/smartthings/authorize' do
   redirect app.authorize
 end
 
+# Authentication callback for SmartThings
 get '/smartthings/oauth/callback' do
   app.acquireToken(params[:code])
   app.request(:post, 'config', {
@@ -19,6 +26,7 @@ get '/smartthings/oauth/callback' do
   redirect '/'
 end
 
+# Dispatch requests to the SmartApp endpoint
 get '/smartthings/dispatch' do
   app.request(:get, params['deviceType'], params)
 end
@@ -27,7 +35,9 @@ post '/smartthings/dispatch' do
   app.request(:post, params['deviceType'], params)
 end
 
+# Update the weather ever so often
 SCHEDULER.every '15m', :first_in => 1 do |job|
+  # Current weather
   weather = app.request(:get, 'weather', {
     feature: 'conditions'})
   if weather
@@ -40,6 +50,7 @@ SCHEDULER.every '15m', :first_in => 1 do |job|
       wind_dir: weather["current_observation"]["wind_dir"]})
   end
 
+  # Forecast (today & tomorrow)
   forecast = app.request(:get, 'weather', {
     feature: 'forecast'})
   if forecast
