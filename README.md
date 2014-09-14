@@ -160,6 +160,9 @@ The basic anatomy of a widget is this:
 - **data-icon**: For Stswitch, the icon displayed on the tile. See http://fontawesome.io for an icon cheatsheet.
 - **data-title**: The title to be displayed on the tile.
 - **data-device**: This is the name of the device to be controlled by this Stswitch tile. Use the displayLabel as set in SmartThings. Also make sure that access has been granted to this device during authorization with SmartThings (installation step 6). You can always repeat step 6 to change access rights.
+- **data-changemode**: The mode to be "watched" by the Stmodechange widget. The widget will indicate if this mode has been set, as well as change to this mode if interacted with (touched, clicked).
+- **data-phrase**: (optional) The "Hello Home" phrase to execute when this Stmodechange widget is interacted with (touched, clicked). If this property is set, the phrase will be executed, instead of changing the mode set by **data-changemode**.
+- **data-countdown**: A delay in seconds used by the Stmodechange widget to delay the mode change / phrase execution.
 - **data-event-touchend**: Adds interactivity to this widget. Set this to **onClick** if you want the widget to react to interactions. Removing this property makes the widget static. Refers to interactivity on mobile devices.
 - **data-event-click**: Same as **data-event-touchend**, but for desktop browsers.
 
