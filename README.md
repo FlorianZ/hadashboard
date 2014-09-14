@@ -1,12 +1,16 @@
 # Installation
 
-## 1. Clone Repository
+## 1. Sign up for Heroku
+Navigate to https://www.heroku.com and sign up for a free account. No need to enter your credit card information: We will be using a free dyno.
+
+
+## 2. Clone Repository
 Clone the **hadashboard** repository to the current local directory on your machine.
 
 `git clone https://github.com/FlorianZ/hadashboard.git` 
 
 
-## 2. Install SmartApp
+## 3. Install SmartApp
 Navigate to https://graph.api.smartthings.com and log in to your SmartThings IDE account. Select the **'My SmartApps'** tab, and click the **'+ New SmartApp'** button to create a new SmartApp.
 
 Fill in the required information. The **'Name'** and **'Description'** are both required fields, but their values are not important.
