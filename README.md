@@ -175,3 +175,27 @@ The basic anatomy of a widget is this:
 - **data-event-click**: Same as **data-event-touchend**, but for desktop browsers.
 
 Please, refer to the Dashing website for instructions on how to change the grid and tile size, as well as more general instructions about widgets, their properties, and how to create new widgets.
+
+
+# Changing Dashboards
+You can also have multiple dashboards, by simply adding a new .erb file to the dashboards directory and navigating to the dashboards via **http://*your-app-name*.herokuapps.com/*dashboard-file-name-without-extension***
+
+For example, if you want to deploy multiple devices, you could have one dashboard per room and still only use one hadashboard app installation.
+
+Please refer to the Dashing website with regards to instructions on multiple dashboards, the default dashboard and cycling through dashboards.
+
+
+# Troubleshooting
+### My Dashboard is not updating or devices do not respond to interaction.
+If your dashboard is not updating or devices have stopped responding to interaction, first try to refresh your browser. If this did not help, navigate to **http://*your-app-name*.herokuapps.com/smartthings/authorize** and re-authorize with the SmartApp (installation step 6) 
+You will have to re-authorize with the SmartApp whenever you make changes to backend files (usually .rb or .erb) or the SmartApp Groovy code.
+If your dashboard stops updating or devices have stopped responding without making any changes, make sure to file a bug using the issue tracker.
+
+### I made changes to my dashboard/widgets but they don't show up in the browser.
+After making changes to any files (except the SmartApp Groovy code), you will have to commit your changes to the local git repository and then push these changes to Heroku. These commands from the local repository root should do the trick:
+
+``` bash
+$ git add .
+$ git commit -m "Replace this text with a meaningful description of your changes."
+$ git push heroku
+```
