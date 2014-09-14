@@ -95,3 +95,39 @@ $ heroku config:set \
 - **SESSION_SECRET**: Generate a new, random uuid for this, just like you did for **DASHING_AUTH_TOKEN**. This uuid/password is used to encrypt the session cookie in your browser.
 - **ST_API_KEY**: Set this to the SmartApp **'OAuth Client Secret'** from step 3.
 - **ST_CLIENT_ID**: Set this to the SmartApp **'OAuth Client ID'** from step 3.
+
+## 5. Deploy to Heroku
+To deploy the hadashboard app, all we need to do is push the git repository to Heroku. This will automatically install all the dependencies on the server, and restart the app.
+
+``` bash
+$ git push heroku
+Initializing repository, done.
+Counting objects: 301, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (171/171), done.
+Writing objects: 100% (301/301), 447.67 KiB | 537.00 KiB/s, done.
+Total 301 (delta 120), reused 301 (delta 120)
+
+-----> Ruby app detected
+-----> Compiling Ruby/Rack
+-----> Using Ruby version: ruby-2.0.0
+-----> Installing dependencies using 1.6.3
+       ...
+       
+-----> Discovering process types
+       Procfile declares types -> (none)
+       Default types for Ruby  -> console, rake, web
+
+-----> Compressing... done, 18.5MB
+-----> Launching... done, v6
+       http://your-app-name.herokuapp.com/ deployed to Heroku
+
+To git@heroku.com:your-app-name.git
+ * [new branch]      master -> master
+```
+
+To access the hadashboard app, navigate to **http://*your-app-name*.herokuapps.com**. You will be asked to grant the hadashboard app access to your Heroku account. Make sure to **Allow Access**. The hadashboard app needs access to your Heroku account in order to verify your identity. You may be asked to log in to your Heroku account, as well. Use the email address and password from step 1.
+
+You will see the default dashboard, but it will not yet have access to your SmartThings.
+
+## 6. Authorize SmartThings Access
