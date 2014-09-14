@@ -131,3 +131,8 @@ To access the hadashboard app, navigate to **http://*your-app-name*.herokuapps.c
 You will see the default dashboard, but it will not yet have access to your SmartThings.
 
 ## 6. Authorize SmartThings Access
+To grant the hadashboard access to SmartThings, you must first authorize with the SmartApp created in step 3. To do so, navigate to **http://*your-app-name*.herokuapps.com/smartthings/authorize**. Log in with your SmartThings credentials and allows access to all the devices you would like to be able to control from the hadashboard.
+
+After clicking **Authorize** you should be redirected back to the default dashboard, and you should now have access to your things.
+
+Note, that currently authorization only persists for the lifetime of the execution context of the hadashboard app. So, **whenever you restart the Heroku dyno** (such as after deploying changes - step 5) you will have to **repeat this step**. You may also have to authorize **after making changes to the SmartApp**, for the changes to take effect.
