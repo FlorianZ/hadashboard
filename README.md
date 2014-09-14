@@ -130,9 +130,37 @@ To access the hadashboard app, navigate to **http://*your-app-name*.herokuapps.c
 
 You will see the default dashboard, but it will not yet have access to your SmartThings.
 
-## 6. Authorize SmartThings Access
+## 6. Authorize with SmartThings
 To grant the hadashboard access to SmartThings, you must first authorize with the SmartApp created in step 3. To do so, navigate to **http://*your-app-name*.herokuapps.com/smartthings/authorize**. Log in with your SmartThings credentials and allows access to all the devices you would like to be able to control from the hadashboard.
 
 After clicking **Authorize** you should be redirected back to the default dashboard, and you should now have access to your things.
 
 Note, that currently authorization only persists for the lifetime of the execution context of the hadashboard app. So, **whenever you restart the Heroku dyno** (such as after deploying changes - step 5) you will have to **repeat this step**. You may also have to authorize **after making changes to the SmartApp**, for the changes to take effect.
+
+
+# Adding Widgets
+The hadashboard is a Dashing app, so make sure to read all the instructions on http://dashing.io to learn how to add widgets to your dashboard, as well as how to create new widgets. 
+
+Essentially, you will have to modify the `dashboards/main.erb` file.
+
+The basic anatomy of a widget is this:
+``` html
+<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+  <div data-id="sofalamp" data-view="Stswitch"
+    data-icon="lightbulb" data-title="Sofa" data-device="Sofa Lamp"
+    data-event-touchend="onClick"
+    data-event-click="onClick">
+  </div>
+</li>
+```
+- **data-row**, **data-col**: The position of the widget in the grid.
+- **data-sizex**, **data-sizey**: The size of the widget in terms of grid tile.
+- **data-id**: The unique id of the widget.
+- **data-view**: The type of widget to be used (Stswitch, Sttemp, etc.)
+- **data-icon**: For Stswitch, the icon displayed on the tile. See http://fontawesome.io for an icon cheatsheet.
+- **data-title**: The title to be displayed on the tile.
+- **data-device**: This is the name of the device to be controlled by this Stswitch tile. Use the displayLabel as set in SmartThings. Also make sure that access has been granted to this device during authorization with SmartThings (installation step 6). You can always repeat step 6 to change access rights.
+- **data-event-touchend**: Adds interactivity to this widget. Set this to **onClick** if you want the widget to react to interactions. Removing this property makes the widget static. Refers to interactivity on mobile devices.
+- **data-event-click**: Same as **data-event-touchend**, but for desktop browsers.
+
+Please, refer to the Dashing website for instructions on how to change the grid and tile size, as well as more general instructions about widgets, their properties, and how to create new widgets.
