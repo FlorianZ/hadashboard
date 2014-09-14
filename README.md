@@ -138,10 +138,18 @@ After clicking **Authorize** you should be redirected back to the default dashbo
 Note, that currently authorization only persists for the lifetime of the execution context of the hadashboard app. So, **whenever you restart the Heroku dyno** (such as after deploying changes - step 5) you will have to **repeat this step**. You may also have to authorize **after making changes to the SmartApp**, for the changes to take effect.
 
 
-# Adding Widgets
+# Changing Widgets
 The hadashboard is a Dashing app, so make sure to read all the instructions on http://dashing.io to learn how to add widgets to your dashboard, as well as how to create new widgets. 
 
-Essentially, you will have to modify the `dashboards/main.erb` file.
+Essentially, you will have to modify the `dashboards/main.erb` file. After modifying this file, you must commit the changes to the git repository:
+
+``` bash
+$ git add .
+$ git commit -m "Made some changes to the main.erb layout file."
+$ git push heroku
+```
+
+This will re-deploy your application, so make sure to repeat installation step 6.
 
 The basic anatomy of a widget is this:
 ``` html
