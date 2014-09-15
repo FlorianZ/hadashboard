@@ -1,21 +1,22 @@
 class Dashing.Stpower extends Dashing.Widget
+
+  @accessor 'value', Dashing.AnimatedValue
+
   constructor: ->
     super
-    @queryState()
-
-  @accessor 'value',
-    get: -> if @_value then Math.floor(@_value) else 0
-    set: (key, value) -> @_value = value
-
-  queryState: ->
-    $.get '/smartthings/dispatch',
-      widgetId: @get('id'),
-      deviceType: 'power',
-      deviceId: @get('device')
-      (data) =>
-        json = JSON.parse data
-        @set 'value', json.value
+    @observe 'value', (value) ->
+		$.get '/smartthings/dispatch',
+		  widgetId: @get('id'),
+		  deviceType: 'power',
+		  deviceId: @get('device')
+		  (data) =>
+			json = JSON.parse data
+			@set 'value', json.value
 
   ready: ->
+	stpower = $(@node).find(".stpower")
+    stpower.attr("data-bgcolor", stpower.css("background-color"))
+    stpower.attr("data-fgcolor", stpower.css("color"))
+    stpower.knob()
 
   onData: (data) ->
