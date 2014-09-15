@@ -14,6 +14,12 @@ configure do
     # Protects access to pages and redirects to the autentication page
     # if not already authenticated.
     def protected!
+      # Ignore authentication in development
+      if not production?
+        return
+      end
+
+      # Authenticate in production
       if settings.user
         redirect '/auth/heroku' unless session[:user_id] == settings.user
       else
