@@ -184,14 +184,14 @@ def getPower() {
         if (!whichMeter) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
         } else {
-            return ["deviceId": deviceId, "value": whichMeter.currentMeter]
+            return ["deviceId": deviceId, "value": whichMeter.currentPower]
         }
     }
     
     def result = [:]
     meters.each {
         result[it.displayName] = [
-            "state": it.currentMeter,
+            "value": it.currentPower,
             "widgetId": state.widgets.power[it.displayName]]}
             
     return result
