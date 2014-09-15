@@ -9,7 +9,8 @@ Dashing.gridsterLayout('[
 {"col":3,"row":3,"size_x":1,"size_y":1},
 {"col":4,"row":3,"size_x":1,"size_y":1},
 {"col":5,"row":1,"size_x":1,"size_y":1},
-{"col":6,"row":1,"size_x":1,"size_y":1}]')
+{"col":6,"row":1,"size_x":1,"size_y":1},
+{"col":7,"row":1,"size_x":1,"size_y":1}]')
 });
 </script>
 
@@ -32,17 +33,21 @@ Dashing.gridsterLayout('[
 	<li data-row="1" data-col="5" data-sizex="1" data-sizey="1">
       <div data-id="frontdoorlights" data-view="Stswitch" data-icon="lightbulb" data-title="Frontdoor" data-device="Front Door Lights" data-event-touchend="onClick" data-event-click="onClick"></div>
     </li>
-      
-	<li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
-      <div data-id="mode" data-view="Stmode" data-title="Current Mode"></div>
-    </li>  
-	
-	<li data-row="3" data-col="1" data-sizex="1" data-sizey="1">
+
+	<li data-row="3" data-col="7" data-sizex="1" data-sizey="1">
       <div data-id="reload" data-view="Reload" data-event-touchend="onClick" data-event-click="onClick"></div>
     </li>
 	
+	<li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="mode" data-view="Stmode" data-title="Current Mode"></div>
+    </li>  	
+	
+	<li data-row="3" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="occmode" data-view="Stmodechange" data-title="We're Home" data-icon="fa-home" data-changemode="Home" data-phrase="Make Occupied (Day)" data-countdown="30" data-event-touchend="onClick" data-event-click="onClick"></div>
+    </li>
+	
 	<li data-row="3" data-col="2" data-sizex="1" data-sizey="1">
-      <div data-id="nightmode" data-view="Stmodechange" data-title="Good Night" data-icon="moon" data-changemode="Night" data-phrase="Good Night!" data-countdown="30" data-event-touchend="onClick" data-event-click="onClick"></div>
+      <div data-id="unoccmode" data-view="Stmodechange" data-title="We're Away" data-icon="fa-car" data-changemode="Away" data-phrase="Make Unoccupied" data-countdown="30" data-event-touchend="onClick" data-event-click="onClick"></div>
     </li>
 	  
 	<li data-row="3" data-col="3" data-sizex="1" data-sizey="1">
