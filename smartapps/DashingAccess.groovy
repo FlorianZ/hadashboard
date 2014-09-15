@@ -28,7 +28,7 @@ preferences {
     section("Allow access to the following things...") {
         input "switches", "capability.switch", title: "Which switches?", multiple: true, required: false
         input "temperatures", "capability.temperatureMeasurement", title: "Which temperature sensors?", multiple: true, required: false
-		input "meters", "capability.power", title: "Which meters?", multiple: true, required: false
+		input "meters", "capability.powerMeter", title: "Which meters?", multiple: true, required: false
     }
 }
 
@@ -95,11 +95,13 @@ def initialize() {
     state.dashingAuthToken = ""
     state.widgets = [
         "switch": [:],
+        "power": [:],
         "temperature": [:],
         "mode": []
         ]
         
     subscribe(switches, "switch", switchHandler)
+    subscribe(meters, "power", meterHandler)
     subscribe(temperatures, "temperature", temperatureHandler)
     subscribe(location, locationHandler)
 }
@@ -171,9 +173,9 @@ def switchHandler(evt) {
 // Meters
 //
 
-def getMeter() {
+def getPower() {
     def deviceId = request.JSON?.deviceId
-    log.debug "getMeter ${deviceId}"
+    log.debug "getPower ${deviceId}"
     
     if (deviceId) {
         registerWidget("power", deviceId, request.JSON?.widgetId)
