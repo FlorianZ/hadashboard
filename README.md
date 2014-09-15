@@ -223,4 +223,4 @@ $ dashing start
 
 Point your browser to http://localhost:3030 to access the hadashboard on your local machine.
 
-Note, that the SmartApp will not be able to communicate with the hadashboard running on your local machine, and that in order for the hadashboar to communicate with the SmartApp, the **ST_CLIENT_ID** and **ST_CLIENT_SECRET** variables must be set in your local environment.
+Note, that the SmartApp will not be able to communicate with the hadashboard running on your local machine, and that in order for the hadashboar to communicate with the SmartApp, the **ST_CLIENT_ID** and **ST_CLIENT_SECRET** variables must be set in your local environment. You can also hardcode these values at the top of the `jobs/smartthings.rb` file.
