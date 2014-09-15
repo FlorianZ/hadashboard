@@ -199,3 +199,28 @@ $ git add .
 $ git commit -m "Replace this text with a meaningful description of your changes."
 $ git push heroku
 ```
+
+### Can I test my changes locally?
+Yes! See the **Getting Started** section at http://dashing.io for more details.
+
+Essentially, you want to make sure that you have Ruby installed on your local machine. Then, install the Dashing gem:
+
+``` bash
+$ gem install dashing
+```
+
+From your repository root, make sure that all dependencies are available. Note, that you will need to re-run the bundler whenever you modify the Gemfile.
+
+``` bash
+$ bundle
+```
+
+You can start a local webserver like this:
+
+``` bash
+$ dashing start
+```
+
+Point your browser to http://localhost:3030 to access the hadashboard on your local machine.
+
+Note, that the SmartApp will not be able to communicate with the hadashboard running on your local machine, and that in order for the hadashboar to communicate with the SmartApp, the **ST_CLIENT_ID** and **ST_CLIENT_SECRET** variables must be set in your local environment.
