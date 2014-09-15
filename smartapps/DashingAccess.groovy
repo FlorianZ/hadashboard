@@ -28,6 +28,7 @@ preferences {
     section("Allow access to the following things...") {
         input "switches", "capability.switch", title: "Which switches?", multiple: true, required: false
         input "temperatures", "capability.temperatureMeasurement", title: "Which temperature sensors?", multiple: true, required: false
+		input "meters", "capability.power", title: "Which meters?", multiple: true, required: false
     }
 }
 
@@ -46,6 +47,11 @@ mappings {
         action: [
             GET: "getSwitch",
             POST: "postSwitch"
+        ]
+    }
+	path("/power") {
+        action: [
+            GET: "getPower"
         ]
     }
     path("/temperature") {
@@ -161,6 +167,38 @@ def switchHandler(evt) {
     notifyWidget(widgetId, ["state": evt.value])
 }
 
+//
+// Meters
+//
+
+def getMeter() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getMeter ${deviceId}"
+    
+    if (deviceId) {
+        registerWidget("power", deviceId, request.JSON?.widgetId)
+        
+        def whichMeter = meters.find { it.displayName == deviceId }
+        if (!whichMeter) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return ["deviceId": deviceId, "value": whichMeter.currentMeter]
+        }
+    }
+    
+    def result = [:]
+    meters.each {
+        result[it.displayName] = [
+            "state": it.currentMeter,
+            "widgetId": state.widgets.power[it.displayName]]}
+            
+    return result
+}
+
+def meterHandler(evt) {
+    def widgetId = state.widgets.power[evt.displayName]
+    notifyWidget(widgetId, ["value": evt.value])
+}
 
 //
 // Temperatures
