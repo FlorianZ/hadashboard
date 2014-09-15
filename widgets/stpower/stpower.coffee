@@ -6,7 +6,7 @@ class Dashing.Stpower extends Dashing.Widget
     super
     @queryState()
 	@observe 'value', (value) ->
-		$(@node).find(".stpower").val(value).trigger('change')
+		$(@node).find(".meter").val(value).trigger('change')
   
   queryState: ->
 	$.get '/smartthings/dispatch',
@@ -18,9 +18,9 @@ class Dashing.Stpower extends Dashing.Widget
 		@set 'value', json.value
 
   ready: ->
-	stpower = $(@node).find(".stpower")
-    stpower.attr("data-bgcolor", stpower.css("background-color"))
-    stpower.attr("data-fgcolor", stpower.css("color"))
-    stpower.knob()
+    meter = $(@node).find(".meter")
+    meter.attr("data-bgcolor", meter.css("background-color"))
+    meter.attr("data-fgcolor", meter.css("color"))
+    meter.knob()
 
   onData: (data) ->

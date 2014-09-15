@@ -6,17 +6,17 @@ $background-color:  #9c4274;
 $title-color:       rgba(255, 255, 255, 0.7);
 $moreinfo-color:    rgba(255, 255, 255, 0.3);
 
-$stpower-background:  darken($background-color, 15%);
+$meter-background:  darken($background-color, 15%);
 
 // ----------------------------------------------------------------------------
-// Widget-stpower styles
+// Widget-meter styles
 // ----------------------------------------------------------------------------
-.widget-stpower {
+.widget-meter {
 
   background-color: $background-color;
 
-  input.stpower {
-    background-color: $stpower-background;
+  input.meter {
+    background-color: $meter-background;
     color: #fff;
   }
 
