@@ -9,8 +9,8 @@ Dashing.gridsterLayout('[
 {"col":3,"row":3,"size_x":1,"size_y":1},
 {"col":4,"row":3,"size_x":1,"size_y":1},
 {"col":5,"row":1,"size_x":1,"size_y":1},
-{"col":5,"row":2,"size_x":2,"size_y":3},
 {"col":6,"row":1,"size_x":1,"size_y":1},
+{"col":6,"row":2,"size_x":2,"size_y":3},
 {"col":7,"row":1,"size_x":1,"size_y":1}]')
 });
 </script>
@@ -41,12 +41,11 @@ Dashing.gridsterLayout('[
 	
 	<li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
       <div data-id="mode" data-view="Stmode" data-title="Current Mode"></div>
-    </li>  
-
-	<li data-row="2" data-col="5" data-sizex="2" data-sizey="3">
-      <div data-id="washerpower" data-view="Stpower" data-title="Washer" data-device="Washer Metering Switch"></div>
-    </li> 	
+    </li>   	
 	
+	<li data-row="2" data-col="6" data-sizex="2" data-sizey="3">
+      <div data-id="dryerpower" data-view="Stmeter" data-title="Dryer" data-device="Dryer Metering Switch"></div>
+    </li> 
 	
 	<li data-row="3" data-col="1" data-sizex="1" data-sizey="1">
       <div data-id="occmode" data-view="Stmodechange" data-title="Set Home" data-icon="home" data-changemode="Home" data-phrase="Make Occupied (Day)" data-countdown="30" data-event-touchend="onClick" data-event-click="onClick"></div>
