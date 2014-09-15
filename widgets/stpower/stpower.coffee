@@ -4,19 +4,23 @@ class Dashing.Stpower extends Dashing.Widget
 
   constructor: ->
     super
-    @observe 'value', (value) ->
-		$.get '/smartthings/dispatch',
-		  widgetId: @get('id'),
-		  deviceType: 'power',
-		  deviceId: @get('device')
-		  (data) =>
-			json = JSON.parse data
-			@set 'value', json.value
+    @queryState()
+	@observe 'value', (value) ->
+		$(@node).find(".stpower").val(value).trigger('change')
+  
+  queryState: ->
+	$.get '/smartthings/dispatch',
+	  widgetId: @get('id'),
+	  deviceType: 'power',
+	  deviceId: @get('device')
+	  (data) =>
+		json = JSON.parse data
+		@set 'value', json.value
 
   ready: ->
-	meter = $(@node).find(".meter")
-    meter.attr("data-bgcolor", meter.css("background-color"))
-    meter.attr("data-fgcolor", meter.css("color"))
-    meter.knob()
+	stpower = $(@node).find(".stpower")
+    stpower.attr("data-bgcolor", stpower.css("background-color"))
+    stpower.attr("data-fgcolor", stpower.css("color"))
+    stpower.knob()
 
   onData: (data) ->
