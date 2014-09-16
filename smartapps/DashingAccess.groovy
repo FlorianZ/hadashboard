@@ -32,6 +32,7 @@ preferences {
         input "switches", "capability.switch", title: "Which switches?", multiple: true, required: false
         input "temperatures", "capability.temperatureMeasurement", title: "Which temperature sensors?", multiple: true, required: false
 		input "meters", "capability.powerMeter", title: "Which meters?", multiple: true, required: false
+        input "presences", "capability.presenceSensor", title: "Which sensors?", multiple: true, required: false
     }
 }
 
@@ -78,6 +79,11 @@ mappings {
             GET: "getWeather"
         ]
     }
+    path("/presence") {
+    	action: [
+        	GET: "getPresence"
+            ]
+    }
 }
 
 
@@ -97,12 +103,14 @@ def initialize() {
     state.dashingURI = ""
     state.dashingAuthToken = ""
     state.widgets = [
+    	"presence": [:],
         "switch": [:],
         "power": [:],
         "temperature": [:],
-        "mode": []
+        "mode": [],        
         ]
         
+    subscribe(presences, "presence", presenceHandler)    
     subscribe(switches, "switch", switchHandler)
     subscribe(meters, "power", meterHandler)
     subscribe(temperatures, "temperature", temperatureHandler)
@@ -122,7 +130,6 @@ def postConfig() {
     state.dashingAuthToken = request.JSON?.dashingAuthToken
     respondWithSuccess()
 }
-
 
 //
 // Switches
@@ -187,9 +194,7 @@ def getPower() {
         if (!whichMeter) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
         } else {
-        	def latestPower = whichMeter.currentValue("power")
-        	log.debug "CurrentPower: ${latestPower}W"
-            return ["deviceId": deviceId, "value": latestPower]
+            return ["deviceId": deviceId, "value": whichMeter.currentValue("power")]
         }
     }
     
