@@ -1,4 +1,4 @@
-class Dashing.Meter extends Dashing.Widget
+class Dashing.Stmeter extends Dashing.Widget
 
   @accessor 'value', Dashing.AnimatedValue
 
