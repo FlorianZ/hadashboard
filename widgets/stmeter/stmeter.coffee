@@ -1,5 +1,4 @@
 class Dashing.Stmeter extends Dashing.Widget
-  
   @accessor 'value', Dashing.AnimatedValue
   
   constructor: ->
@@ -18,7 +17,7 @@ class Dashing.Stmeter extends Dashing.Widget
       @set 'value', json.value
 
   ready: ->
-    Stmeter = $(@node).find(".stmeter")
-    Stmeter.attr("data-bgcolor", Stmeter.css("background-color"))
-    Stmeter.attr("data-fgcolor", Stmeter.css("color"))
-    Stmeter.knob()
+    stmeter = $(@node).find(".stmeter")
+    stmeter.attr("data-bgcolor", stmeter.css("background-color"))
+    stmeter.attr("data-fgcolor", stmeter.css("color"))
+    stmeter.knob()
