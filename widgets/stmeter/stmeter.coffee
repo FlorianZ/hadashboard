@@ -17,7 +17,7 @@ class Dashing.Stmeter extends Dashing.Widget
       @set 'value', json.value
 
   ready: ->
-    Stmeter = $(@node).find(".Stmeter")
+    Stmeter = $(@node).find(".stmeter")
     Stmeter.attr("data-bgcolor", Stmeter.css("background-color"))
     Stmeter.attr("data-fgcolor", Stmeter.css("color"))
     Stmeter.knob()
