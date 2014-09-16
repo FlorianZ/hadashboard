@@ -12,5 +12,13 @@ gem 'json'
 
 # Database
 gem 'data_mapper'
-gem 'dm-postgres-adapter'
-gem 'dm-sqlite-adapter'
+
+# Development
+group :development do
+	gem 'dm-sqlite-adapter'
+end
+
+# Production
+group :production do
+	gem 'dm-postgres-adapter'
+end
