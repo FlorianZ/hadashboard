@@ -132,6 +132,39 @@ def postConfig() {
 }
 
 //
+// Presences
+//
+
+def getPresence() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getPresence ${deviceId}"
+    
+    if (deviceId) {
+        registerWidget("presence", deviceId, request.JSON?.widgetId)
+        
+        def whichPresence = presences.find { it.displayName == deviceId }
+        if (!whichPresence) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return ["deviceId": deviceId, "state": whichPresence.currentPresence]
+        }
+    }
+    
+    def result = [:]
+    presences.each {
+        result[it.displayName] = [
+            "state": it.currentPresence,
+            "widgetId": state.widgets.presence[it.displayName]]}
+            
+    return result
+}
+
+def presenceHandler(evt) {
+    def widgetId = state.widgets.presence[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.currentPresence])
+}
+
+//
 // Switches
 //
 def getSwitch() {
