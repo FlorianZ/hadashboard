@@ -9,7 +9,7 @@ class Dashing.Stpresence extends Dashing.Widget
 
   updateBackgroundColor: ->
     if @get('state') == 'present'
-      $(@node).css 'background-color', '#ffa500'
+      $(@node).css 'background-color', '#42C873'
     else
       $(@node).css 'background-color', '#888888'
 	
@@ -20,7 +20,7 @@ class Dashing.Stpresence extends Dashing.Widget
       deviceId: @get('device')
       (data) =>
         json = JSON.parse data
-        @set 'state', json.state.toUpperCase()
+        @set 'state', json.state
 		@updateBackgroundColor()
 
   ready: ->
