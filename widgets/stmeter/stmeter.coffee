@@ -5,7 +5,9 @@ class Dashing.Stmeter extends Dashing.Widget
     @observe 'value', (value) ->
       $(@node).find(".stmeter").val(value).trigger('change')
 
-  @accessor 'value', Dashing.AnimatedValue
+  @accessor 'value', 
+    get: -> if @_value then Math.floor(@_value) else 0
+    set: (key, value) -> @_value = value
 
   queryState: ->
     $.get '/smartthings/dispatch',
