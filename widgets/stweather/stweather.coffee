@@ -26,7 +26,7 @@ class Dashing.Stweather extends Dashing.Widget
     new Batman.TerminalAccessible (attr) =>
       @_icons[attr]
 
-  @accessor 'temp_f',
+  @accessor 'now_temp',
     get: -> if @_temp then Math.floor(@_temp) else 0
     set: (key, value) -> @_temp = value
 
