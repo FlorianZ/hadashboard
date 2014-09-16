@@ -5,6 +5,7 @@ class Dashing.Stmeter extends Dashing.Widget
   constructor: ->
     super
     @observe 'value', (value) ->
+      $(@node).find(".stmeter").val(value).trigger('change')
       $.get '/smartthings/dispatch',
       widgetId: @get('id'),
       deviceType: 'power',
