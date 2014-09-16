@@ -4,19 +4,19 @@ class Dashing.Stmeter extends Dashing.Widget
     @queryState()
     @observe 'value', (value) ->
       $(@node).find(".stmeter").val(value).trigger('change')
-
-  @accessor 'value', 
+	  
+  @accessor 'value', Dashing.AnimatedValue
     get: -> if @_value then Math.floor(@_value) else 0
     set: (key, value) -> @_value = value
 
   queryState: ->
     $.get '/smartthings/dispatch',
-    widgetId: @get('id'),
-    deviceType: 'power',
-    deviceId: @get('device')
-    (data) =>
-      json = JSON.parse data
-      @set 'value', json.value
+      widgetId: @get('id'),
+      deviceType: 'power',
+      deviceId: @get('device')
+      (data) =>
+        json = JSON.parse data
+        @set 'value', json.value
 
   ready: ->
     stmeter = $(@node).find(".stmeter")
