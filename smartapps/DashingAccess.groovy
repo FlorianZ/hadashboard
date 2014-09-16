@@ -3,6 +3,9 @@
  *
  *  Copyright 2014 florianz
  *
+ *	Author: florianz
+ *  Contributor: bmmiller
+ *
  */
 
 
@@ -15,8 +18,8 @@ definition(
     author: "florianz",
     description: "API access for Dashing dashboards.",
     category: "Convenience",
-    iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
-    iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png",
+    iconUrl: "http://atulsql.com/wp-content/uploads/2014/04/icon_256.png",
+    iconX2Url: "http://atulsql.com/wp-content/uploads/2014/04/icon_256.png",
     oauth: true) {
 }
 
