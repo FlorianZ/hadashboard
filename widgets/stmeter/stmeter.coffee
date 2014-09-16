@@ -2,7 +2,7 @@ class Dashing.Stmeter extends Dashing.Widget
   constructor: ->
     super
     @queryState()
-	@observe 'value', (value) ->
+    @observe 'value', (value) ->
       $(@node).find(".stmeter").val(value).trigger('change')
 	
   @accessor 'value', Dashing.AnimatedValue
