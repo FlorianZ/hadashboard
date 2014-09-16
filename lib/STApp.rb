@@ -6,8 +6,8 @@ require 'json'
 # object also handles authorization with SmartThings.
 # 
 class STApp
-  def initialize(client_id, api_key, redirect_uri)
-    @client = OAuth2::Client.new(client_id, api_key, {
+  def initialize(client_id, client_secret, redirect_uri)
+    @client = OAuth2::Client.new(client_id, client_secret, {
       site: 'https://graph.api.smartthings.com',
       authorize_url: '/oauth/authorize',
       token_url: '/oauth/token'
