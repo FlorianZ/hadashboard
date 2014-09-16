@@ -10,5 +10,7 @@ gem 'oauth2'
 # JSON
 gem 'json'
 
-# PostgreSQL
-# gem 'pg'
+# Database
+gem 'data_mapper'
+gem 'dm-postgres-adapter'
+gem 'dm-sqlite-adapter'
