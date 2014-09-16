@@ -21,3 +21,5 @@ class Dashing.Stmeter extends Dashing.Widget
     stmeter.attr("data-bgcolor", stmeter.css("background-color"))
     stmeter.attr("data-fgcolor", stmeter.css("color"))
     stmeter.knob()
+	
+  onData: (data) ->
