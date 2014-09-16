@@ -4,18 +4,18 @@ class Dashing.Stmeter extends Dashing.Widget
 
   constructor: ->
     super
-	@queryState()
     @observe 'value', (value) ->
-      $(@node).find(".stmeter").val(value).trigger('change')
+		$.get '/smartthings/dispatch',
+			widgetId: @get('id'),
+			deviceType: 'power',
+			deviceId: @get('device')
+			(data) =>
+				json = JSON.parse data
+				@set 'value', json.value
+		$(@node).find(".stmeter").val(value).trigger('change')
 	  
   queryState: ->
-    $.get '/smartthings/dispatch',
-      widgetId: @get('id'),
-      deviceType: 'power',
-      deviceId: @get('device')
-      (data) =>
-        json = JSON.parse data
-        @set 'value', json.value
+    
 	  
 
   ready: ->
