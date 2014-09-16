@@ -3,9 +3,9 @@ class Dashing.Stpresence extends Dashing.Widget
     super
     @queryState()
 
-  @accessor 'value',
-    get: -> @_value ? "Unknown"
-    set: (key, value) -> @_value = value
+  @accessor 'state',
+    get: -> @_state ? "Unknown"
+    set: (key, value) -> @_state = value
 
   queryState: ->
     $.get '/smartthings/dispatch',
@@ -14,7 +14,7 @@ class Dashing.Stpresence extends Dashing.Widget
       deviceId: @get('device')
       (data) =>
         json = JSON.parse data
-        @set 'value', json.value
+        @set 'state', json.state
 
   ready: ->
 
