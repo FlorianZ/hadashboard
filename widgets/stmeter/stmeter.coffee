@@ -1,8 +1,9 @@
 class Dashing.Stmeter extends Dashing.Widget
   constructor: ->
     super
-    @queryState()
-	
+    @observe 'value', (value) ->
+      $(@node).find(".stmeter").val(@queryState).trigger('change')
+
   @accessor 'value',
     get: -> if @_value then Math.floor(@_value) else 0
     set: (key, value) -> @_value = value
@@ -13,8 +14,8 @@ class Dashing.Stmeter extends Dashing.Widget
     deviceType: 'power',
     deviceId: @get('device')
     (data) =>
-	  json = JSON.parse data
-	  @set 'value', json.value
+      json = JSON.parse data
+      @set 'value', json.value
 
   ready: ->
     Stmeter = $(@node).find(".Stmeter")
