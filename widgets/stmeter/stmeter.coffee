@@ -1,11 +1,12 @@
 class Dashing.Stmeter extends Dashing.Widget
 
-  @accessor 'value', Dashing.AnimatedValue
+  @accessor 'value',
+    get: -> if @_value then Math.floor(@_value) else 0
+    set: (key, value) -> @_value = value
 
   constructor: ->
     super
-    @observe @queryState, (value) ->
-      $(@node).find(".stmeter").val(value).trigger('change')
+    @queryState()
 
     queryState: ->
       $.get '/smartthings/dispatch',
