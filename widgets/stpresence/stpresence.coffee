@@ -21,7 +21,7 @@ class Dashing.Stpresence extends Dashing.Widget
       (data) =>
         json = JSON.parse data
         @set 'state', json.state
-		@updateBackgroundColor()
+        @updateBackgroundColor()
 
   ready: ->
 
