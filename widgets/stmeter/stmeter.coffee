@@ -5,8 +5,8 @@ class Dashing.Stmeter extends Dashing.Widget
   constructor: ->
     super
     @observe 'value', (value) ->
+      @queryState()
       $(@node).find(".stmeter").val(value).trigger('change')
-    @queryState()
 
     queryState: ->
       $.get '/smartthings/dispatch',
