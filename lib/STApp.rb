@@ -6,15 +6,16 @@ require 'json'
 # object also handles authorization with SmartThings.
 # 
 class STApp
-  def initialize(client_id, api_key, redirect_uri)
-    @token = nil
-    @endpoint = nil
-    @redirect_uri = redirect_uri
-    @client = OAuth2::Client.new(client_id, api_key, {
+  def initialize(client_id, client_secret, redirect_uri)
+    @client = OAuth2::Client.new(client_id, client_secret, {
       site: 'https://graph.api.smartthings.com',
       authorize_url: '/oauth/authorize',
       token_url: '/oauth/token'
     })
+
+    @token = retrieveToken()
+    @endpoint = getEndpoint(@token)
+    @redirect_uri = redirect_uri
   end
 
   # Returns the url used for authorization
@@ -29,9 +30,9 @@ class STApp
       auth_code, 
       redirect_uri: @redirect_uri,
       scope: 'app')
+    storeToken(@token)
 
-    response = @token.get('/api/smartapps/endpoints')
-    @endpoint = response.parsed()[0]['url']
+    @endpoint = getEndpoint(@token)
   end
 
   # Make a request to the SmartApp endpoint. The verb shall be set to
@@ -42,7 +43,7 @@ class STApp
       return
     end
 
-    refreshToken()
+    @token = refreshToken(@token)
 
     result = @token.request(
       verb, @endpoint + '/' + url, {
@@ -52,12 +53,42 @@ class STApp
   end
 
   # Refresh the auth token, if it has expired.
-  def refreshToken()
-    if @token and @token.expired?
-      @token = @token.refresh!
+  def refreshToken(token)
+    if token and token.expired?
+      token.refresh!
+    else
+      token
     end
   end
 
-  private :refreshToken
+  # Retrieve the SmartApp endpoint
+  def getEndpoint(token)
+    if not token
+      return nil
+    end
+
+    response = token.get('/api/smartapps/endpoints')
+    response.parsed()[0]['url']
+  end
+
+  # Retrieve an existing token from persistent storage
+  def retrieveToken()
+    s = Setting.get('st_token')
+    if s
+      token = OAuth2::AccessToken.from_hash(
+        @client,
+        JSON.parse(s.value))
+      refreshToken(token)   
+    end
+  end
+
+  # Store a token in persistant storage
+  def storeToken(token)
+    Setting.first_or_create(
+      { :name => 'st_token'},
+      { :value => JSON.generate(token.to_hash) })
+  end
+
+  private :refreshToken, :getEndpoint, :retrieveToken, :storeToken
 
 end

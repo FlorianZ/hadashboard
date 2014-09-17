@@ -83,8 +83,8 @@ $ heroku config:set \
   HEROKU_OAUTH_ID=uuid-from-above \
   HEROKU_OAUTH_SECRET=uuid-from-above\
   SESSION_SECRET=some-random-uuid \
-  ST_API_KEY=from-step-3 \
-  ST_CLIENT_ID=from-step-3
+  ST_CLIENT_ID=from-step-3 \
+  ST_CLIENT_SECRET=from-step-3
 ```
 
 - **DASHING_AUTH_TOKEN**: Set this to a new, random uuid. You may be able to generate a new uuid using the `uuidgen` command line tool, if it is installed on your local machine. You can also use one of the many [online tools](https://www.uuidgenerator.net) to generate uuids. This is used as a machine-to-machine password of sorts, so you could even make up your own. Just make sure it's long, and random, and comlicated in order to ensure it is as secure as possible. This uuid/password is used for the SmartApp to communicate with the Heroku app.
@@ -93,8 +93,8 @@ $ heroku config:set \
 - **HEROKU_OAUTH_ID**: Set this to the **HEROKU_OAUTH_ID** uuid returned by the previous command (`heroku clients:create`).
 - **HEROKU_OAUTH_SECRET**: Set this to the **HEROKU_OAUTH_SECRET** uuid returned by the previous command (`heroku clients:create`).
 - **SESSION_SECRET**: Generate a new, random uuid for this, just like you did for **DASHING_AUTH_TOKEN**. This uuid/password is used to encrypt the session cookie in your browser.
-- **ST_API_KEY**: Set this to the SmartApp **'OAuth Client Secret'** from step 3.
 - **ST_CLIENT_ID**: Set this to the SmartApp **'OAuth Client ID'** from step 3.
+- **ST_CLIENT_SECRET**: Set this to the SmartApp **'OAuth Client Secret'** from step 3.
 
 ## 5. Deploy to Heroku
 To deploy the hadashboard app, all we need to do is push the git repository to Heroku. This will automatically install all the dependencies on the server, and restart the app.

@@ -5,11 +5,12 @@ host_uri = ENV["DASHING_URI"] || 'http://localhost:3030'
 
 # SmartApp credentials
 client_id = ENV["ST_CLIENT_ID"]
-api_key = ENV["ST_API_KEY"]
+# Keeping ST_API_KEY for compatibility (was renamed to ST_CLIENT_SECRET)
+client_secret = ENV["ST_CLIENT_SECRET"] || ENV["ST_API_KEY"]
 
 # Create a new STApp instance for communication with the SmartApp
 app = STApp.new(
-  client_id, api_key,
+  client_id, client_secret,
   host_uri + '/smartthings/oauth/callback')
 
 # Must be called to authenticate with SmartThings, at least once
