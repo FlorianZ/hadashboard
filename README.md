@@ -96,6 +96,22 @@ $ heroku config:set \
 - **ST_CLIENT_ID**: Set this to the SmartApp **'OAuth Client ID'** from step 3.
 - **ST_CLIENT_SECRET**: Set this to the SmartApp **'OAuth Client Secret'** from step 3.
 
+Lastly, we will add a PostgreSQL database. Heroku makes this trivial by simple configuring an add-on:
+
+``` bash
+$ heroku addons:add heroku-postgresql:hobby-dev
+Adding heroku-postgresql:hobby-dev to your-app-name... done, v69 (free)
+Attached as HEROKU_POSTGRESQL_GOLD
+Database has been created and is available
+```
+
+Heroku may require up to 5 minutes to set up the database for you. You can run the following command to make sure the database is ready before you move on to the next step.
+
+``` bash
+$ heroku pg:wait
+Waiting for database HEROKU_POSTGRESQL_GOLD... done
+```
+
 ## 5. Deploy to Heroku
 To deploy the hadashboard app, all we need to do is push the git repository to Heroku. This will automatically install all the dependencies on the server, and restart the app.
 
