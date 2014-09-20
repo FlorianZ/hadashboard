@@ -4,7 +4,7 @@ gem 'dashing'
 
 # Authentication
 gem 'oa-openid'
-gem 'omniauth-heroku', :git => "https://github.com/heroku/omniauth-heroku.git"
+gem 'omniauth-heroku', '~> 0.2.0.pre'
 gem 'oauth2'
 
 # JSON
