@@ -26,3 +26,4 @@ class Dashing.Stcontact extends Dashing.Widget
   ready: ->
 
   onData: (data) ->
+    @updateBackgroundColor()
