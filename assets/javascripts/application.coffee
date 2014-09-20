@@ -1,3 +1,6 @@
+# Use the Yaffle EventSource polyfill to work around browser issues
+#= require eventsource.min.js
+
 # dashing.js is located in the dashing framework
 # It includes jquery & batman for you.
 #= require dashing.js
