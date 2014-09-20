@@ -1,16 +1,8 @@
-GIT
-  remote: https://github.com/heroku/omniauth-heroku.git
-  revision: fe91550d7cb036dd4f12c0505925e0086176d0cf
-  specs:
-    omniauth-heroku (0.2.0.pre)
-      omniauth (~> 1.2)
-      omniauth-oauth2 (~> 1.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.6)
-    backports (3.6.0)
+    backports (3.6.1)
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
@@ -110,6 +102,9 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
+    omniauth-heroku (0.2.0.pre)
+      omniauth (~> 1.2)
+      omniauth-oauth2 (~> 1.2)
     omniauth-oauth2 (1.2.0)
       faraday (>= 0.8, < 0.10)
       multi_json (~> 1.3)
@@ -168,4 +163,4 @@ DEPENDENCIES
   json
   oa-openid
   oauth2
-  omniauth-heroku!
+  omniauth-heroku (~> 0.2.0.pre)
