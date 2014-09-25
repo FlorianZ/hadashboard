@@ -202,7 +202,7 @@ def getContact() {
 
 def contactHandler(evt) {
     def widgetId = state.widgets.contact[evt.displayName]
-    notifyWidget(widgetId, ["state": evt.currentContact])
+    notifyWidget(widgetId, ["state": evt.value])
 }
 
 //
