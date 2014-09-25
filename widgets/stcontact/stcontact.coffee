@@ -13,7 +13,7 @@ class Dashing.Stcontact extends Dashing.Widget
 
   updateBackgroundColor: ->
     if @get('state') == 'open'
-      $(@node).css 'background-color', '#42C873'
+      $(@node).css 'background-color', '#dc9145'
     else
       $(@node).css 'background-color', '#888888'
 
