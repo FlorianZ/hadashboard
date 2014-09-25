@@ -32,7 +32,8 @@ preferences {
         input "switches", "capability.switch", title: "Which switches?", multiple: true, required: false
         input "temperatures", "capability.temperatureMeasurement", title: "Which temperature sensors?", multiple: true, required: false
 		input "meters", "capability.powerMeter", title: "Which meters?", multiple: true, required: false
-        input "presences", "capability.presenceSensor", title: "Which sensors?", multiple: true, required: false
+        input "presences", "capability.presenceSensor", title: "Which presence sensors?", multiple: true, required: false
+        input "contacts", "capability.contactSensor", title: "Which contact sensors?", multiple: true, required: false
     }
 }
 
@@ -61,6 +62,11 @@ mappings {
     path("/temperature") {
         action: [
             GET: "getTemperature"
+        ]
+    }
+    path("/contact") {
+        action: [
+            GET: "getContact"
         ]
     }
     path("/mode") {
@@ -107,13 +113,15 @@ def initialize() {
         "switch": [:],
         "power": [:],
         "temperature": [:],
-        "mode": [],        
+        "mode": [],
+        "contact": [:],
         ]
-        
-    subscribe(presences, "presence", presenceHandler)    
+
+    subscribe(presences, "presence", presenceHandler)
     subscribe(switches, "switch", switchHandler)
     subscribe(meters, "power", meterHandler)
     subscribe(temperatures, "temperature", temperatureHandler)
+    subscribe(contacts, "contact", contactHandler)
     subscribe(location, locationHandler)
 }
 
@@ -138,10 +146,10 @@ def postConfig() {
 def getPresence() {
     def deviceId = request.JSON?.deviceId
     log.debug "getPresence ${deviceId}"
-    
+
     if (deviceId) {
         registerWidget("presence", deviceId, request.JSON?.widgetId)
-        
+
         def whichPresence = presences.find { it.displayName == deviceId }
         if (!whichPresence) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
@@ -149,13 +157,13 @@ def getPresence() {
             return ["deviceId": deviceId, "state": whichPresence.currentPresence]
         }
     }
-    
+
     def result = [:]
     presences.each {
         result[it.displayName] = [
             "state": it.currentPresence,
             "widgetId": state.widgets.presence[it.displayName]]}
-            
+
     return result
 }
 
@@ -165,15 +173,48 @@ def presenceHandler(evt) {
 }
 
 //
+// Contacts
+//
+
+def getContact() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getContact ${deviceId}"
+
+    if (deviceId) {
+        registerWidget("contact", deviceId, request.JSON?.widgetId)
+
+        def whichContact = contacts.find { it.displayName == deviceId }
+        if (!whichContact) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return ["deviceId": deviceId, "state": whichContact.currentContact]
+        }
+    }
+
+    def result = [:]
+    contacts.each {
+        result[it.displayName] = [
+            "state": it.currentContact,
+            "widgetId": state.widgets.contact[it.displayName]]}
+
+    return result
+}
+
+def contactHandler(evt) {
+    def widgetId = state.widgets.contact[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.currentContact])
+}
+
+//
 // Switches
 //
 def getSwitch() {
     def deviceId = request.JSON?.deviceId
     log.debug "getSwitch ${deviceId}"
-    
+
     if (deviceId) {
         registerWidget("switch", deviceId, request.JSON?.widgetId)
-        
+
         def whichSwitch = switches.find { it.displayName == deviceId }
         if (!whichSwitch) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
@@ -181,13 +222,13 @@ def getSwitch() {
             return ["deviceId": deviceId, "switch": whichSwitch.currentSwitch]
         }
     }
-    
+
     def result = [:]
     switches.each {
         result[it.displayName] = [
             "state": it.currentSwitch,
             "widgetId": state.widgets.switch[it.displayName]]}
-            
+
     return result
 }
 
@@ -195,7 +236,7 @@ def postSwitch() {
     def command = request.JSON?.command
     def deviceId = request.JSON?.deviceId
     log.debug "postSwitch ${deviceId}, ${command}"
-    
+
     if (command && deviceId) {
         def whichSwitch = switches.find { it.displayName == deviceId }
         if (!whichSwitch) {
@@ -219,10 +260,10 @@ def switchHandler(evt) {
 def getPower() {
     def deviceId = request.JSON?.deviceId
     log.debug "getPower ${deviceId}"
-    
+
     if (deviceId) {
         registerWidget("power", deviceId, request.JSON?.widgetId)
-        
+
         def whichMeter = meters.find { it.displayName == deviceId }
         if (!whichMeter) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
@@ -230,13 +271,13 @@ def getPower() {
             return ["deviceId": deviceId, "value": whichMeter.currentValue("power")]
         }
     }
-    
+
     def result = [:]
     meters.each {
         result[it.displayName] = [
             "value": it.currentValue("power"),
             "widgetId": state.widgets.power[it.displayName]]}
-            
+
     return result
 }
 
@@ -251,10 +292,10 @@ def meterHandler(evt) {
 def getTemperature() {
     def deviceId = request.JSON?.deviceId
     log.debug "getTemperature ${deviceId}"
-    
+
     if (deviceId) {
         registerWidget("temperature", deviceId, request.JSON?.widgetId)
-        
+
         def whichTemperature = temperatures.find { it.displayName == deviceId }
         if (!whichTemperature) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
@@ -262,13 +303,13 @@ def getTemperature() {
             return ["deviceId": deviceId, "value": whichTemperature.currentTemperature]
         }
     }
-    
+
     def result = [:]
     temperatures.each {
         result[it.displayName] = [
             "value": it.currentTemperature,
             "widgetId": state.widgets.temperature[it.displayName]]}
-            
+
     return result
 }
 
@@ -288,7 +329,7 @@ def getMode() {
             log.debug "registerWidget for mode: ${widgetId}"
         }
     }
-    
+
     log.debug "getMode"
     return ["mode": location.mode]
 }
@@ -296,11 +337,11 @@ def getMode() {
 def postMode() {
     def mode = request.JSON?.mode
     log.debug "postMode ${mode}"
-    
+
     if (mode) {
         setLocationMode(mode)
     }
-    
+
     if (location.mode != mode) {
         return respondWithStatus(404, "Mode not found.")
     }
@@ -319,15 +360,15 @@ def locationHandler(evt) {
 def postPhrase() {
     def phrase = request.JSON?.phrase
     log.debug "postPhrase ${phrase}"
-    
+
     if (!phrase) {
         respondWithStatus(404, "Phrase not specified.")
     }
-    
+
     location.helloHome.execute(phrase)
-    
+
     return respondWithSuccess()
-    
+
 }
 
 //
