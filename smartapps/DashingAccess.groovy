@@ -3,6 +3,9 @@
  *
  *  Copyright 2014 florianz
  *
+ *  Author: florianz
+ *  Contributor: bmmiller
+ *
  */
 
 
@@ -28,6 +31,8 @@ preferences {
     section("Allow access to the following things...") {
         input "switches", "capability.switch", title: "Which switches?", multiple: true, required: false
         input "temperatures", "capability.temperatureMeasurement", title: "Which temperature sensors?", multiple: true, required: false
+        input "meters", "capability.powerMeter", title: "Which meters?", multiple: true, required: false
+        input "presences", "capability.presenceSensor", title: "Which presence sensors?", multiple: true, required: false
     }
 }
 
@@ -46,6 +51,11 @@ mappings {
         action: [
             GET: "getSwitch",
             POST: "postSwitch"
+        ]
+    }
+    path("/power") {
+        action: [
+            GET: "getPower"
         ]
     }
     path("/temperature") {
@@ -69,6 +79,11 @@ mappings {
             GET: "getWeather"
         ]
     }
+    path("/presence") {
+        action: [
+            GET: "getPresence"
+        ]
+    }
 }
 
 
@@ -88,12 +103,16 @@ def initialize() {
     state.dashingURI = ""
     state.dashingAuthToken = ""
     state.widgets = [
+        "presence": [:],
         "switch": [:],
+        "power": [:],
         "temperature": [:],
-        "mode": []
+        "mode": [],        
         ]
         
+    subscribe(presences, "presence", presenceHandler)    
     subscribe(switches, "switch", switchHandler)
+    subscribe(meters, "power", meterHandler)
     subscribe(temperatures, "temperature", temperatureHandler)
     subscribe(location, locationHandler)
 }
@@ -112,6 +131,39 @@ def postConfig() {
     respondWithSuccess()
 }
 
+//
+// Presences
+//
+def getPresence() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getPresence ${deviceId}"
+    
+    if (deviceId) {
+        registerWidget("presence", deviceId, request.JSON?.widgetId)
+        
+        def whichPresence = presences.find { it.displayName == deviceId }
+        if (!whichPresence) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId,
+                "state": whichPresence.currentPresence]
+        }
+    }
+    
+    def result = [:]
+    presences.each {
+        result[it.displayName] = [
+            "state": it.currentPresence,
+            "widgetId": state.widgets.presence[it.displayName]]}
+            
+    return result
+}
+
+def presenceHandler(evt) {
+    def widgetId = state.widgets.presence[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.currentPresence])
+}
 
 //
 // Switches
@@ -127,7 +179,9 @@ def getSwitch() {
         if (!whichSwitch) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
         } else {
-            return ["deviceId": deviceId, "switch": whichSwitch.currentSwitch]
+            return [
+                "deviceId": deviceId,
+                "switch": whichSwitch.currentSwitch]
         }
     }
     
@@ -161,6 +215,39 @@ def switchHandler(evt) {
     notifyWidget(widgetId, ["state": evt.value])
 }
 
+//
+// Meters
+//
+def getPower() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getPower ${deviceId}"
+    
+    if (deviceId) {
+        registerWidget("power", deviceId, request.JSON?.widgetId)
+        
+        def whichMeter = meters.find { it.displayName == deviceId }
+        if (!whichMeter) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId, 
+                "value": whichMeter.currentValue("power")]
+        }
+    }
+    
+    def result = [:]
+    meters.each {
+        result[it.displayName] = [
+            "value": it.currentValue("power"),
+            "widgetId": state.widgets.power[it.displayName]]}
+            
+    return result
+}
+
+def meterHandler(evt) {
+    def widgetId = state.widgets.power[evt.displayName]
+    notifyWidget(widgetId, ["value": evt.value])
+}
 
 //
 // Temperatures
@@ -176,7 +263,9 @@ def getTemperature() {
         if (!whichTemperature) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
         } else {
-            return ["deviceId": deviceId, "value": whichTemperature.currentTemperature]
+            return [
+                "deviceId": deviceId, 
+                "value": whichTemperature.currentTemperature]
         }
     }
     
