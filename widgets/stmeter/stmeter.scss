@@ -1,19 +1,26 @@
 // ----------------------------------------------------------------------------
 // Sass declarations
 // ----------------------------------------------------------------------------
-$background-color:  #0C72E8;
+$background-color:  #9c4274;
 
 $title-color:       rgba(255, 255, 255, 0.7);
 
+$stmeter-background:  darken($background-color, 15%);
+
 // ----------------------------------------------------------------------------
-// Widget styles
+// Widget-stmeter styles
 // ----------------------------------------------------------------------------
-.widget-reload {
+.widget-stmeter {
 
   background-color: $background-color;
+
+  input.stmeter {
+    background-color: $stmeter-background;
+    color: #fff;
+  }
 
   .title {
     color: $title-color;
   }
-    
+
 }

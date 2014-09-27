@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'dashing'
+gem 'thor'
 
 # Authentication
 gem 'oa-openid'

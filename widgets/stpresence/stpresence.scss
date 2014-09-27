@@ -1,19 +1,23 @@
 // ----------------------------------------------------------------------------
 // Sass declarations
 // ----------------------------------------------------------------------------
-$background-color:  #0C72E8;
+$background-color:  #821AE8;
 
 $title-color:       rgba(255, 255, 255, 0.7);
 
 // ----------------------------------------------------------------------------
-// Widget styles
+// Widget-stpresence styles
 // ----------------------------------------------------------------------------
-.widget-reload {
+.widget-stpresence {
 
   background-color: $background-color;
 
   .title {
     color: $title-color;
   }
-    
+
+  .state {
+    color: #fff;
+  }
+
 }
