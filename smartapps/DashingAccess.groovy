@@ -4,7 +4,7 @@
  *  Copyright 2014 florianz
  *
  *  Author: florianz
- *  Contributor: bmmiller, Dianoga
+ *  Contributor: bmmiller, Dianoga, mattjfrank
  *
  */
 
@@ -30,7 +30,9 @@ definition(
 preferences {
     section("Allow access to the following things...") {
         input "contacts", "capability.contactSensor", title: "Which contact sensors?", multiple: true, required: false
+        input "locks", "capability.lock", title: "Which Locks?", multiple: true, required: false
         input "meters", "capability.powerMeter", title: "Which meters?", multiple: true, required: false
+        input "motions", "capability.motionSensor", title: "Which motion sensors?", multiple: true, required: false
         input "presences", "capability.presenceSensor", title: "Which presence sensors?", multiple: true, required: false
         input "switches", "capability.switch", title: "Which switches?", multiple: true, required: false
         input "temperatures", "capability.temperatureMeasurement", title: "Which temperature sensors?", multiple: true, required: false
@@ -53,10 +55,21 @@ mappings {
             GET: "getContact"
         ]
     }
+    path("/lock") {
+        action: [
+            GET: "getLock",
+            POST: "postLock"
+        ]
+    }
     path("/mode") {
         action: [
             GET: "getMode",
             POST: "postMode"
+        ]
+    }
+    path("/motion") {
+        action: [
+            GET: "getMotion"
         ]
     }
     path("/phrase") {
@@ -110,7 +123,9 @@ def initialize() {
     state.dashingAuthToken = ""
     state.widgets = [
         "contact": [:],
+        "lock": [:],
         "mode": [],
+        "motion": [:],
         "power": [:],
         "presence": [:],
         "switch": [:],
@@ -119,6 +134,8 @@ def initialize() {
 
     subscribe(contacts, "contact", contactHandler)        
     subscribe(location, locationHandler)
+    subscribe(locks, "lock", lockHandler)
+    subscribe(motions, "motion", motionHandler)
     subscribe(meters, "power", meterHandler)
     subscribe(presences, "presence", presenceHandler)    
     subscribe(switches, "switch", switchHandler)
@@ -170,6 +187,56 @@ def getContact() {
 
 def contactHandler(evt) {
     def widgetId = state.widgets.contact[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.value])
+}
+
+//
+// Locks
+//
+def getLock() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getLock ${deviceId}"
+
+    if (deviceId) {
+        registerWidget("lock", deviceId, request.JSON?.widgetId)
+
+        def whichLock = locks.find { it.displayName == deviceId }
+        if (!whichLock) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId,
+                "state": whichLock.currentLock]
+        }
+    }
+
+    def result = [:]
+    locks.each {
+        result[it.displayName] = [
+            "state": it.currentLock,
+            "widgetId": state.widgets.lock[it.displayName]]}
+
+    return result
+}
+
+def postLock() {
+    def command = request.JSON?.command
+    def deviceId = request.JSON?.deviceId
+    log.debug "postLock ${deviceId}, ${command}"
+
+    if (command && deviceId) {
+        def whichLock = locks.find { it.displayName == deviceId }
+        if (!whichLock) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            whichLock."$command"()
+        }
+    }
+    return respondWithSuccess()
+}
+
+def lockHandler(evt) {
+    def widgetId = state.widgets.lock[evt.displayName]
     notifyWidget(widgetId, ["state": evt.value])
 }
 
@@ -241,6 +308,40 @@ def locationHandler(evt) {
     for (i in state['widgets']['mode']) {
         notifyWidget(i, ["mode": evt.value])
     }
+}
+
+//
+// Motions
+//
+def getMotion() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getMotion ${deviceId}"
+
+    if (deviceId) {
+        registerWidget("motion", deviceId, request.JSON?.widgetId)
+
+        def whichMotion = motions.find { it.displayName == deviceId }
+        if (!whichMotion) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId,
+                "state": whichMotion.currentMotion]
+        }
+    }
+
+    def result = [:]
+    motionss.each {
+        result[it.displayName] = [
+            "state": it.currentMotion,
+            "widgetId": state.widgets.motion[it.displayName]]}
+
+    return result
+}
+
+def motionHandler(evt) {
+    def widgetId = state.widgets.motion[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.value])
 }
 
 //
