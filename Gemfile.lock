@@ -164,3 +164,4 @@ DEPENDENCIES
   oa-openid
   oauth2
   omniauth-heroku (~> 0.2.0.pre)
+  thor
