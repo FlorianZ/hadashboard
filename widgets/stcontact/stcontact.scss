@@ -1,0 +1,38 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #45B4D5;
+
+$title-color:       rgba(255, 255, 255, 0.7);
+
+// ----------------------------------------------------------------------------
+// Widget-sttemp styles
+// ----------------------------------------------------------------------------
+.widget-sttemp {
+
+  background-color: $background-color;
+
+  .title {
+    color: $title-color;
+  }
+
+  .value {
+  	color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .unit {
+    font-size: 250%;
+    font-weight: 400;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+
+  .updated-at {
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+}

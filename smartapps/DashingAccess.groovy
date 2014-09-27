@@ -4,7 +4,7 @@
  *  Copyright 2014 florianz
  *
  *  Author: florianz
- *  Contributor: bmmiller
+ *  Contributor: bmmiller, Dianoga
  *
  */
 
@@ -29,10 +29,11 @@ definition(
 //
 preferences {
     section("Allow access to the following things...") {
-        input "switches", "capability.switch", title: "Which switches?", multiple: true, required: false
-        input "temperatures", "capability.temperatureMeasurement", title: "Which temperature sensors?", multiple: true, required: false
+        input "contacts", "capability.contactSensor", title: "Which contact sensors?", multiple: true, required: false
         input "meters", "capability.powerMeter", title: "Which meters?", multiple: true, required: false
         input "presences", "capability.presenceSensor", title: "Which presence sensors?", multiple: true, required: false
+        input "switches", "capability.switch", title: "Which switches?", multiple: true, required: false
+        input "temperatures", "capability.temperatureMeasurement", title: "Which temperature sensors?", multiple: true, required: false
     }
 }
 
@@ -47,20 +48,9 @@ mappings {
             POST: "postConfig"
         ]
     }
-    path("/switch") {
+    path("/contact") {
         action: [
-            GET: "getSwitch",
-            POST: "postSwitch"
-        ]
-    }
-    path("/power") {
-        action: [
-            GET: "getPower"
-        ]
-    }
-    path("/temperature") {
-        action: [
-            GET: "getTemperature"
+            GET: "getContact"
         ]
     }
     path("/mode") {
@@ -74,14 +64,30 @@ mappings {
             POST: "postPhrase"
         ]
     }
-    path("/weather") {
+    path("/power") {
         action: [
-            GET: "getWeather"
+            GET: "getPower"
         ]
     }
     path("/presence") {
         action: [
             GET: "getPresence"
+        ]
+    }
+    path("/switch") {
+        action: [
+            GET: "getSwitch",
+            POST: "postSwitch"
+        ]
+    }
+    path("/temperature") {
+        action: [
+            GET: "getTemperature"
+        ]
+    }
+    path("/weather") {
+        action: [
+            GET: "getWeather"
         ]
     }
 }
@@ -103,18 +109,20 @@ def initialize() {
     state.dashingURI = ""
     state.dashingAuthToken = ""
     state.widgets = [
+        "contact": [:],
+        "mode": [],
+        "power": [:],
         "presence": [:],
         "switch": [:],
-        "power": [:],
         "temperature": [:],
-        "mode": [],        
         ]
-        
+
+    subscribe(contacts, "contact", contactHandler)        
+    subscribe(location, locationHandler)
+    subscribe(meters, "power", meterHandler)
     subscribe(presences, "presence", presenceHandler)    
     subscribe(switches, "switch", switchHandler)
-    subscribe(meters, "power", meterHandler)
     subscribe(temperatures, "temperature", temperatureHandler)
-    subscribe(location, locationHandler)
 }
 
 
@@ -129,6 +137,127 @@ def postConfig() {
     state.dashingURI = request.JSON?.dashingURI
     state.dashingAuthToken = request.JSON?.dashingAuthToken
     respondWithSuccess()
+}
+
+//
+// Contacts
+//
+def getContact() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getContact ${deviceId}"
+
+    if (deviceId) {
+        registerWidget("contact", deviceId, request.JSON?.widgetId)
+
+        def whichContact = contacts.find { it.displayName == deviceId }
+        if (!whichContact) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId,
+                "state": whichContact.currentContact]
+        }
+    }
+
+    def result = [:]
+    contacts.each {
+        result[it.displayName] = [
+            "state": it.currentContact,
+            "widgetId": state.widgets.contact[it.displayName]]}
+
+    return result
+}
+
+def contactHandler(evt) {
+    def widgetId = state.widgets.contact[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.value])
+}
+
+//
+// Meters
+//
+def getPower() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getPower ${deviceId}"
+    
+    if (deviceId) {
+        registerWidget("power", deviceId, request.JSON?.widgetId)
+        
+        def whichMeter = meters.find { it.displayName == deviceId }
+        if (!whichMeter) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId, 
+                "value": whichMeter.currentValue("power")]
+        }
+    }
+    
+    def result = [:]
+    meters.each {
+        result[it.displayName] = [
+            "value": it.currentValue("power"),
+            "widgetId": state.widgets.power[it.displayName]]}
+            
+    return result
+}
+
+def meterHandler(evt) {
+    def widgetId = state.widgets.power[evt.displayName]
+    notifyWidget(widgetId, ["value": evt.value])
+}
+
+//
+// Modes
+//
+def getMode() {
+    def widgetId = request.JSON?.widgtId
+    if (widgetId) {
+        if (!state['widgets']['mode'].contains(widgetId)) {
+            state['widgets']['mode'].add(widgetId)
+            log.debug "registerWidget for mode: ${widgetId}"
+        }
+    }
+    
+    log.debug "getMode"
+    return ["mode": location.mode]
+}
+
+def postMode() {
+    def mode = request.JSON?.mode
+    log.debug "postMode ${mode}"
+    
+    if (mode) {
+        setLocationMode(mode)
+    }
+    
+    if (location.mode != mode) {
+        return respondWithStatus(404, "Mode not found.")
+    }
+    return respondWithSuccess()
+}
+
+def locationHandler(evt) {
+    for (i in state['widgets']['mode']) {
+        notifyWidget(i, ["mode": evt.value])
+    }
+}
+
+//
+// Phrases
+//
+def postPhrase() {
+    def phrase = request.JSON?.phrase
+    log.debug "postPhrase ${phrase}"
+    
+    if (!phrase) {
+        respondWithStatus(404, "Phrase not specified.")
+    }
+    
+    location.helloHome.execute(phrase)
+    
+    return respondWithSuccess()
+    
 }
 
 //
@@ -216,40 +345,6 @@ def switchHandler(evt) {
 }
 
 //
-// Meters
-//
-def getPower() {
-    def deviceId = request.JSON?.deviceId
-    log.debug "getPower ${deviceId}"
-    
-    if (deviceId) {
-        registerWidget("power", deviceId, request.JSON?.widgetId)
-        
-        def whichMeter = meters.find { it.displayName == deviceId }
-        if (!whichMeter) {
-            return respondWithStatus(404, "Device '${deviceId}' not found.")
-        } else {
-            return [
-                "deviceId": deviceId, 
-                "value": whichMeter.currentValue("power")]
-        }
-    }
-    
-    def result = [:]
-    meters.each {
-        result[it.displayName] = [
-            "value": it.currentValue("power"),
-            "widgetId": state.widgets.power[it.displayName]]}
-            
-    return result
-}
-
-def meterHandler(evt) {
-    def widgetId = state.widgets.power[evt.displayName]
-    notifyWidget(widgetId, ["value": evt.value])
-}
-
-//
 // Temperatures
 //
 def getTemperature() {
@@ -284,59 +379,6 @@ def temperatureHandler(evt) {
 }
 
 //
-// Modes
-//
-def getMode() {
-    def widgetId = request.JSON?.widgtId
-    if (widgetId) {
-        if (!state['widgets']['mode'].contains(widgetId)) {
-            state['widgets']['mode'].add(widgetId)
-            log.debug "registerWidget for mode: ${widgetId}"
-        }
-    }
-    
-    log.debug "getMode"
-    return ["mode": location.mode]
-}
-
-def postMode() {
-    def mode = request.JSON?.mode
-    log.debug "postMode ${mode}"
-    
-    if (mode) {
-        setLocationMode(mode)
-    }
-    
-    if (location.mode != mode) {
-        return respondWithStatus(404, "Mode not found.")
-    }
-    return respondWithSuccess()
-}
-
-def locationHandler(evt) {
-    for (i in state['widgets']['mode']) {
-        notifyWidget(i, ["mode": evt.value])
-    }
-}
-
-//
-// Phrases
-//
-def postPhrase() {
-    def phrase = request.JSON?.phrase
-    log.debug "postPhrase ${phrase}"
-    
-    if (!phrase) {
-        respondWithStatus(404, "Phrase not specified.")
-    }
-    
-    location.helloHome.execute(phrase)
-    
-    return respondWithSuccess()
-    
-}
-
-//
 // Weather
 //
 def getWeather() {
@@ -346,6 +388,7 @@ def getWeather() {
     }
     return getWeatherFeature(feature)
 }
+
 
 //
 // Widget Helpers
