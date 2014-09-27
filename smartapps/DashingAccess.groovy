@@ -5,6 +5,7 @@
  *
  *	Author: florianz
  *  Contributor: bmmiller
+ *  Contributor: Dianoga
  *
  */
 
