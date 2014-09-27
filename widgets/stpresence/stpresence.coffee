@@ -7,6 +7,10 @@ class Dashing.Stpresence extends Dashing.Widget
     get: -> @_state ? "Unknown"
     set: (key, value) -> @_state = value
 
+  @accessor 'icon',
+    get: -> if @get('state') == 'present' then 'user' else 'times'
+    set: Batman.Property.defaultAccessor.set
+
   updateBackgroundColor: ->
     if @get('state') == 'present'
       $(@node).css 'background-color', '#42C873'
