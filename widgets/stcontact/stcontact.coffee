@@ -8,7 +8,7 @@ class Dashing.Stcontact extends Dashing.Widget
     set: (key, value) -> @_state = value
 
   @accessor 'icon',
-    get: -> if this.get('state') == 'open' then 'expand' else 'compress'
+    get: -> if @get('state') == 'open' then 'expand' else 'compress'
     set: Batman.Property.defaultAccessor.set
 
   updateBackgroundColor: ->
