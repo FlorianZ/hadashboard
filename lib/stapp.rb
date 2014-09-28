@@ -84,9 +84,9 @@ class STApp
 
   # Store a token in persistant storage
   def storeToken(token)
-    Setting.first_or_create(
-      { :name => 'st_token'},
-      { :value => JSON.generate(token.to_hash) })
+    s = Setting.first_or_create(:name => 'st_token')
+    s.value = JSON.generate(token.to_hash)
+    s.save
   end
 
   private :refreshToken, :getEndpoint, :retrieveToken, :storeToken
