@@ -27,4 +27,4 @@ Dashing.on 'ready', ->
         stop: Dashing.showGridsterInstructions
         start: -> Dashing.currentWidgetPositions = Dashing.getWidgetPositions()
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) )
-        $(".gridster ul:first").gridster().data('gridster').draggable().disable();
+        $(".gridster ul:first").gridster().data('gridster').draggable().disable()
