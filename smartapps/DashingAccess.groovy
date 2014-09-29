@@ -3,8 +3,8 @@
  *
  *  Copyright 2014 florianz
  *
- *	Author: florianz
- *  Contributor: bmmiller
+ *  Author: florianz
+ *  Contributor: bmmiller, Dianoga, mattjfrank
  *
  */
 
@@ -18,8 +18,8 @@ definition(
     author: "florianz",
     description: "API access for Dashing dashboards.",
     category: "Convenience",
-    iconUrl: "http://atulsql.com/wp-content/uploads/2014/04/icon_256.png",
-    iconX2Url: "http://atulsql.com/wp-content/uploads/2014/04/icon_256.png",
+    iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
+    iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png",
     oauth: true) {
 }
 
@@ -29,10 +29,13 @@ definition(
 //
 preferences {
     section("Allow access to the following things...") {
+        input "contacts", "capability.contactSensor", title: "Which contact sensors?", multiple: true, required: false
+        input "locks", "capability.lock", title: "Which Locks?", multiple: true, required: false
+        input "meters", "capability.powerMeter", title: "Which meters?", multiple: true, required: false
+        input "motions", "capability.motionSensor", title: "Which motion sensors?", multiple: true, required: false
+        input "presences", "capability.presenceSensor", title: "Which presence sensors?", multiple: true, required: false
         input "switches", "capability.switch", title: "Which switches?", multiple: true, required: false
         input "temperatures", "capability.temperatureMeasurement", title: "Which temperature sensors?", multiple: true, required: false
-		input "meters", "capability.powerMeter", title: "Which meters?", multiple: true, required: false
-        input "presences", "capability.presenceSensor", title: "Which sensors?", multiple: true, required: false
     }
 }
 
@@ -47,20 +50,15 @@ mappings {
             POST: "postConfig"
         ]
     }
-    path("/switch") {
+    path("/contact") {
         action: [
-            GET: "getSwitch",
-            POST: "postSwitch"
+            GET: "getContact"
         ]
     }
-	path("/power") {
+    path("/lock") {
         action: [
-            GET: "getPower"
-        ]
-    }
-    path("/temperature") {
-        action: [
-            GET: "getTemperature"
+            GET: "getLock",
+            POST: "postLock"
         ]
     }
     path("/mode") {
@@ -69,20 +67,41 @@ mappings {
             POST: "postMode"
         ]
     }
+    path("/motion") {
+        action: [
+            GET: "getMotion"
+        ]
+    }
     path("/phrase") {
         action: [
             POST: "postPhrase"
+        ]
+    }
+    path("/power") {
+        action: [
+            GET: "getPower"
+        ]
+    }
+    path("/presence") {
+        action: [
+            GET: "getPresence"
+        ]
+    }
+    path("/switch") {
+        action: [
+            GET: "getSwitch",
+            POST: "postSwitch"
+        ]
+    }
+    path("/temperature") {
+        action: [
+            GET: "getTemperature"
         ]
     }
     path("/weather") {
         action: [
             GET: "getWeather"
         ]
-    }
-    path("/presence") {
-    	action: [
-        	GET: "getPresence"
-            ]
     }
 }
 
@@ -103,18 +122,24 @@ def initialize() {
     state.dashingURI = ""
     state.dashingAuthToken = ""
     state.widgets = [
-    	"presence": [:],
-        "switch": [:],
+        "contact": [:],
+        "lock": [:],
+        "mode": [],
+        "motion": [:],
         "power": [:],
+        "presence": [:],
+        "switch": [:],
         "temperature": [:],
-        "mode": [],        
         ]
-        
+
+    subscribe(contacts, "contact", contactHandler)        
+    subscribe(location, locationHandler)
+    subscribe(locks, "lock", lockHandler)
+    subscribe(motions, "motion", motionHandler)
+    subscribe(meters, "power", meterHandler)
     subscribe(presences, "presence", presenceHandler)    
     subscribe(switches, "switch", switchHandler)
-    subscribe(meters, "power", meterHandler)
     subscribe(temperatures, "temperature", temperatureHandler)
-    subscribe(location, locationHandler)
 }
 
 
@@ -132,90 +157,92 @@ def postConfig() {
 }
 
 //
-// Presences
+// Contacts
 //
-
-def getPresence() {
+def getContact() {
     def deviceId = request.JSON?.deviceId
-    log.debug "getPresence ${deviceId}"
-    
+    log.debug "getContact ${deviceId}"
+
     if (deviceId) {
-        registerWidget("presence", deviceId, request.JSON?.widgetId)
-        
-        def whichPresence = presences.find { it.displayName == deviceId }
-        if (!whichPresence) {
+        registerWidget("contact", deviceId, request.JSON?.widgetId)
+
+        def whichContact = contacts.find { it.displayName == deviceId }
+        if (!whichContact) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
         } else {
-            return ["deviceId": deviceId, "state": whichPresence.currentPresence]
+            return [
+                "deviceId": deviceId,
+                "state": whichContact.currentContact]
         }
     }
-    
+
     def result = [:]
-    presences.each {
+    contacts.each {
         result[it.displayName] = [
-            "state": it.currentPresence,
-            "widgetId": state.widgets.presence[it.displayName]]}
-            
+            "state": it.currentContact,
+            "widgetId": state.widgets.contact[it.displayName]]}
+
     return result
 }
 
-def presenceHandler(evt) {
-    def widgetId = state.widgets.presence[evt.displayName]
-    notifyWidget(widgetId, ["state": evt.currentPresence])
+def contactHandler(evt) {
+    def widgetId = state.widgets.contact[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.value])
 }
 
 //
-// Switches
+// Locks
 //
-def getSwitch() {
+def getLock() {
     def deviceId = request.JSON?.deviceId
-    log.debug "getSwitch ${deviceId}"
-    
+    log.debug "getLock ${deviceId}"
+
     if (deviceId) {
-        registerWidget("switch", deviceId, request.JSON?.widgetId)
-        
-        def whichSwitch = switches.find { it.displayName == deviceId }
-        if (!whichSwitch) {
+        registerWidget("lock", deviceId, request.JSON?.widgetId)
+
+        def whichLock = locks.find { it.displayName == deviceId }
+        if (!whichLock) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
         } else {
-            return ["deviceId": deviceId, "switch": whichSwitch.currentSwitch]
+            return [
+                "deviceId": deviceId,
+                "state": whichLock.currentLock]
         }
     }
-    
+
     def result = [:]
-    switches.each {
+    locks.each {
         result[it.displayName] = [
-            "state": it.currentSwitch,
-            "widgetId": state.widgets.switch[it.displayName]]}
-            
+            "state": it.currentLock,
+            "widgetId": state.widgets.lock[it.displayName]]}
+
     return result
 }
 
-def postSwitch() {
+def postLock() {
     def command = request.JSON?.command
     def deviceId = request.JSON?.deviceId
-    log.debug "postSwitch ${deviceId}, ${command}"
-    
+    log.debug "postLock ${deviceId}, ${command}"
+
     if (command && deviceId) {
-        def whichSwitch = switches.find { it.displayName == deviceId }
-        if (!whichSwitch) {
+        def whichLock = locks.find { it.displayName == deviceId }
+        if (!whichLock) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
         } else {
-            whichSwitch."$command"()
+            whichLock."$command"()
         }
     }
     return respondWithSuccess()
 }
 
-def switchHandler(evt) {
-    def widgetId = state.widgets.switch[evt.displayName]
+def lockHandler(evt) {
+    def widgetId = state.widgets.lock[evt.displayName]
     notifyWidget(widgetId, ["state": evt.value])
 }
 
 //
 // Meters
 //
-
 def getPower() {
     def deviceId = request.JSON?.deviceId
     log.debug "getPower ${deviceId}"
@@ -227,7 +254,9 @@ def getPower() {
         if (!whichMeter) {
             return respondWithStatus(404, "Device '${deviceId}' not found.")
         } else {
-            return ["deviceId": deviceId, "value": whichMeter.currentValue("power")]
+            return [
+                "deviceId": deviceId, 
+                "value": whichMeter.currentValue("power")]
         }
     }
     
@@ -242,38 +271,6 @@ def getPower() {
 
 def meterHandler(evt) {
     def widgetId = state.widgets.power[evt.displayName]
-    notifyWidget(widgetId, ["value": evt.value])
-}
-
-//
-// Temperatures
-//
-def getTemperature() {
-    def deviceId = request.JSON?.deviceId
-    log.debug "getTemperature ${deviceId}"
-    
-    if (deviceId) {
-        registerWidget("temperature", deviceId, request.JSON?.widgetId)
-        
-        def whichTemperature = temperatures.find { it.displayName == deviceId }
-        if (!whichTemperature) {
-            return respondWithStatus(404, "Device '${deviceId}' not found.")
-        } else {
-            return ["deviceId": deviceId, "value": whichTemperature.currentTemperature]
-        }
-    }
-    
-    def result = [:]
-    temperatures.each {
-        result[it.displayName] = [
-            "value": it.currentTemperature,
-            "widgetId": state.widgets.temperature[it.displayName]]}
-            
-    return result
-}
-
-def temperatureHandler(evt) {
-    def widgetId = state.widgets.temperature[evt.displayName]
     notifyWidget(widgetId, ["value": evt.value])
 }
 
@@ -314,6 +311,40 @@ def locationHandler(evt) {
 }
 
 //
+// Motions
+//
+def getMotion() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getMotion ${deviceId}"
+
+    if (deviceId) {
+        registerWidget("motion", deviceId, request.JSON?.widgetId)
+
+        def whichMotion = motions.find { it.displayName == deviceId }
+        if (!whichMotion) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId,
+                "state": whichMotion.currentMotion]
+        }
+    }
+
+    def result = [:]
+    motionss.each {
+        result[it.displayName] = [
+            "state": it.currentMotion,
+            "widgetId": state.widgets.motion[it.displayName]]}
+
+    return result
+}
+
+def motionHandler(evt) {
+    def widgetId = state.widgets.motion[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.value])
+}
+
+//
 // Phrases
 //
 def postPhrase() {
@@ -331,6 +362,124 @@ def postPhrase() {
 }
 
 //
+// Presences
+//
+def getPresence() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getPresence ${deviceId}"
+    
+    if (deviceId) {
+        registerWidget("presence", deviceId, request.JSON?.widgetId)
+        
+        def whichPresence = presences.find { it.displayName == deviceId }
+        if (!whichPresence) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId,
+                "state": whichPresence.currentPresence]
+        }
+    }
+    
+    def result = [:]
+    presences.each {
+        result[it.displayName] = [
+            "state": it.currentPresence,
+            "widgetId": state.widgets.presence[it.displayName]]}
+            
+    return result
+}
+
+def presenceHandler(evt) {
+    def widgetId = state.widgets.presence[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.currentPresence])
+}
+
+//
+// Switches
+//
+def getSwitch() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getSwitch ${deviceId}"
+    
+    if (deviceId) {
+        registerWidget("switch", deviceId, request.JSON?.widgetId)
+        
+        def whichSwitch = switches.find { it.displayName == deviceId }
+        if (!whichSwitch) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId,
+                "switch": whichSwitch.currentSwitch]
+        }
+    }
+    
+    def result = [:]
+    switches.each {
+        result[it.displayName] = [
+            "state": it.currentSwitch,
+            "widgetId": state.widgets.switch[it.displayName]]}
+            
+    return result
+}
+
+def postSwitch() {
+    def command = request.JSON?.command
+    def deviceId = request.JSON?.deviceId
+    log.debug "postSwitch ${deviceId}, ${command}"
+    
+    if (command && deviceId) {
+        def whichSwitch = switches.find { it.displayName == deviceId }
+        if (!whichSwitch) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            whichSwitch."$command"()
+        }
+    }
+    return respondWithSuccess()
+}
+
+def switchHandler(evt) {
+    def widgetId = state.widgets.switch[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.value])
+}
+
+//
+// Temperatures
+//
+def getTemperature() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getTemperature ${deviceId}"
+    
+    if (deviceId) {
+        registerWidget("temperature", deviceId, request.JSON?.widgetId)
+        
+        def whichTemperature = temperatures.find { it.displayName == deviceId }
+        if (!whichTemperature) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId, 
+                "value": whichTemperature.currentTemperature]
+        }
+    }
+    
+    def result = [:]
+    temperatures.each {
+        result[it.displayName] = [
+            "value": it.currentTemperature,
+            "widgetId": state.widgets.temperature[it.displayName]]}
+            
+    return result
+}
+
+def temperatureHandler(evt) {
+    def widgetId = state.widgets.temperature[evt.displayName]
+    notifyWidget(widgetId, ["value": evt.value])
+}
+
+//
 // Weather
 //
 def getWeather() {
@@ -340,6 +489,7 @@ def getWeather() {
     }
     return getWeatherFeature(feature)
 }
+
 
 //
 // Widget Helpers
