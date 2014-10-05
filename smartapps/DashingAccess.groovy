@@ -278,7 +278,7 @@ def meterHandler(evt) {
 // Modes
 //
 def getMode() {
-    def widgetId = request.JSON?.widgtId
+    def widgetId = request.JSON?.widgetId
     if (widgetId) {
         if (!state['widgets']['mode'].contains(widgetId)) {
             state['widgets']['mode'].add(widgetId)
