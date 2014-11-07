@@ -100,5 +100,5 @@ class Dashing.Stdimmer extends Dashing.Widget
       @levelDown()
     else if dataSpot == "fa fa-plus"
       @levelUp()
-    else if dataSpot == "fa fa-lightbulb-o" || dataSpot == "title"
+    else if dataSpot == "toggle-area"
       @postState()
