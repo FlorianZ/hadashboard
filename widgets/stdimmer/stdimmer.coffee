@@ -22,7 +22,7 @@ class Dashing.Stdimmer extends Dashing.Widget
     if @get('state') == 'on'
       $(@node).css 'background-color', '#42C873'
     else
-      $(@node).css 'background-color', '#72818B'
+      $(@node).css 'background-color', '#888888'
 
   plusLevel: ->
     newLevel = parseInt(@get('level'))+10
