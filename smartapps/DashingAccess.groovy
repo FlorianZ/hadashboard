@@ -392,7 +392,7 @@ def getPresence() {
 
 def presenceHandler(evt) {
     def widgetId = state.widgets.presence[evt.displayName]
-    notifyWidget(widgetId, ["state": evt.currentPresence])
+    notifyWidget(widgetId, ["state": evt.value])
 }
 
 //
