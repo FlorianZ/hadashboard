@@ -8,22 +8,24 @@ class Dashing.Stswitch extends Dashing.Widget
     set: (key, value) -> @_state = value
 
   @accessor 'icon',
-    get: -> @['icon'] ? 'power-off'
+    get: -> if @['icon'] then @['icon'] else
+      if @get('state') == 'on' then @get('iconon') else @get('iconoff')
     set: Batman.Property.defaultAccessor.set
 
-  @accessor 'stateInverse', ->
-    if @get('state') == 'on' then 'off' else 'on'
+  @accessor 'iconon',
+    get: -> @['iconon'] ? 'circle'
+    set: Batman.Property.defaultAccessor.set
 
-  updateBackgroundColor: ->
-    if @get('state') == 'on'
-      $(@node).css 'background-color', '#42C873'
-    else
-      $(@node).css 'background-color', '#888888'
+  @accessor 'iconoff',
+    get: -> @['iconoff'] ? 'circle-thin'
+    set: Batman.Property.defaultAccessor.set
+
+  @accessor 'icon-style', ->
+    if @get('state') == 'on' then 'switch-icon-on' else 'switch-icon-off'    
 
   toggleState: ->
-    newState = @get 'stateInverse'
+    newState = if @get('state') == 'on' then 'off' else 'on'
     @set 'state', newState
-    @updateBackgroundColor()
     return newState
 
   queryState: ->
@@ -34,7 +36,6 @@ class Dashing.Stswitch extends Dashing.Widget
       (data) =>
         json = JSON.parse data
         @set 'state', json.switch
-        @updateBackgroundColor()
 
   postState: ->
     newState = @toggleState()
@@ -48,9 +49,6 @@ class Dashing.Stswitch extends Dashing.Widget
           @toggleState()
 
   ready: ->
-
-  onData: (data) ->
-    @updateBackgroundColor()
 
   onClick: (node, event) ->
     @postState()

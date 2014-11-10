@@ -11,11 +11,8 @@ class Dashing.Stpresence extends Dashing.Widget
     get: -> if @get('state') == 'present' then 'user' else 'times'
     set: Batman.Property.defaultAccessor.set
 
-  updateBackgroundColor: ->
-    if @get('state') == 'present'
-      $(@node).css 'background-color', '#42C873'
-    else
-      $(@node).css 'background-color', '#888888'
+  @accessor 'icon-style', ->
+    if @get('state') == 'present' then 'icon-present' else 'icon-absent'
   
   queryState: ->
     $.get '/smartthings/dispatch',
@@ -25,7 +22,6 @@ class Dashing.Stpresence extends Dashing.Widget
       (data) =>
         json = JSON.parse data
         @set 'state', json.state
-        @updateBackgroundColor()
 
   ready: ->
 

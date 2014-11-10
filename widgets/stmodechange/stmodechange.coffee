@@ -7,6 +7,9 @@ class Dashing.Stmodechange extends Dashing.Widget
     get: -> @['icon'] ? 'tag'
     set: Batman.Property.defaultAccessor.set
 
+  @accessor 'icon-style', ->
+    if @isModeSet() then 'icon-active' else 'icon-inactive'
+
   @accessor 'mode',
     get: -> @_mode ? 'Unknown'
     set: (key, value) -> @_mode = value
@@ -30,12 +33,6 @@ class Dashing.Stmodechange extends Dashing.Widget
   isModeSet: ->
     @get('mode') == @get('changemode')
 
-  updateBackgroundColor: ->
-    if @isModeSet()
-      $(@node).css 'background-color', '#42C873'
-    else
-      $(@node).css 'background-color', '#888888'
-
   queryState: ->
     $.get '/smartthings/dispatch',
       widgetId: @get('id'),
@@ -43,12 +40,10 @@ class Dashing.Stmodechange extends Dashing.Widget
       (data) =>
         json = JSON.parse data
         @set 'mode', json.mode
-        @updateBackgroundColor()
 
   postModeState: ->
     oldMode = @get 'mode'
     @set 'mode', @get('changemode')
-    @updateBackgroundColor()
     $.post '/smartthings/dispatch',
       deviceType: 'mode',
       mode: @get('changemode'),
@@ -56,7 +51,6 @@ class Dashing.Stmodechange extends Dashing.Widget
         json = JSON.parse data
         if json.error != 0
           @set 'mode', oldModeM
-          @updateBackgroundColor()
 
   postPhraseState: ->
     $.post '/smartthings/dispatch',
@@ -69,7 +63,6 @@ class Dashing.Stmodechange extends Dashing.Widget
     @showIcon()
 
   onData: (data) ->
-    @updateBackgroundColor()
 
   changeModeDelayed: =>
     if @get('timer') <= 0

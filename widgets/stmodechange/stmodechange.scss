@@ -1,19 +1,12 @@
 // ----------------------------------------------------------------------------
-// Sass declarations
-// ----------------------------------------------------------------------------
-$background-color:  #888888;
-
-$title-color:       rgba(255, 255, 255, 0.7);
-
-// ----------------------------------------------------------------------------
 // Widget-stmode styles
 // ----------------------------------------------------------------------------
 .widget-stmodechange {
 
-  background-color: $background-color;
+  background-color: #444 !important;
 
   .title {
-    color: $title-color;
+    color: #fff;
   }
 
   i {
@@ -37,8 +30,12 @@ $title-color:       rgba(255, 255, 255, 0.7);
   	z-index: 1;
   }
 
-  .updated-at {
-    color: rgba(0, 0, 0, 0.3);
+  .icon-inactive {
+    color: #888888;
+  }
+
+  .icon-active {
+    color: #aaff00;
   }
 
 }
