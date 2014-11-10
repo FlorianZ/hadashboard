@@ -11,11 +11,8 @@ class Dashing.Stmotion extends Dashing.Widget
     get: -> if @get('state') == 'active' then 'exchange' else 'reorder'
     set: Batman.Property.defaultAccessor.set
 
-  updateBackgroundColor: ->
-    if @get('state') == 'active'
-      $(@node).css 'background-color', '#42C873'
-    else
-      $(@node).css 'background-color', '#888888'
+  @accessor 'icon-style', ->
+    if @get('state') == 'active' then 'icon-active' else 'icon-inactive'
 
   queryState: ->
     $.get '/smartthings/dispatch',
@@ -25,9 +22,7 @@ class Dashing.Stmotion extends Dashing.Widget
       (data) =>
         json = JSON.parse data
         @set 'state', json.state
-        @updateBackgroundColor()
 
   ready: ->
 
   onData: (data) ->
-    @updateBackgroundColor()

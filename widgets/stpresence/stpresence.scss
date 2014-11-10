@@ -1,23 +1,17 @@
 // ----------------------------------------------------------------------------
-// Sass declarations
-// ----------------------------------------------------------------------------
-$background-color:  #821AE8;
-
-$title-color:       rgba(255, 255, 255, 0.7);
-
-// ----------------------------------------------------------------------------
 // Widget-stpresence styles
 // ----------------------------------------------------------------------------
 .widget-stpresence {
 
-  background-color: $background-color;
-
   .title {
-    color: $title-color;
-  }
-
-  .state {
     color: #fff;
   }
 
+  .icon-present {
+  	color: #aaff00;
+  }
+
+  .icon-absent {
+  	color: #888888;
+  }
 }
