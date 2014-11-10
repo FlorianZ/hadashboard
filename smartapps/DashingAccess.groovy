@@ -462,7 +462,7 @@ def dimmerLevel() {
     def command = request.JSON?.command
     def deviceId = request.JSON?.deviceId
     log.debug "dimmerLevel ${deviceId}, ${command}"
-
+    command = command.toInteger()
     if (command && deviceId) {
         def whichDimmer = dimmers.find { it.displayName == deviceId }
         if (!whichDimmer) {
