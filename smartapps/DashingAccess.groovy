@@ -278,7 +278,7 @@ def meterHandler(evt) {
 // Modes
 //
 def getMode() {
-    def widgetId = request.JSON?.widgtId
+    def widgetId = request.JSON?.widgetId
     if (widgetId) {
         if (!state['widgets']['mode'].contains(widgetId)) {
             state['widgets']['mode'].add(widgetId)
@@ -392,7 +392,7 @@ def getPresence() {
 
 def presenceHandler(evt) {
     def widgetId = state.widgets.presence[evt.displayName]
-    notifyWidget(widgetId, ["state": evt.currentPresence])
+    notifyWidget(widgetId, ["state": evt.value])
 }
 
 //
