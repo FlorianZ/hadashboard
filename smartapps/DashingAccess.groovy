@@ -36,6 +36,8 @@ preferences {
         input "presences", "capability.presenceSensor", title: "Which presence sensors?", multiple: true, required: false
         input "switches", "capability.switch", title: "Which switches?", multiple: true, required: false
         input "temperatures", "capability.temperatureMeasurement", title: "Which temperature sensors?", multiple: true, required: false
+        input "humidities", "capability.relativeHumidityMeasurement", title: "Which humidity sensors?", multiple: true, required: false
+
     }
 }
 
@@ -98,6 +100,11 @@ mappings {
             GET: "getTemperature"
         ]
     }
+    path("/humidity") {
+        action: [
+            GET: "getHumidity"
+        ]
+    }
     path("/weather") {
         action: [
             GET: "getWeather"
@@ -130,6 +137,8 @@ def initialize() {
         "presence": [:],
         "switch": [:],
         "temperature": [:],
+        "humidity": [:],
+
         ]
 
     subscribe(contacts, "contact", contactHandler)        
@@ -140,6 +149,8 @@ def initialize() {
     subscribe(presences, "presence", presenceHandler)    
     subscribe(switches, "switch", switchHandler)
     subscribe(temperatures, "temperature", temperatureHandler)
+    subscribe(humidities, "humidity", humidityHandler)
+
 }
 
 
@@ -476,6 +487,40 @@ def getTemperature() {
 
 def temperatureHandler(evt) {
     def widgetId = state.widgets.temperature[evt.displayName]
+    notifyWidget(widgetId, ["value": evt.value])
+}
+
+//
+// Humidities
+//
+def getHumidity() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getHumidity ${deviceId}"
+
+    if (deviceId) {
+        registerWidget("humidity", deviceId, request.JSON?.widgetId)
+
+        def whichHumidity = humidities.find { it.displayName == deviceId }
+        if (!whichHumidity) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId,
+                "value": whichHumidity.currentHumidity]
+        }
+    }
+
+    def result = [:]
+    humidities.each {
+        result[it.displayName] = [
+            "value": it.currentHumidity,
+            "widgetId": state.widgets.humidity[it.displayName]]}
+
+    return result
+}
+
+def humidityHandler(evt) {
+    def widgetId = state.widgets.humidity[evt.displayName]
     notifyWidget(widgetId, ["value": evt.value])
 }
 
