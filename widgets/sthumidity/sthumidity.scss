@@ -1,0 +1,32 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------
+// Widget-sthumidity styles
+// ----------------------------------------------------------------------------
+.widget-sthumidity {
+
+  background-color: #444 !important;
+
+  .title {
+    color: #fff
+  }
+
+  .value {
+  	color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .unit {
+    font-size: 250%;
+    font-weight: 400;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+
+
+}
