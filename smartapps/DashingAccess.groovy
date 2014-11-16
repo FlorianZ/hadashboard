@@ -4,7 +4,7 @@
  *  Copyright 2014 florianz
  *
  *  Author: florianz
- *  Contributor: bmmiller, Dianoga, mattjfrank
+ *  Contributor: bmmiller, Dianoga, mattjfrank, ronnycarr
  *
  */
 
@@ -437,7 +437,7 @@ def getDimmer() {
         } else {
             return [
                 "deviceId": deviceId,
-				"level": whichDimmer.currentValue("level"),
+                "level": whichDimmer.currentValue("level"),
                 "state": whichDimmer.currentValue("switch")
             ]
         }
@@ -492,7 +492,7 @@ def dimmerHandler(evt) {
 }
 
 def dimmerSwitch(evt) {
-	def whichDimmer = dimmers.find { it.displayName == evt.displayName }
+    def whichDimmer = dimmers.find { it.displayName == evt.displayName }
     def widgetId = state.widgets.dimmer[evt.displayName]
     notifyWidget(widgetId, ["state": evt.value])
 }
