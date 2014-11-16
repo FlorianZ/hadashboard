@@ -1,28 +1,27 @@
 // ----------------------------------------------------------------------------
-// Sass declarations
-// ----------------------------------------------------------------------------
-$background-color:  #72818B;
-$title-color:       rgba(255, 255, 255, 0.7);
-$value-color:		#fff;
-
-// ----------------------------------------------------------------------------
 // Widget styles
 // ----------------------------------------------------------------------------
 .widget-stdimmer {
 
-  background-color: $background-color;
+  background-color: #444 !important;
   position: relative;
 
   .title {
-    color: $title-color;
+    color: #fff;
     margin-bottom: 0;
     margin-top: 10px;
   }
 
-  .dimmer-icon {
-    font-weight: 500;
+  .dimmer-icon-off .dimmer-icon-on {
     font-size: 150%;
-    color: $value-color;
+  }
+
+  .dimmer-icon-off {
+    color: #888888;
+  }
+
+  .dimmer-icon-on {
+    color: #aaff00;
   }
 
   .toggle-area {

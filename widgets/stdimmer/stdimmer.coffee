@@ -12,17 +12,20 @@ class Dashing.Stdimmer extends Dashing.Widget
     set: (key, value) -> @_level = value
 
   @accessor 'icon',
-    get: -> @['icon'] ? 'power-off'
+    get: -> if @['icon'] then @['icon'] else
+      if @get('state') == 'on' then @get('iconon') else @get('iconoff')
     set: Batman.Property.defaultAccessor.set
 
-  @accessor 'stateInverse', ->
-    if @get('state') == 'on' then 'off' else 'on'
+  @accessor 'iconon',
+    get: -> @['iconon'] ? 'circle'
+    set: Batman.Property.defaultAccessor.set
 
-  updateBackgroundColor: ->
-    if @get('state') == 'on'
-      $(@node).css 'background-color', '#42C873'
-    else
-      $(@node).css 'background-color', '#72818B'
+  @accessor 'iconoff',
+    get: -> @['iconoff'] ? 'circle-thin'
+    set: Batman.Property.defaultAccessor.set
+
+  @accessor 'icon-style', ->
+    if @get('state') == 'on' then 'dimmer-icon-on' else 'dimmer-icon-off' 
 
   plusLevel: ->
     newLevel = parseInt(@get('level'))+10
@@ -62,9 +65,8 @@ class Dashing.Stdimmer extends Dashing.Widget
         json = JSON.parse data
 
   toggleState: ->
-    newState = @get 'stateInverse'
+    newState = if @get('state') == 'on' then 'off' else 'on'
     @set 'state', newState
-    @updateBackgroundColor()
     return newState
 
   queryState: ->
@@ -76,7 +78,6 @@ class Dashing.Stdimmer extends Dashing.Widget
         json = JSON.parse data
         @set 'state', json.state
         @set 'level', json.level
-        @updateBackgroundColor()
 
   postState: ->
     newState = @toggleState()
@@ -92,7 +93,6 @@ class Dashing.Stdimmer extends Dashing.Widget
   ready: ->
 
   onData: (data) ->
-    @updateBackgroundColor()
 
   onClick: (node, event) ->
     dataSpot = event.toElement.className
