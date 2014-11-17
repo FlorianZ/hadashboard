@@ -1,4 +1,4 @@
-class Dashing.Stmodechange extends Dashing.Widget
+class Dashing.Stmodechange extends Dashing.ClickableWidget
   constructor: ->
     super
     @queryState()
@@ -77,7 +77,7 @@ class Dashing.Stmodechange extends Dashing.Widget
       @set 'timer', @get('timer') - 1
       @_timeout = setTimeout(@changeModeDelayed, 1000)
 
-  onClick: (node, event) ->
+  onClick: (event) ->
     if not @_timeout and not @isModeSet()
       @set 'timer', @get('countdown')
       @changeModeDelayed()

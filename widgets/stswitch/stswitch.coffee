@@ -1,4 +1,4 @@
-class Dashing.Stswitch extends Dashing.Widget
+class Dashing.Stswitch extends Dashing.ClickableWidget
   constructor: ->
     super
     @queryState()
@@ -50,5 +50,5 @@ class Dashing.Stswitch extends Dashing.Widget
 
   ready: ->
 
-  onClick: (node, event) ->
+  onClick: (event) ->
     @postState()
