@@ -1,4 +1,4 @@
-class Dashing.Stdimmer extends Dashing.Widget
+class Dashing.Stdimmer extends Dashing.ClickableWidget
   constructor: ->
     super
     @queryState()
@@ -94,7 +94,7 @@ class Dashing.Stdimmer extends Dashing.Widget
 
   onData: (data) ->
 
-  onClick: (node, event) ->
+  onClick: (event) ->
     dataSpot = event.toElement.className
     if dataSpot == "fa fa-minus"
       @levelDown()

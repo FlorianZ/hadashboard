@@ -1,4 +1,4 @@
-class Dashing.Stlock extends Dashing.Widget
+class Dashing.Stlock extends Dashing.ClickableWidget
   constructor: ->
     super
     @queryState()
@@ -43,5 +43,5 @@ class Dashing.Stlock extends Dashing.Widget
 
   onData: (data) ->
 
-  onClick: (node, event) ->
+  onClick: (event) ->
     @postState()
