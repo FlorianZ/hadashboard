@@ -95,10 +95,9 @@ class Dashing.Stdimmer extends Dashing.ClickableWidget
   onData: (data) ->
 
   onClick: (event) ->
-    dataSpot = event.toElement.className
-    if dataSpot == "fa fa-minus"
+    if event.target.id == "level-down"
       @levelDown()
-    else if dataSpot == "fa fa-plus"
+    else if event.target.id == "level-up"
       @levelUp()
-    else if dataSpot == "toggle-area"
+    else if event.target.id == "switch"
       @postState()
