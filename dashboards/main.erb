@@ -1,3 +1,11 @@
+<script type='text/javascript'>
+$(function() {
+  Dashing.widget_base_dimensions = [138, 145]
+  Dashing.numColumns = 5
+  Dashing.cycleDashboards({timeInSeconds: 0, stagger: true, page: 1});
+});
+</script>
+
 <% content_for :title do %>HADashboard<% end %>
 
 <div class="gridster">
@@ -87,8 +95,20 @@
     </li>
 
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="cpage1" data-view="ChangePage" data-icon="asterisk" data-title="Upstairs" data-page="3" data-stagger="false" data-fasttransition="true" data-event-click="onClick"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
       <div data-id="reload" data-view="Reload" data-event-click="onClick"></div>
     </li>
 
   </ul>
+</div>
+
+<div class="gridster">
+  <ul>
+    <li data-row="1" data-col="1" data-sizex="7" data-sizey="1">
+      <div data-id="text2" data-view="Text" data-text="Dashboard 2" ></div>
+    </li>
+ </ul>
 </div>
