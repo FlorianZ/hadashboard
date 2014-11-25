@@ -19,7 +19,7 @@ Dashing.on 'ready', ->
 
   Batman.setImmediate ->
     $('.gridster').width(contentWidth)
-   $('.gridster > ul').gridster
+    $('.gridster > ul').gridster
       widget_margins: Dashing.widget_margins
       widget_base_dimensions: Dashing.widget_base_dimensions
       avoid_overlapped_widgets: !Dashing.customGridsterLayout
