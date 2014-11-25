@@ -1,3 +1,11 @@
+<script type='text/javascript'>
+$(function() {
+  Dashing.widget_base_dimensions = [138, 145]
+  Dashing.numColumns = 5
+  Dashing.cycleDashboards({timeInSeconds: 0, stagger: true, page: 1});
+});
+</script>
+
 <% content_for :title do %>HADashboard<% end %>
 
 <div class="gridster">
@@ -6,89 +14,125 @@
       <div data-id="clock" data-view="Clock"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
+    <li data-row="1" data-col="3" data-sizex="2" data-sizey="2">
       <div data-id="weather" data-view="Stweather"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="sofalamp" data-view="Stswitch" data-icon="lightbulb-o" data-title="Sofa" data-device="Sofa Lamp" data-event-click="onClick"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="consolelamp" data-view="Stswitch" data-icon="lightbulb-o" data-title="Console" data-device="Console Lamp" data-event-click="onClick"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="dininglamp" data-view="Stswitch" data-icon="lightbulb-o" data-title="Dining Floor" data-device="Dining Lamp" data-event-click="onClick"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="diningwalllamp" data-view="Stswitch" data-icon="lightbulb-o" data-title="Dining Wall" data-device="Dining Wall Lamp" data-event-click="onClick"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="kitchenlight" data-view="Stswitch" data-icon="lightbulb-o" data-title="Kitchen" data-device="Kitchen Switch" data-event-click="onClick"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="bedroomlight" data-view="Stswitch" data-icon="lightbulb-o" data-title="Bedroom" data-device="Bedroom Switch" data-event-click="onClick"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="officeswitch" data-view="Stswitch" data-icon="lightbulb-o" data-title="Office" data-device="Office Switch" data-event-click="onClick"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="exteriorswitch" data-view="Stswitch" data-icon="lightbulb-o" data-title="Exterior" data-device="Front Porch Switch" data-event-click="onClick"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="garageswitch" data-view="Stswitch" data-icon="lightbulb-o" data-title="Garage" data-device="Garage Switch" data-event-click="onClick"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="bathroomswitch" data-view="Stswitch" data-icon="lightbulb-o" data-title="Bathroom" data-device="Bathroom Switch" data-event-click="onClick"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="lrtemp" data-view="Sttemp" data-title="Living Room" data-device="Thermostat"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="uctemp" data-view="Sttemp" data-title="Closet" data-device="Utility Closet"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+    <li data-row="1" data-col="5" data-sizex="2" data-sizey="1">
       <div data-id="mode" data-view="Stmode" data-title="Current Mode"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="nightmode" data-view="Stmodechange" data-title="Good Night" data-icon="moon-o" data-changemode="Night" data-phrase="Good Night!" data-countdown="30" data-event-click="onClick"></div>
+    <li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="temp" data-view="Sttemp" data-title="Outside Temperature" data-device="Porch Multisensor"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="kitchenmeter" data-view="Stmeter" data-title="Kitchen" data-device="Kitchen Switch" data-min="0" data-max="100"></div>
+    <li data-row="2" data-col="5" data-sizex="1" data-sizey="1">
+      <div data-id="presence1" data-view="Stpresence" data-title="Person 1" data-device="Person1's iPhone"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="backdoorcontact" data-view="Stcontact" data-title="Backdoor" data-device="Back Door"></div>
+    <li data-row="2" data-col="6" data-sizex="1" data-sizey="1">
+      <div data-id="presence2" data-view="Stpresence" data-title="Person 2" data-device="Person2's iPhone"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="presence1" data-view="Stpresence" data-title="Me" data-device="My Mobile Presence"></div>
+    <li data-row="3" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="dson" data-view="Stswitch" data-icon="lightbulb-o" data-title="Downstairs On" data-device="Downstairs On" data-event-click="onClick"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="drmotion" data-view="Stmotion" data-title="Dining Room" data-device="Dining Room"></div>
+	<li data-row="3" data-col="3" data-sizex="2" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Downstairs Off" data-device="Downstairs Off" data-event-click="onClick"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="fdlock" data-view="Stlock" data-title="Front Door" data-device="Front Door Lock" data-event-click="onClick"></div>
+    <li data-row="4" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="morningmode" data-view="Stmodechange" data-title="Good Morning" data-icon="sun-o" data-changemode="Day" data-phrase="Sunrise" data-event-click="onClick"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+	<li data-row="4" data-col="3" data-sizex="2" data-sizey="1">
+      <div data-id="eveningmode" data-view="Stmodechange" data-title="Good Evening" data-icon="moon-o" data-changemode="Evening" data-phrase="Sunset" data-event-click="onClick"></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="cpage2" data-view="ChangePage" data-icon="asterisk" data-title="Downstairs" data-page="2" data-event-click="onClick"></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="cpage1" data-view="ChangePage" data-icon="asterisk" data-title="Upstairs" data-page="3" data-stagger="false" data-fasttransition="true" data-event-click="onClick"></div>
+    </li>
+    <li data-row="5" data-col="7" data-sizex="1" data-sizey="1">
       <div data-id="reload" data-view="Reload" data-event-click="onClick"></div>
     </li>
-
   </ul>
+</div>
+
+<div class="gridster">
+  <ul>
+	<li data-row="1" data-col="1" data-sizex="7" data-sizey="1">
+      <div data-id="text1" data-view="Text" data-text="Downstairs" ></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Downstairs Light 1" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Downstairs Ligh 2" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Downstairs Light 3" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Downstairs Light 4" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Downstairs Light 5" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Downstairs Light 6" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Downstairs Light 7" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Downstairs Light 8" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>
+	<li data-row="5" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="cpage3" data-view="ChangePage" data-icon="arrow-left" data-title="Back" data-page="1" data-event-click="onClick"></div>
+    </li>
+    <li data-row="5" data-col="7" data-sizex="1" data-sizey="1">
+      <div data-id="reload" data-view="Reload" data-event-click="onClick"></div>
+    </li>
+ </ul>
+</div>
+
+<div class="gridster">
+  <ul>
+	<li data-row="1" data-col="1" data-sizex="7" data-sizey="1">
+      <div data-id="text2" data-view="Text" data-text="Upstairs" ></div>
+    </li>
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Upstairs Light 1" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>	
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Upstairs Light 2" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>	
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Upstairs Light 3" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>	
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Upstairs Light 4" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>	
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Upstairs Light 5" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>	
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Upstairs Light 6" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>	
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Upstairs Light 7" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>	
+	<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dsoff" data-view="Stswitch" data-icon="lightbulb-o" data-title="Upstairs Light 8" data-device="Downstairs Off" data-event-click="onClick"></div>
+    </li>	
+	<li data-row="5" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="cpage4" data-view="ChangePage" data-icon="arrow-left" data-title="Back" data-page="1" data-event-click="onClick"></div>
+    </li>
+    <li data-row="5" data-col="7" data-sizex="1" data-sizey="1">
+      <div data-id="reload" data-view="Reload" data-event-click="onClick"></div>
+    </li>
+ </ul>
 </div>
