@@ -1,4 +1,4 @@
-class Dashing.ChangePage extends Dashing.Widget
+class Dashing.ChangePage extends Dashing.ClickableWidget
 
   ready: ->
 
