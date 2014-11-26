@@ -5,4 +5,8 @@ class Dashing.ChangePage extends Dashing.ClickableWidget
   onData: (data) ->
 
   onClick: (node, event) ->
-  	Dashing.cycleDashboardsNow(boardnumber: @get('page'), stagger: @get('stagger'), fastTransition: @get('fasttransition'), transitiontype: @get('transitiontype'))
+    Dashing.cycleDashboardsNow(
+      boardnumber: @get('page'),
+      stagger: @get('stagger'),
+      fastTransition: @get('fasttransition'),
+      transitiontype: @get('transitiontype'))
