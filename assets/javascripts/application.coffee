@@ -14,6 +14,7 @@ Dashing.on 'ready', ->
   Dashing.widget_margins ||= [5, 5]
   Dashing.widget_base_dimensions ||= [145, 145]
   Dashing.numColumns ||= 7
+  Dashing.cycleDashboards({timeInSeconds: 0, stagger: true, page: 1});
 
   contentWidth = (Dashing.widget_base_dimensions[0] + Dashing.widget_margins[0] * 2) * Dashing.numColumns
 
