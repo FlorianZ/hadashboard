@@ -1,25 +1,24 @@
 // ----------------------------------------------------------------------------
-// Sass declarations
-// ----------------------------------------------------------------------------
-$background-color:  #888888;
-$title-color:       rgba(255, 255, 255, 0.7);
-$value-color:		#fff;
-
-// ----------------------------------------------------------------------------
 // Widget styles
 // ----------------------------------------------------------------------------
 .widget-stswitch {
 
-  background-color: $background-color;
+  background-color: #444 !important;
 
   .title {
-    color: $title-color;
+    color: #fff;
   }
 
-  .switch-icon {
-    font-weight: 500;
+  .switch-icon-off .switch-icon-on {
     font-size: 150%;
-    color: $value-color;
+  }
+
+  .switch-icon-off {
+    color: #888888;
+  }
+
+  .switch-icon-on {
+  	color: #aaff00;
   }
 
 }

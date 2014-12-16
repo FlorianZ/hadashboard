@@ -1,8 +1,8 @@
-class Dashing.Reload extends Dashing.Widget
+class Dashing.Reload extends Dashing.ClickableWidget
 
   ready: ->
 
   onData: (data) ->
 
-  onClick: (node, event) ->
+  onClick: (event) ->
   	Dashing.fire 'reload'

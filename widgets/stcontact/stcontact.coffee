@@ -11,11 +11,8 @@ class Dashing.Stcontact extends Dashing.Widget
     get: -> if @get('state') == 'open' then 'expand' else 'compress'
     set: Batman.Property.defaultAccessor.set
 
-  updateBackgroundColor: ->
-    if @get('state') == 'open'
-      $(@node).css 'background-color', '#dc9145'
-    else
-      $(@node).css 'background-color', '#888888'
+  @accessor 'icon-style', ->
+    if @get('state') == 'open' then 'icon-open' else 'icon-closed'
 
   queryState: ->
     $.get '/smartthings/dispatch',
@@ -25,9 +22,7 @@ class Dashing.Stcontact extends Dashing.Widget
       (data) =>
         json = JSON.parse data
         @set 'state', json.state
-        @updateBackgroundColor()
 
   ready: ->
 
   onData: (data) ->
-    @updateBackgroundColor()

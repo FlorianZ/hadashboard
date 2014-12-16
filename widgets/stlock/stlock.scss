@@ -1,18 +1,20 @@
 // ----------------------------------------------------------------------------
-// Sass declarations
-// ----------------------------------------------------------------------------
-$background-color:  #888888;
-$title-color:       rgba(255, 255, 255, 0.7);
-
-// ----------------------------------------------------------------------------
 // Widget styles
 // ----------------------------------------------------------------------------
 .widget-stlock {
 
-  background-color: $background-color;
+  background-color: #444 !important;
 
   .title {
-    color: $title-color;
+    color: #fff;
+  }
+
+  .icon-unlocked {
+  	color: #ff00aa;
+  }
+
+  .icon-locked {
+  	color: #fff;
   }
 
 }

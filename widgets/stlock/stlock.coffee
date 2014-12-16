@@ -1,4 +1,4 @@
-class Dashing.Stlock extends Dashing.Widget
+class Dashing.Stlock extends Dashing.ClickableWidget
   constructor: ->
     super
     @queryState()
@@ -11,19 +11,12 @@ class Dashing.Stlock extends Dashing.Widget
     get: -> if @get('state') == 'unlocked' then 'unlock-alt' else 'lock'
     set: Batman.Property.defaultAccessor.set
 
-  @accessor 'stateInverse', ->
-    if @get('state') == 'locked' then 'unlock' else 'lock'
-
-  updateBackgroundColor: ->
-    if @get('state') == 'locked'
-      $(@node).css 'background-color', '#42C873'
-    else
-      $(@node).css 'background-color', '#888888'
+  @accessor 'icon-style', ->
+    if @get('state') == 'locked' then 'icon-locked' else 'icon-unlocked'
 
   toggleState: ->
-    newState = @get 'stateInverse'
+    newState = if @get('state') == 'locked' then 'unlock' else 'lock'
     @set 'state', newState
-    @updateBackgroundColor()
     return newState
 
   queryState: ->
@@ -34,7 +27,6 @@ class Dashing.Stlock extends Dashing.Widget
       (data) =>
         json = JSON.parse data
         @set 'state', json.state
-        @updateBackgroundColor()
 
   postState: ->
     newState = @toggleState()
@@ -50,7 +42,6 @@ class Dashing.Stlock extends Dashing.Widget
   ready: ->
 
   onData: (data) ->
-    @updateBackgroundColor()
 
-  onClick: (node, event) ->
+  onClick: (event) ->
     @postState()

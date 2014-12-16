@@ -1,14 +1,18 @@
 // ----------------------------------------------------------------------------
-// Widget-sttemp styles
+// Sass declarations
 // ----------------------------------------------------------------------------
-.widget-sttemp {
+
+// ----------------------------------------------------------------------------
+// Widget-sthumidity styles
+// ----------------------------------------------------------------------------
+.widget-sthumidity {
 
   .title {
-    color: #fff;
+    color: #fff
   }
 
   .value {
-  	color: #00aaff;
+    color: #00aaff;
     display: inline-block;
     vertical-align: middle;
   }
@@ -22,4 +26,6 @@
     margin-left: 5px;
     margin-top: 5px;
   }
+
+
 }
