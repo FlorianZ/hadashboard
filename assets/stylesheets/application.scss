@@ -46,7 +46,7 @@ body {
   background-color: $background-color;
   font-size: 15px;
   color: $text-color;
-  font-family: 'Helvetica Neue', 'Helvetica', 'Open Sans', 'Arial'
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 b, strong {
@@ -95,17 +95,17 @@ h1 {
   margin-bottom: 6px;
   text-align: center;
   font-size: 150%;
-  font-weight: 200;
+  font-weight: 400;
 }
 h2 {
   text-transform: uppercase;
   font-size: 380%;
-  font-weight: 400;
+  font-weight: 700;
   color: $text-color;
 }
 h3 {
   font-size: 125%;
-  font-weight: 300;
+  font-weight: 600;
   color: $text-color;
 }
 
@@ -149,7 +149,7 @@ h3 {
   width: 100%;
   display: table-cell;
   vertical-align: middle;
-  background-color: #333;
+  background-color: #456A90;
 }
 
 .widget.status-warning {
