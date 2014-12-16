@@ -1,7 +1,11 @@
 // ----------------------------------------------------------------------------
-// Widget-stmode styles
+// Widget-stweather styles
 // ----------------------------------------------------------------------------
 .widget-stweather {
+
+  .weather {
+    text-shadow: 2px 2px #000000;
+  }
 
   h1 {
   	margin-bottom: 0px;
@@ -33,7 +37,7 @@
 
   .primary-climacon {
   	font-family: "Climacons-Font";
-  	font-size: 90px;
+  	font-size: 90px;    
   }
 
   .primary-info {
