@@ -1,12 +1,11 @@
 // ----------------------------------------------------------------------------
 // Widget-stweather styles
 // ----------------------------------------------------------------------------
-.widget-stweather {
-
-  .weather {
+.widget.widget-stweather.weather {
     text-shadow: 2px 2px #000000;
-  }
+}
 
+.widget-stweather {
   h1 {
   	margin-bottom: 0px;
   }
