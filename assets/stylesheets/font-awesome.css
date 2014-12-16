@@ -18,6 +18,7 @@
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-shadow: 2px 2px #000000;
 }
 /* makes the font 33% larger relative to the icon container */
 .fa-lg {
