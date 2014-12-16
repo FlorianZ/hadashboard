@@ -3,6 +3,8 @@
 // ----------------------------------------------------------------------------
 .widget-sttemp {
 
+  text-shadow: 2px 2px #000000;
+
   .title {
     color: #fff;
   }
@@ -10,8 +12,7 @@
   .value {
   	color: #ffffff;
     display: inline-block;
-    vertical-align: middle;
-    text-shadow: 2px 2px #000000;
+    vertical-align: middle;   
   }
 
   .unit {
