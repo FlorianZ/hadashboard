@@ -6,19 +6,7 @@
 // Sass declarations
 // ----------------------------------------------------------------------------
 
-$background-color: #222;
-$background-color-1: #456A90;
-$background-color-2: #444444;
-$text-color: #fff;
-$shadow-color: #000;
-
-$background-warning-color-1: #e82711;
-$background-warning-color-2: #9b2d23;
-$text-warning-color: #fff;
-
-$background-danger-color-1: #eeae32;
-$background-danger-color-2: #ff9618;
-$text-danger-color: #fff;
+@import "theme.scss"
 
 @-webkit-keyframes status-warning-background {
   0%   { background-color: $background-warning-color-1; }
