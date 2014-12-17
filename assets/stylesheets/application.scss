@@ -298,6 +298,7 @@ h3 {
     background-color: darken($background-color-1, 15%);;
     color: #fff;
   }
+}
 
 .widget-sttemp {
 
@@ -318,13 +319,10 @@ h3 {
     display: inline-block;
     vertical-align: top;
     margin-left: 5px;
-    margin-top: 5px;
+    margin-top: 5px; 
   }
-  
-  !important;
 }  
   
-}
 
 // ----------------------------------------------------------------------------
 // Clearfix
