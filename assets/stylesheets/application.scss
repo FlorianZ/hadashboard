@@ -5,7 +5,10 @@
 // ----------------------------------------------------------------------------
 // Sass declarations
 // ----------------------------------------------------------------------------
+
 $background-color: #222;
+$background-color-1: #456A90;
+$background-color-2: #444444;
 $text-color: #fff;
 
 $background-warning-color-1: #e82711;
@@ -154,7 +157,7 @@ h3 {
   width: 100%;
   display: table-cell;
   vertical-align: middle;
-  background-color: #456A90;
+  background-color: $background-color-1;
 }
 
 .widget.status-warning {
@@ -259,7 +262,8 @@ h3 {
 // ----------------------------------------------------------------------------
 */
 .widget-stswitch {
-  background-color: #444 !important;
+
+  background-color: $background-color-2 !important;
   .title {
     color: #fff;
   }
@@ -272,9 +276,11 @@ h3 {
   .switch-icon-on {
   	color: #aaff00;
   }
+  
 }
 
 .widget-stmode {
+
   .title {
     color: #fff;
   }
@@ -283,6 +289,16 @@ h3 {
     font-weight: bold;
     text-shadow: 2px 2px #000000;
   }
+  
+}
+
+.widget-stmeter {
+
+  input.stmeter {
+    background-color: darken($background-color-1, 15%);;
+    color: #fff;
+  }
+
 }
 
 // ----------------------------------------------------------------------------
