@@ -10,6 +10,7 @@ $background-color: #222;
 $background-color-1: #456A90;
 $background-color-2: #444444;
 $text-color: #fff;
+$shadow-color: #000;
 
 $background-warning-color-1: #e82711;
 $background-warning-color-2: #9b2d23;
@@ -99,7 +100,7 @@ h1 {
   text-align: center;
   font-size: 150%;
   font-weight: 200;
-  text-shadow: 2px 2px #000000;
+  text-shadow: 2px 2px $shadow-color;
 }
 h2 {
   text-transform: uppercase;
@@ -121,8 +122,8 @@ h3 {
 }
 
 .title {
-  color: #ffffff;
-  text-shadow: 2px 2px #000000;
+  color: $text-color;
+  text-shadow: 2px 2px $shadow-color;
 }
 
 .icon-background {
@@ -158,7 +159,7 @@ h3 {
   width: 100%;
   display: table-cell;
   vertical-align: middle;
-  text-shadow: 2px 2px #000000;
+  text-shadow: 2px 2px $shadow-color;
   background-color: $background-color-1;
 }
 

@@ -1,9 +1,11 @@
 // ----------------------------------------------------------------------------
 // Widget styles
 // ----------------------------------------------------------------------------
+@import ..\..\assets\stylesheets\application.scss
+
 .widget-stswitch {
 
-  background-color: #444444 !important;
+  background-color: $background-color-2 !important;
   
   .switch-icon-off .switch-icon-on {
     font-size: 150%;
