@@ -121,6 +121,7 @@ h3 {
 }
 
 .title {
+  color: #ffffff;
   text-shadow: 2px 2px #000000;
 }
 
@@ -257,72 +258,6 @@ h3 {
 #container {
   padding-top: 5px;
 }
-/*
-// ----------------------------------------------------------------------------
-// Widgets
-// ----------------------------------------------------------------------------
-*/
-.widget-stswitch {
-
-  background-color: $background-color-2 !important;
-  .title {
-    color: #fff;
-  }
-  .switch-icon-off .switch-icon-on {
-    font-size: 150%;
-  }
-  .switch-icon-off {
-    color: #888888;
-  }
-  .switch-icon-on {
-  	color: #aaff00;
-  }
-  
-}
-
-.widget-stmode {
-
-  .title {
-    color: #fff;
-  }
-  .mode {
-  	color: #fff;
-    font-weight: bold;
-  }
-  
-}
-
-.widget-stmeter {
- 
-  input.stmeter {
-    background-color: darken($background-color-1, 15%);;
-    color: #fff;
-  }
-}
-
-.widget-sttemp {
-
-  .title {
-    color: #fff;
-  }
-
-  .value {
-  	color: #ffffff;
-    display: inline-block;
-    vertical-align: middle;   
-  }
-
-  .unit {
-    color: #ffffff;
-    font-size: 250%;
-    font-weight: 400;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 5px;
-    margin-top: 5px; 
-  }
-}  
-  
 
 // ----------------------------------------------------------------------------
 // Clearfix
