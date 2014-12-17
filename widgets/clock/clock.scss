@@ -1,9 +1,12 @@
 // ----------------------------------------------------------------------------
 // Widget-clock styles
 // ----------------------------------------------------------------------------
+@import "/app/assets/stylesheets/themes/current.scss";
+
 .widget-clock {
 
   .time {
+    color: $clock-text-color;
   	font-weight: bold;
   }
 
