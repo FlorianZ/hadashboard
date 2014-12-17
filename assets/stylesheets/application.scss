@@ -101,6 +101,9 @@ h3 {
   font-weight: 300;
   color: $text-color;
 }
+.fa {
+  text-shadow: 2px 2px $shadow-color;
+}
 
 // ----------------------------------------------------------------------------
 // Base widget styles
