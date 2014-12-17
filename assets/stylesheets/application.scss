@@ -157,6 +157,7 @@ h3 {
   width: 100%;
   display: table-cell;
   vertical-align: middle;
+  text-shadow: 2px 2px #000000;
   background-color: $background-color-1;
 }
 
@@ -287,18 +288,40 @@ h3 {
   .mode {
   	color: #fff;
     font-weight: bold;
-    text-shadow: 2px 2px #000000;
   }
   
 }
 
 .widget-stmeter {
-
+ 
   input.stmeter {
     background-color: darken($background-color-1, 15%);;
     color: #fff;
   }
 
+.widget-sttemp {
+
+  .title {
+    color: #fff;
+  }
+
+  .value {
+  	color: #ffffff;
+    display: inline-block;
+    vertical-align: middle;   
+  }
+
+  .unit {
+    color: #ffffff;
+    font-size: 250%;
+    font-weight: 400;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+}  
+  
 }
 
 // ----------------------------------------------------------------------------
