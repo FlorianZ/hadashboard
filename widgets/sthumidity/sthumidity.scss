@@ -1,24 +1,18 @@
 // ----------------------------------------------------------------------------
-// Sass declarations
-// ----------------------------------------------------------------------------
-
-// ----------------------------------------------------------------------------
 // Widget-sthumidity styles
 // ----------------------------------------------------------------------------
+@import "/app/assets/stylesheets/themes/current.scss";
+
 .widget-sthumidity {
 
-  .title {
-    color: #fff
-  }
-
   .value {
-    color: #00aaff;
+    color: $humidity-value-color;
     display: inline-block;
     vertical-align: middle;
   }
 
   .unit {
-    color: #00aaff;
+    color: $humidity-unit-color;
     font-size: 250%;
     font-weight: 400;
     display: inline-block;
@@ -26,6 +20,5 @@
     margin-left: 5px;
     margin-top: 5px;
   }
-
 
 }

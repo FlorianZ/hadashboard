@@ -1,13 +1,13 @@
 // ----------------------------------------------------------------------------
 // Widget-stmeter styles
 // ----------------------------------------------------------------------------
-@import "/app/assets/stylesheets/theme.scss";
+@import "/app/assets/stylesheets/themes/current.scss";
 
 .widget-stmeter {
  
   input.stmeter {
-    background-color: darken($background-color-1, 15%);
-    color: $text-color;
+    background-color: darken($background-color-noaction, 15%);
+    color: $meter-text-color;
     text-shadow: 2px 2px $shadow-color;
   }
   

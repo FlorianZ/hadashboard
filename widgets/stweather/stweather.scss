@@ -1,8 +1,10 @@
 // ----------------------------------------------------------------------------
 // Widget-stweather styles
 // ----------------------------------------------------------------------------
+@import "/app/assets/stylesheets/themes/current.scss";
+
 .widget.widget-stweather.weather {
-    text-shadow: 2px 2px #000000;
+    text-shadow: 2px 2px $shadow-color;
 }
 
 .widget-stweather {
@@ -11,7 +13,7 @@
   }
 
   .colored {
-    color: #ffffff !important;
+    color: $weather-primary-text-color !important;
   }
 
   [class^="primary"] {
@@ -32,6 +34,7 @@
   	margin-right: 0px;
   	margin-top: 0px;
   	margin-bottom: 0px;
+    color: $weather-secondary-text-color;
   }
 
   .primary-climacon {

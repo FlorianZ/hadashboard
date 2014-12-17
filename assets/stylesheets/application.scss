@@ -6,7 +6,7 @@
 // Sass declarations
 // ----------------------------------------------------------------------------
 
-@import "theme.scss";
+@import "themes/current.scss";
 
 @-webkit-keyframes status-warning-background {
   0%   { background-color: $background-warning-color-1; }
@@ -148,7 +148,7 @@ h3 {
   display: table-cell;
   vertical-align: middle;
   text-shadow: 2px 2px $shadow-color;
-  background-color: $background-color-1;
+  background-color: $background-color-noaction;
 }
 
 .widget.status-warning {
