@@ -1,25 +1,23 @@
 // ----------------------------------------------------------------------------
 // Widget-sttemp styles
 // ----------------------------------------------------------------------------
+@import "/app/assets/stylesheets/themes/current.scss";
+
 .widget-sttemp {
 
-  .title {
-    color: #fff;
-  }
-
   .value {
-  	color: #00aaff;
+  	color: $temp-value-color;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: middle;   
   }
 
   .unit {
-    color: #00aaff;
+    color: $temp-unit-color;
     font-size: 250%;
     font-weight: 400;
     display: inline-block;
     vertical-align: top;
     margin-left: 5px;
-    margin-top: 5px;
+    margin-top: 5px; 
   }
-}
+} 

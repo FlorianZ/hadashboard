@@ -1,94 +1,96 @@
+<script type='text/javascript'></script>
+
 <% content_for :title do %>HADashboard<% end %>
 
 <div class="gridster">
   <ul>
     <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
-      <div data-id="clock" data-view="Clock"></div>
+      <div data-id="clock" data-view="Clock" data-title="Synergy" data-min="0" data-max="100"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
+    <li data-row="1" data-col="3" data-sizex="2" data-sizey="2">
       <div data-id="weather" data-view="Stweather"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="sofalamp" data-view="Stswitch" data-title="Sofa" data-device="Sofa Lamp"></div>
+    <li data-row="1" data-col="5" data-sizex="1" data-sizey="1">
+      <div data-id="firelights" data-view="Stdimmer" data-icon="lightbulb-o" data-title="Fireplace" data-device="Fireplace Lights"></div>
+    </li>
+	
+	<li data-row="1" data-col="6" data-sizex="1" data-sizey="1">
+      <div data-id="livingroomlight" data-view="Stswitch" data-icon="lightbulb-o" data-title="Living Room" data-device="Living Room Light"></div>
+    </li>
+	
+	<li data-row="1" data-col="7" data-sizex="1" data-sizey="1">
+      <div data-id="basementlights" data-view="Stswitch" data-icon="lightbulb-o" data-title="Basement" data-device="Basement Stairs Lights"></div>
+    </li>
+	
+	<li data-row="2" data-col="5" data-sizex="1" data-sizey="1">
+      <div data-id="patiolight" data-view="Stswitch" data-icon="lightbulb-o" data-title="Patio" data-device="Patio Light"></div>
+    </li>
+	
+	<li data-row="2" data-col="6" data-sizex="1" data-sizey="1">
+      <div data-id="frontlights" data-view="Stswitch" data-icon="lightbulb-o" data-title="Front Door" data-device="Front Door Lights"></div>
+    </li>
+	
+	<li data-row="3" data-col="5" data-sizex="1" data-sizey="1">
+      <div data-id="rearoutlet" data-view="Stswitch" data-icon="tree" data-title="Rear Lights" data-device="Patio Outlet"></div>
+    </li>
+	
+	<li data-row="3" data-col="6" data-sizex="1" data-sizey="1">
+      <div data-id="frontoutlet" data-view="Stswitch" data-icon="tree" data-title="Front Lights" data-device="Front Door Outlet"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="consolelamp" data-view="Stswitch" data-title="Console" data-device="Console Lamp"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="dininglamp" data-view="Stswitch" data-title="Dining Floor" data-device="Dining Lamp"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="diningwalllamp" data-view="Stdimmer" data-title="Dining Wall" data-device="Dining Wall Lamp"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="kitchenlight" data-view="Stswitch" data-title="Kitchen" data-device="Kitchen Switch"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="bedroomlight" data-view="Stswitch" data-title="Bedroom" data-device="Bedroom Switch"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="officeswitch" data-view="Stswitch" data-title="Office" data-device="Office Switch"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="exteriorswitch" data-view="Stswitch" data-title="Exterior" data-device="Front Porch Switch"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="garageswitch" data-view="Stswitch" data-title="Garage" data-device="Garage Switch"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="bathroomswitch" data-view="Stswitch" data-title="Bathroom" data-device="Bathroom Switch"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="lrtemp" data-view="Sttemp" data-title="Living Room" data-device="Thermostat"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="uctemp" data-view="Sttemp" data-title="Closet" data-device="Utility Closet"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
-      <div data-id="mode" data-view="Stmode" data-title="Current Mode"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="nightmode" data-view="Stmodechange" data-title="Good Night" data-icon="moon-o" data-changemode="Night" data-phrase="Good Night!" data-countdown="30"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="kitchenmeter" data-view="Stmeter" data-title="Kitchen" data-device="Kitchen Switch" data-min="0" data-max="100"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="backdoorcontact" data-view="Stcontact" data-title="Backdoor" data-device="Back Door"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="presence1" data-view="Stpresence" data-title="Me" data-device="My Mobile Presence"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="drmotion" data-view="Stmotion" data-title="Dining Room" data-device="Dining Room"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="fdlock" data-view="Stlock" data-title="Front Door" data-device="Front Door Lock"></div>
-    </li>
-
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+	<li data-row="4" data-col="7" data-sizex="1" data-sizey="1">
       <div data-id="reload" data-view="Reload"></div>
     </li>
+	
+	<li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="mode" data-view="Stmode" data-title="Current Mode"></div>
+    </li>  	
+	
+	<li data-row="4" data-col="5" data-sizex="1" data-sizey="1">
+      <div data-id="washerpower" data-view="Stmeter" data-title="Washer" data-device="Washer Metering Switch" data-min="0" data-max="1000"></div>
+    </li>
+	
+	<li data-row="4" data-col="6" data-sizex="1" data-sizey="1">
+      <div data-id="dryerpower" data-view="Stmeter" data-title="Dryer" data-device="Dryer Metering Switch" data-min="0" data-max="1000"></div>
+    </li>
+	
+	<li data-row="3" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="occmode" data-view="Stmodechange" data-title="Set Home" data-icon="home" data-changemode="Home" data-phrase="Make Occupied (Day)" data-countdown="30"></div>
+    </li>
+	
+	<li data-row="3" data-col="2" data-sizex="1" data-sizey="1">
+      <div data-id="unoccmode" data-view="Stmodechange" data-title="Set Away" data-icon="road" data-changemode="Away" data-phrase="Make Unoccupied" data-countdown="30"></div>
+    </li>
+	
+	<li data-row="4" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="apresence" data-view="Stpresence" data-title="Alexis" data-device="Alexis"></div>
+    </li>
+	
+	<li data-row="4" data-col="2" data-sizex="1" data-sizey="1">
+      <div data-id="bpresence" data-view="Stpresence" data-title="Brandon" data-device="Brandon"></div>
+    </li>
+	  
+	<li data-row="4" data-col="3" data-sizex="1" data-sizey="1">
+      <div data-id="octemp" data-view="Sttemp" data-title="Outdoors" data-device="Front Door Multisensor"></div>
+    </li>  
+	  
+    <li data-row="3" data-col="4" data-sizex="1" data-sizey="1">
+      <div data-id="lrtemp" data-view="Sttemp" data-title="Living Room" data-device="Nest"></div>
+    </li>
 
+	<li data-row="3" data-col="3" data-sizex="1" data-sizey="1">
+      <div data-id="fmtemp" data-view="Sttemp" data-title="Family Room" data-device="Garage Entryway Door"></div>
+    </li>
+	
+	<li data-row="4" data-col="4" data-sizex="1" data-sizey="1">
+      <div data-id="bstemp" data-view="Sttemp" data-title="Basement" data-device="Sump Pump"></div>
+    </li>
+	
+	<li data-row="3" data-col="7" data-sizex="1" data-sizey="1">
+	  <div data-id="garage" data-view="Stcontact" data-title="Garage Door" data-device="Garage Door"></div>
+	</li>
+	
   </ul>
 </div>

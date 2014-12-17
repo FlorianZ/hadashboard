@@ -1,14 +1,19 @@
 // ----------------------------------------------------------------------------
-// Widget-stmode styles
+// Widget-stweather styles
 // ----------------------------------------------------------------------------
-.widget-stweather {
+@import "/app/assets/stylesheets/themes/current.scss";
 
+.widget.widget-stweather.weather {
+    text-shadow: 2px 2px $shadow-color;
+}
+
+.widget-stweather {
   h1 {
   	margin-bottom: 0px;
   }
 
   .colored {
-    color: #ffaa00 !important;
+    color: $weather-primary-text-color !important;
   }
 
   [class^="primary"] {
@@ -29,12 +34,12 @@
   	margin-right: 0px;
   	margin-top: 0px;
   	margin-bottom: 0px;
-  	color: rgba(255, 255, 255, 0.6);
+    color: $weather-secondary-text-color;
   }
 
   .primary-climacon {
   	font-family: "Climacons-Font";
-  	font-size: 90px;
+  	font-size: 90px;    
   }
 
   .primary-info {
