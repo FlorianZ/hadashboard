@@ -1,13 +1,11 @@
 // ----------------------------------------------------------------------------
 // Widget styles
 // ----------------------------------------------------------------------------
+@import "/app/assets/stylesheets/themes/current.scss";
+
 .widget-stlock {
 
-  background-color: #444 !important;
-
-  .title {
-    color: #fff;
-  }
+  background-color: $background-color-action !important;
 
   .icon-unlocked {
   	color: #ff00aa;
