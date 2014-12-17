@@ -1,11 +1,13 @@
 // ----------------------------------------------------------------------------
 // Widget-stmode styles
 // ----------------------------------------------------------------------------
+@import "/app/assets/stylesheets/themes/current.scss";
+
 .widget-stmode {
 
   .mode {
-  	color: #fff;
-    font-weight: bold;
+  	color: $mode-text-color;
+    font-weight: $mode-font-weight;
   }
   
 }
