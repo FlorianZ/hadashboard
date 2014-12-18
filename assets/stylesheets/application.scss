@@ -5,16 +5,8 @@
 // ----------------------------------------------------------------------------
 // Sass declarations
 // ----------------------------------------------------------------------------
-$background-color: #222;
-$text-color: #fff;
 
-$background-warning-color-1: #e82711;
-$background-warning-color-2: #9b2d23;
-$text-warning-color: #fff;
-
-$background-danger-color-1: #eeae32;
-$background-danger-color-2: #ff9618;
-$text-danger-color: #fff;
+@import "themes/current.scss";
 
 @-webkit-keyframes status-warning-background {
   0%   { background-color: $background-warning-color-1; }
@@ -96,6 +88,7 @@ h1 {
   text-align: center;
   font-size: 150%;
   font-weight: 200;
+  text-shadow: 2px 2px $shadow-color;
 }
 h2 {
   text-transform: uppercase;
@@ -108,12 +101,20 @@ h3 {
   font-weight: 300;
   color: $text-color;
 }
+.fa {
+  text-shadow: 2px 2px $shadow-color;
+}
 
 // ----------------------------------------------------------------------------
 // Base widget styles
 // ----------------------------------------------------------------------------
 .gridster {
   margin: 0px auto;
+}
+
+.title {
+  color: $text-color;
+  text-shadow: 2px 2px $shadow-color;
 }
 
 .icon-background {
@@ -149,7 +150,8 @@ h3 {
   width: 100%;
   display: table-cell;
   vertical-align: middle;
-  background-color: #333;
+  text-shadow: 2px 2px $shadow-color;
+  background-color: $background-color-noaction;
 }
 
 .widget.status-warning {
@@ -248,7 +250,6 @@ h3 {
 #container {
   padding-top: 5px;
 }
-
 
 // ----------------------------------------------------------------------------
 // Clearfix

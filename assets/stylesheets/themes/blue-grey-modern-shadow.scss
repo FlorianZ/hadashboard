@@ -1,0 +1,35 @@
+// ----------------------------------------------------------------------------
+//  Blue/Grey theme with shadows
+//  Blue = Widgets that ARE NOT clickable are blue
+//  Grey = Widgets that ARE clickable are grey and icon reponds with status change
+// ----------------------------------------------------------------------------
+
+$background-color: #222;
+$background-color-noaction: #456A90;
+$background-color-action: #444;
+$text-color: #fff;
+$shadow-color: #000;
+
+$clock-text-color: #fff;
+$clock-font-weight: bold;
+$mode-text-color: #fff;
+$mode-font-weight: bold;
+
+$weather-primary-text-color: #fff;
+$weather-secondary-text-color: #fff;
+
+$meter-text-color: #fff;
+
+$temp-value-color: #fff;
+$temp-unit-color: #fff;
+
+$humidity-value-color: #fff;
+$humidity-unit-color: #fff;
+
+$background-warning-color-1: #e82711;
+$background-warning-color-2: #9b2d23;
+$text-warning-color: #fff;
+
+$background-danger-color-1: #eeae32;
+$background-danger-color-2: #ff9618;
+$text-danger-color: #fff;

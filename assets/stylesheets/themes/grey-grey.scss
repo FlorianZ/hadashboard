@@ -1,0 +1,35 @@
+// ----------------------------------------------------------------------------
+//  Default theme
+//
+//
+// ----------------------------------------------------------------------------
+
+$background-color: #222;
+$background-color-noaction: #333;
+$background-color-action: #444;
+$text-color: #fff;
+$shadow-color: rgba(255, 255, 255, 0);
+
+$clock-text-color: #aa00ff;
+$clock-font-weight: normal;
+$mode-text-color: #fff;
+$mode-font-weight: normal;
+
+$weather-primary-text-color: #ffaa00;
+$weather-secondary-text-color: rgba(255, 255, 255, 0.6);
+
+$meter-text-color: #aa00ff;
+
+$temp-value-color: #00aaff;
+$temp-unit-color: #00aaff;
+
+$humidity-value-color: #00aaff;
+$humidity-unit-color: #00aaff;
+
+$background-warning-color-1: #e82711;
+$background-warning-color-2: #9b2d23;
+$text-warning-color: #fff;
+
+$background-danger-color-1: #eeae32;
+$background-danger-color-2: #ff9618;
+$text-danger-color: #fff;

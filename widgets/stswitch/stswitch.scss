@@ -1,24 +1,20 @@
 // ----------------------------------------------------------------------------
 // Widget styles
 // ----------------------------------------------------------------------------
+@import "/app/assets/stylesheets/themes/current.scss";
+
 .widget-stswitch {
 
-  background-color: #444 !important;
-
-  .title {
-    color: #fff;
-  }
-
+  background-color: $background-color-action !important;
+  
   .switch-icon-off .switch-icon-on {
     font-size: 150%;
   }
-
   .switch-icon-off {
     color: #888888;
   }
-
   .switch-icon-on {
   	color: #aaff00;
   }
-
+  
 }
