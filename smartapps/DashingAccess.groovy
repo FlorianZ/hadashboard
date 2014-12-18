@@ -96,7 +96,7 @@ mappings {
             POST: "postDimmer"
         ]
     }
-    path("/dimmerLevel") {
+    path("/dimmer/level") {
         action: [
             POST: "dimmerLevel"
         ]
