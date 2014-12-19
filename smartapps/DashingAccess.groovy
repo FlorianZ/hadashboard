@@ -64,6 +64,12 @@ mappings {
             POST: "postLock"
         ]
     }
+    path("/garage") {
+        action: [
+            GET: "getGarage",
+            POST: "postGarage"
+        ]
+    }
     path("/mode") {
         action: [
             GET: "getMode",
@@ -157,6 +163,8 @@ def initialize() {
     subscribe(contacts, "contact", contactHandler)
     subscribe(location, locationHandler)
     subscribe(locks, "lock", lockHandler)
+    subscribe(contacts, "contact", garageHandler)
+    subscribe(contacts, "door", garageHandler)
     subscribe(motions, "motion", motionHandler)
     subscribe(meters, "power", meterHandler)
     subscribe(presences, "presence", presenceHandler)
@@ -265,6 +273,57 @@ def lockHandler(evt) {
     def widgetId = state.widgets.lock[evt.displayName]
     notifyWidget(widgetId, ["state": evt.value])
 }
+
+//
+// Z-Wave Garages
+//
+def getGarage() {
+    def deviceId = request.JSON?.deviceId
+    log.debug "getGarage ${deviceId}"
+
+    if (deviceId) {
+        registerWidget("contact", deviceId, request.JSON?.widgetId)
+
+        def whichGarage = contacts.find { it.displayName == deviceId }
+        if (!whichGarage) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            return [
+                "deviceId": deviceId,
+                "state": whichGarage.currentContact]
+        }
+    }
+
+    def result = [:]
+    garages.each {
+        result[it.displayName] = [
+            "state": it.currentContact,
+            "widgetId": state.widgets.garage[it.displayName]]}
+
+    return result
+}
+
+def postGarage() {
+    def command = request.JSON?.command
+    def deviceId = request.JSON?.deviceId
+    log.debug "postGarage ${deviceId}, ${command}"
+
+    if (command && deviceId) {
+        def whichGarage = contacts.find { it.displayName == deviceId }
+        if (!whichGarage) {
+            return respondWithStatus(404, "Device '${deviceId}' not found.")
+        } else {
+            whichGarage."$command"()
+        }
+    }
+    return respondWithSuccess()
+}
+
+def garageHandler(evt) {
+    def widgetId = state.widgets.contact[evt.displayName]
+    notifyWidget(widgetId, ["state": evt.value])
+}
+
 
 //
 // Meters
@@ -638,6 +697,7 @@ private registerWidget(deviceType, deviceId, widgetId) {
 }
 
 private notifyWidget(widgetId, data) {
+log.debug("Notify Widget $widgetId : $state.dashingAuthToken :")
     if (widgetId && state.dashingAuthToken) {
         def uri = getWidgetURI(widgetId)
         data["auth_token"] = state.dashingAuthToken
