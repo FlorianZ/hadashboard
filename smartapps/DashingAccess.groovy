@@ -697,7 +697,6 @@ private registerWidget(deviceType, deviceId, widgetId) {
 }
 
 private notifyWidget(widgetId, data) {
-log.debug("Notify Widget $widgetId : $state.dashingAuthToken :")
     if (widgetId && state.dashingAuthToken) {
         def uri = getWidgetURI(widgetId)
         data["auth_token"] = state.dashingAuthToken
