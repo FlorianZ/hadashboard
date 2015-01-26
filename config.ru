@@ -5,7 +5,7 @@ require_relative 'lib/models'
 configure do
   # The auth token used by external clients to get API access to the
   # dashing widgets.
-  set :auth_token, ENV["DASHING_AUTH_TOKEN"]
+  set :auth_token, ENV["DASHING_AUTH_TOKEN"] || "foobar"
 
   helpers do
     # Protects access to pages and redirects to the autentication page

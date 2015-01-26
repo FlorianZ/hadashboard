@@ -16,10 +16,10 @@
           "col": 1,
           "sizex": 1,
           "sizey": 1,
-          "id": "sofalamp",
+          "id": "kitchenlight",
           "view": "Stswitch",
-          "title": "Sofa",
-          "device": "Sofa Lamp"
+          "title": "Kitchen",
+          "device": "Kitchen Switch"
         }
       ]
     }

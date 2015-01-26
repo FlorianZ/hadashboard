@@ -199,6 +199,8 @@ def postSubscribe() {
         }
     }
 
+    subscribeToEvents()
+
     return response
 }
 

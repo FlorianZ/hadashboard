@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/FlorianZ/dashing.git
-  revision: 6c6d71cee1056be596af40921761eeebee368828
+  revision: bd5fecf315e3fd5eb050af51e5813f9f1a2b49cb
   branch: master
   specs:
     dashing (1.3.4)
