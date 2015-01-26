@@ -432,30 +432,3 @@ Dashing.cycleGridsterLayout = (positions) ->
 	else
 		console.log "Warning: Could not apply custom layout!"
  
-# Redefine functions for saving layout
-sleep 0.1, () ->
-	Dashing.getWidgetPositions = ->
-		dashboardPositions = []
-		for dashboard in $(".gridster > ul")
-			dashboardPositions.push $(dashboard).gridster().data('gridster').serialize()
-		return dashboardPositions
- 
-	Dashing.showGridsterInstructions = ->
-		newWidgetPositions = Dashing.getWidgetPositions()
- 
-		if !isArray(newWidgetPositions[0])
-			$('#save-gridster').slideDown()
-			$('#gridster-code').text("
-				Something went wrong - reload the page and try again.
-			")
-		else
-			unless JSON.stringify(newWidgetPositions) == JSON.stringify(Dashing.currentWidgetPositions)
-				Dashing.currentWidgetPositions = newWidgetPositions
-				$('#save-gridster').slideDown()
-				$('#gridster-code').text("
-				  <script type='text/javascript'>\n
-				  $(function() {\n\n
-				  \ \ Dashing.cycleGridsterLayout('#{JSON.stringify(Dashing.currentWidgetPositions)}')\n
-				  });\n
-				  </script>
-				")

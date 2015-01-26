@@ -1,0 +1,27 @@
+<% content_for :title do %>Login<% end %>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.47/jquery.form-validator.min.js"></script>
+
+<div class="md-modal md-effect md-show">
+  <div class="md-content">
+    <h3>Login</h3>
+    <div>
+      <p class="md-centered">Please log in with your username and password.</p>
+      <div id="error-message" class="md-centered"></div>
+      <div class="md-centerd">
+        <form method="post">
+          <input name="username" type="username" placeholder="Username" data-validation="required" data-validation-error-msg="You must enter a username." />
+          <input name="password" type="password" placeholder="Password" data-validation="required" data-validation-error-msg="You must enter a password." />
+          <input id="submit" type="submit" value="Login" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$.validate({
+  modules: 'security',
+  errorMessagePosition: $('#error-message')
+  });
+</script>

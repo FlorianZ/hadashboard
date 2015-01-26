@@ -1,12 +1,13 @@
 require 'oauth2'
 require 'json'
+require_relative 'models'
 
 #
 # Object grants REST-ful access to a ST SmartApp endpoint. This
 # object also handles authorization with SmartThings.
 # 
 class STApp
-  def initialize(client_id, client_secret, redirect_uri)
+  def initialize(client_id, client_secret)
     @client = OAuth2::Client.new(client_id, client_secret, {
       site: 'https://graph.api.smartthings.com',
       authorize_url: '/oauth/authorize',
@@ -15,20 +16,19 @@ class STApp
 
     @token = retrieveToken()
     @endpoint = getEndpoint(@token)
-    @redirect_uri = redirect_uri
   end
 
   # Returns the url used for authorization
-  def authorize()
-    @client.auth_code.authorize_url(redirect_uri: @redirect_uri, scope: 'app')
+  def authorize(redirect_uri)
+    @client.auth_code.authorize_url(redirect_uri: redirect_uri, scope: 'app')
   end
 
   # Given a previously acquired auth code, this will acquire the
   # authorization token for use with subsequent requests.
-  def acquireToken(auth_code)
+  def acquireToken(redirect_uri, auth_code)
     @token = @client.auth_code.get_token(
       auth_code, 
-      redirect_uri: @redirect_uri,
+      redirect_uri: redirect_uri,
       scope: 'app')
     storeToken(@token)
 
@@ -38,7 +38,7 @@ class STApp
   # Make a request to the SmartApp endpoint. The verb shall be set to
   # :get or :post. data shall be a dictionary, which will be converted
   # to a JSON object in the request.
-  def request(verb, url, data)
+  def request(verb, path, data)
     if not @token
       return
     end
@@ -46,7 +46,7 @@ class STApp
     @token = refreshToken(@token)
 
     result = @token.request(
-      verb, @endpoint + '/' + url, {
+      verb, @endpoint + '/' + path, {
         body: JSON.generate(data), 
         headers: {'Content-Type'=>"application/json"} })
     result.body()

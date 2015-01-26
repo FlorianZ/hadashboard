@@ -1,0 +1,27 @@
+{
+  "dashboards": {
+    "main": {
+      "title": "Main Dashboard",
+      "widgets": [
+        {
+          "row": 1,
+          "col": 1,
+          "sizex": 2,
+          "sizey": 1,
+          "id": "clock",
+          "view": "Clock"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "sizex": 1,
+          "sizey": 1,
+          "id": "sofalamp",
+          "view": "Stswitch",
+          "title": "Sofa",
+          "device": "Sofa Lamp"
+        }
+      ]
+    }
+  }
+}

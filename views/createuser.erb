@@ -1,0 +1,28 @@
+<% content_for :title do %>Welcome<% end %>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.47/jquery.form-validator.min.js"></script>
+
+<div class="md-modal md-effect md-show">
+  <div class="md-content">
+    <h3>Welcome</h3>
+    <div>
+      <p class="md-centered">Let's create a username and password to log in to your dashboard.</p>
+      <div id="error-message" class="md-centered"></div>
+      <div class="md-centerd">
+        <form method="post">
+          <input name="username" type="username" placeholder="Username" data-validation="required" data-validation-error-msg="A username is required." />
+          <input name="password_confirmation" type="password" placeholder="Password" data-validation="length" data-validation-length="min8" data-validation-error-msg="The password must be at least 8 characters long. "/>
+          <input name="password" type="password" placeholder="Confirm Password" data-validation="confirmation" data-validation-error-msg="The password does not match." />
+          <input id="submit" type="submit" value="Create User" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$.validate({
+  modules: 'security',
+  errorMessagePosition: $('#error-message')
+  });
+</script>

@@ -1,4 +1,7 @@
-class Dashing.ClickableWidget extends Dashing.Widget
+#= require dashing
+
+class Dashing.InteractiveWidget extends Dashing.Widget
+  
   constructor: ->
     super
     $(@node).on 'click', (evt) => @handleClick evt

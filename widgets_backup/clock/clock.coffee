@@ -1,9 +1,8 @@
-#= require dashing.modaldialog
-
-class Dashing.Clock extends Dashing.InteractiveWidget
+class Dashing.Clock extends Dashing.MultiDeviceWidget
+  constructor: ->
+    super {}, arguments...
 
   ready: ->
-    @startTime()
     setInterval(@startTime, 500)
 
   startTime: =>

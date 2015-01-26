@@ -1,0 +1,41 @@
+<% dashboards ||= {} %>
+<% content_for(:title) { dashboard[:title] || "Dashboard" } %>
+
+<div class="gridster">
+  <ul>
+    <% widgets = dashboard[:widgets] || [] %>
+    <% widgets.each do |widget| %>
+      <li data-row="<%= widget[:row] || 1 %>"
+          data-col="<%= widget[:col] || 1 %>"
+          data-sizex="<%= widget[:sizex] || 1 %>"
+          data-sizey="<%= widget[:sizey] || 1 %>">
+          <% data = widget.clone %>
+          <% [:row, :col, :sizex, :sizey].each { |k| data.delete(k) } %>
+          <div <%= data.map{|k,v| "data-#{k}='#{v}'"}.join(" ") %>></div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="md-overlay"></div>
+<div id="md-location"></div>
+
+<div class="md-modal md-effect" id="no-devices">
+  <div class="md-content">
+    <h3>Authorize with SmartThings</h3>
+    <div>
+      <p>The Dashboard does not yet have access to any of your devices. Would you like to allow access to some devices, now?</p>
+      <br />
+      <div class="md-centered">
+        <button class="md-confirm md-left-button">Yes, let's do it!</button>
+        <button class="md-close md-right-button">No, thanks.</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type='text/javascript'>
+  $(".md-confirm").click(function() {
+    document.url = "/smartthings/authorize"
+  }) 
+</script>

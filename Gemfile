@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'dashing'
+gem 'dashing', :github => 'FlorianZ/dashing', :branch => 'master'
 gem 'thor'
 
 # Authentication
@@ -23,3 +23,6 @@ end
 group :production do
 	gem 'dm-postgres-adapter'
 end
+
+# Authentication
+gem 'warden'

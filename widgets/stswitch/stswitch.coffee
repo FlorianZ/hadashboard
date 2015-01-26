@@ -1,11 +1,11 @@
-class Dashing.Stswitch extends Dashing.ClickableWidget
-  constructor: ->
-    super
-    @queryState()
+class Dashing.Stswitch extends Dashing.DeviceWidget
+
+  ready: ->
+    @subscribeToDevice 'switch'
 
   @accessor 'state',
-    get: -> @_state ? 'off'
-    set: (key, value) -> @_state = value
+    get: -> @['state'] ? 'off'
+    set: (key, value) -> @['state'] = value
 
   @accessor 'icon',
     get: -> if @['icon'] then @['icon'] else
@@ -21,34 +21,19 @@ class Dashing.Stswitch extends Dashing.ClickableWidget
     set: Batman.Property.defaultAccessor.set
 
   @accessor 'icon-style', ->
-    if @get('state') == 'on' then 'switch-icon-on' else 'switch-icon-off'    
+    if @get('state') == 'on' then 'switch-icon-on' else 'switch-icon-off'
 
   toggleState: ->
     newState = if @get('state') == 'on' then 'off' else 'on'
     @set 'state', newState
-    return newState
 
-  queryState: ->
-    $.get '/smartthings/dispatch',
-      widgetId: @get('id'),
-      deviceType: 'switch',
-      deviceId: @get('device')
-      (data) =>
-        json = JSON.parse data
-        @set 'state', json.switch
-
-  postState: ->
-    newState = @toggleState()
-    $.post '/smartthings/dispatch',
-      deviceType: 'switch',
-      deviceId: @get('device'),
-      command: newState,
-      (data) =>
-        json = JSON.parse data
-        if json.error != 0
-          @toggleState()
-
-  ready: ->
+  onData: (data) ->
+    @set 'state', @getDeviceAttribute 'switch'
 
   onClick: (event) ->
-    @postState()
+    @toggleState()
+    response = @executeDeviceCommand @get 'state', 
+      (data) =>
+        if data.error != 0
+          alert data.error
+          @toggleState()
