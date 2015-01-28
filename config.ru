@@ -1,4 +1,5 @@
 require 'dashing'
+require 'rack-flash'
 require 'warden'
 require_relative 'lib/models'
 
@@ -26,6 +27,9 @@ configure do
   # Store the authenticated user name in session state
   use Rack::Session::Cookie, :secret => ENV["SESSION_SECRET"]
 
+  # Flash
+  use Rack::Flash
+
   # Authentication with Warden
   use Warden::Manager do |config|
     config.serialize_into_session { |user| user.id }
@@ -46,11 +50,11 @@ configure do
     end
 
     def authenticate!
-      return fail! unless user = User.first(username: params['username'])
-      if user.authenticate(params['password'])
+      user = User.first(username: params['username'])
+      if not user.nil? and user.authenticate(params['password'])
         success!(user)
       else
-        fail!
+        fail!("Incorrect username or password. Please try again.")
       end
     end
   end
@@ -88,7 +92,6 @@ configure do
 
   post '/auth/login' do
     env['warden'].authenticate!
-    puts env['warden'].message
     redirect '/'
   end
 
@@ -99,7 +102,7 @@ configure do
   end
 
   post '/auth/unauthenticated' do
-    puts env['warden'].message
+    flash[:login] = env['warden'].message
     redirect '/auth/login'
   end
 

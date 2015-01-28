@@ -6,7 +6,13 @@
   <div class="md-content">
     <h3>Login</h3>
     <div>
-      <p class="md-centered">Please log in with your username and password.</p>
+      <p class="md-centered">
+        <% if flash[:login] %>
+          <%= flash[:login] %>
+        <% else %>
+          Please log in with your username and password.
+        <% end %>
+      </p>
       <div id="error-message" class="md-centered"></div>
       <div class="md-centerd">
         <form method="post">

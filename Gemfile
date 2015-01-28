@@ -26,3 +26,6 @@ end
 
 # Authentication
 gem 'warden'
+
+# Flash Messages
+gem 'rack-flash3'
