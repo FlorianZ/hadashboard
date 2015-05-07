@@ -10,7 +10,7 @@ class Dashing.Sttemp extends Dashing.Widget
   queryState: ->
     $.get '/smartthings/dispatch',
       widgetId: @get('id'),
-      deviceType: 'cost',
+      deviceType: 'energyTwo',
       deviceId: @get('device')
       (data) =>
         json = JSON.parse data
