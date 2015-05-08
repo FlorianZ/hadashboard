@@ -1,0 +1,161 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #52809E;
+
+$title-color:       rgba(255, 255, 255, 0.7);
+
+// ----------------------------------------------------------------------------
+// Widget-stmode styles
+// ----------------------------------------------------------------------------
+.widget-stthermostat {
+
+  background-color: $background-color;
+  position: relative;
+
+  .info {
+
+    .title {
+      color: $title-color;
+      margin: 6px 0;
+      font-size: 150%;
+    }
+
+    span {
+      display: inline-block;
+
+      .temp {
+
+        font-size: 700%;
+        line-height: 85px;
+        font-weight: 600;
+        display: inline-block;
+      }
+
+      .unit {
+        font-size: 200%;
+        font-weight: 400;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 0;
+
+        &.hd {
+          font-size: 100%;
+          margin-top: 13px;
+          padding-right: 20px;
+        }
+      }
+
+      .label {
+        position: absolute;
+        bottom: 15px;
+        left: 53px;
+      }
+    }
+
+
+  }
+
+  .toggle-area {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .controls {
+    z-index: 20;
+    display: none;
+  }
+
+  .setpoint {
+  	color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 200%;
+  }
+
+  .unit {
+    font-size: 90%;
+    font-weight: 400;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 0px;
+    margin-top: 10px;
+  }
+
+  .label {
+    position: absolute;
+    bottom: -6px;
+    left: 72px;
+    font-size: 12px;
+  }
+
+  .setWrapper {
+    margin-top: 4px;
+  }
+
+  .modes {
+    float: left;
+    padding-top: 7px;
+    width: 120px;
+    margin-left: 5px;
+  }
+
+  .mode {
+    font-size: 8px;
+    float: left;
+    width:57px;
+    height: 62px;
+
+    &.fan {
+      margin-top: 10px;
+    }
+  }
+
+  .mode img {
+    width: 40px;
+    -webkit-filter: invert(100%);
+  }
+
+  .sets {
+    float: right;
+  }
+
+  .right {
+    float: right;
+    position: relative;
+    width: 170px;
+    margin-top: 10px;
+
+    &:after {
+      /*content:"";
+      background: green;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 50%;
+      width: 1px;*/
+    }
+  }
+
+  .left {
+    float: left;
+  }
+
+  .secondary-icon {
+  	font-family: "Climacons-Font";
+  	display: inline-block;
+  	font-size: 50px;
+    margin: 0px 5px;
+    vertical-align: middle;
+    line-height: 40px;
+  }
+
+  .updated-at {
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+}
