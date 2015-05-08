@@ -1,0 +1,15 @@
+<h1 class="subtitle" >Next event:</h1>
+<h3 class="times" data-bind="event_date"></h3>
+<h2 class="title" data-bind="event.summary"></h2>
+<h3 class="times" data-bind="event_times"></h3>
+<h4 data-bind="next_count"></h4>
+
+<table class="next">
+  <tr data-foreach-e='next_events'>
+    <td data-bind="e.start_date"></td>
+    <td data-bind="e.start_time"></td>
+    <td data-bind="e.summary"></td>
+  </tr>
+</table>
+
+<div class="updated-at" data-bind="updatedAtMessage"></div>
