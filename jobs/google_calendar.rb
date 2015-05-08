@@ -9,10 +9,10 @@ require 'active_support/all'
 require 'json'
 
 # Update these to match your own apps credentials
-service_account_email = '...@developer.gserviceaccount.com' # Email of service account
+service_account_email = '758089989734-5c3do49v5q18p3momejsgm7s68va49ck@developer.gserviceaccount.com' # Email of service account
 key_file = '/Path/to/keyfile.p12' # File containing your private key
 key_secret = 'notasecret' # Password to unlock private key
-calendarID = '...@group.calendar.google.com' # Calendar ID.
+calendarID = 'ml6003nfamltefmqarm09d89do@group.calendar.google.com' # Calendar ID.
 
 # Get the Google API client
 client = Google::APIClient.new(:application_name => 'Dashing Calendar Widget',
