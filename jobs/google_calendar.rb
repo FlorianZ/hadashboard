@@ -10,7 +10,7 @@ require 'json'
 
 # Update these to match your own apps credentials
 service_account_email = '758089989734-lu9nf6cqcinjpdaubj396o8ubihf7b0s@developer.gserviceaccount.com' # Email of service account
-key_file = '/key/dashing.p12' # File containing your private key
+key_file = './key/dashing.p12' # File containing your private key
 key_secret = 'notasecret' # Password to unlock private key
 calendarID = 'ml6003nfamltefmqarm09d89do@group.calendar.google.com' # Calendar ID.
 
