@@ -1,0 +1,29 @@
+<div class="info">
+    <h1 class="title" data-bind="title"></h1>
+    <span><p class="temp" data-bind="temperature"></p><p class="unit">&deg;F</p></span>
+    <span class="toggle-area"></span>
+</div>
+
+<div class="controls">
+  <div class="modes">
+    <h2 class="mode"><img class="mode-icon" data-bind-src="icon | prepend '/assets'" data-bind-width="width"/><br/>mode</h2>
+    <h2 class="mode fan" style="clear:left;"><img class="fan" data-bind-src="iconFan | prepend '/assets'" data-bind-width="width"/><br/>fan</h2>
+  </div>
+
+  <div class="sets">
+    <div class="right">
+      <div style="position:relative;margin-bottom:20px;">
+        <p class="secondary-icon"><i class="fa fa-minus-square cool"></i></p>
+        <p class="setpoint" data-bind="setpointCool"></p><p class="unit">&deg;F</p>
+        <p class="secondary-icon"><i class="fa fa-plus-square cool"></i></p>
+        <p class="label">cool</p>
+      </div>
+      <div style="position:relative;">
+        <p class="secondary-icon"><i class="fa fa-minus-square heat"></i></p>
+        <p class="setpoint" data-bind="setpointHeat"></p><p class="unit">&deg;F</p>
+        <p class="secondary-icon"><i class="fa fa-plus-square heat"></i></p>
+        <p class="label">heat</p>
+      </div>
+    </div>
+  </div>
+</div>

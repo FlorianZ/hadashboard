@@ -14,6 +14,9 @@ gem 'json'
 # Database
 gem 'data_mapper'
 
+# google api
+#gem 'google-api-client', '>= 0.8'
+
 # Development
 group :development do
 	gem 'dm-sqlite-adapter'
@@ -22,4 +25,6 @@ end
 # Production
 group :production do
 	gem 'dm-postgres-adapter'
+	gem 'google-api-client'
+
 end

@@ -9,24 +9,21 @@ configure do
   # Email used for signing up to Heroku. This is used for authentication.
   set :user, ENV["HEROKU_OAUTH_EMAIL"]
 
-  helpers do
-    # Protects access to pages and redirects to the autentication page
-    # if not already authenticated.
-    def protected!
-      # Ignore authentication in development
-      if not production?
-        return
-      end
+helpers do
 
-      # Authenticate in production
-      if settings.user
-        redirect '/auth/heroku' unless session[:user_id] == settings.user
-      else
-        # The HEROKU_OAUTH_EMAIL env var has not been set!
-        redirect '/auth/notset'
-      end
+  def protected!
+    unless authorized?
+      response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+      throw(:halt, [401, "Not authorized\n"])
     end
   end
+
+  def authorized?
+    @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+    @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['admin', 'P@22w0rd']
+  end
+
+end
 
   # Store the authenticated user name in session state
   use Rack::Session::Cookie, :secret => ENV["SESSION_SECRET"]
