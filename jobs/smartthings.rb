@@ -1,12 +1,15 @@
 require 'json'
 
 # URI to the installed app root
-host_uri = ENV["DASHING_URI"] || 'http://localhost:3030'
+#host_uri = 'http://localhost:3030'
+host_uri = 'http://mike-d82.com:3030'
 
 # SmartApp credentials
-client_id = ENV["ST_CLIENT_ID"]
+client_id = '22e365fb-c05c-421b-9063-5da392d10079'
+#client_id = ENV["ST_CLIENT_ID"]
 # Keeping ST_API_KEY for compatibility (was renamed to ST_CLIENT_SECRET)
-client_secret = ENV["ST_CLIENT_SECRET"] || ENV["ST_API_KEY"]
+client_secret = '863051e1-5f0c-4fe0-933a-b54239ae1a18'
+#client_secret = ENV["ST_CLIENT_SECRET"] || ENV["ST_API_KEY"]
 
 # Create a new STApp instance for communication with the SmartApp
 app = STApp.new(
