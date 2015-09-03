@@ -2,8 +2,8 @@ require 'net/https'
 require 'json'
 
 #
-# Object grants REST-ful access to a ST SmartApp endpoint. This
-# object also handles authorization with SmartThings.
+# Object for REST access to openHAB
+#
 # 
 class OHApp
   OPENHAB_SERVER = "localhost"
