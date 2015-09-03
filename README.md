@@ -1,5 +1,7 @@
 # Touch-based Dashboard for OpenHAB
 
+![Image of openHAB Dashboard](https://github.com/smar000/openhab-dashboard/tmp/image.jpg)
+
 This is a dashboard type interface for OpenHAB (http://www.openhab.org), a superb open source home automation system.  It is a fork from FlorianZ's SmartThings dashboard (https://github.com/FlorianZ/hadashboard), basically replacing the SmartThings related calls to OpenHAB equivalents/work-arounds. For those interested, there is a great discussion on the SmartThings forum (link available in FlorianZ's github repo).
 
 I have it running on wall-mounted Nexus 7's, providing a much easier UI for users in my home with quick access to the most commonly used items.
@@ -47,7 +49,7 @@ I'm assuming you know the basics of linux and are comfortable with simple instal
 These are defined as in the Weather binding wiki for openHAB. If you do want to use different names, then the *lib/ohapp.rb* file accordingly.
 
 General instructions on creating widgets and dashboards are given on the dashing website. In addition, and specifically for this openHAB setup, the main points to note are:
-1. Each widget is defined in the dashboard file (e.g. the *dashboards/default.erb* file) using html list items (<li>...</li>). 
+1. Each widget is defined in the dashboard file (e.g. the *dashboards/default.erb* file) using html list items (`<li>...</li>`). 
 2. The widget is linked to a corresponding openHAB item via the **data-device** list item parameter. This must match exactly the item name in openHAB. (You may have noticed that for most of the list items in the included dashboards, the **data-id** parameter also has the same value as the **data-device** paramater - this is not a requrement and has just been used this way for simplicity; the **data-id** is basically a unique ID for that specific widget on the dashboard).
 3. The **data-view** parameter of the list item specifies the type of widget. All the widget types available are in the widgets folder, and prefixed with 'Oh' - e.g. Ohdimmer, Ohswitch etc. **NOTE that not all of the widgets have been tested**. These have been taken from FlorianZ's original repo for SmartThings and kept here in case I have a future need. The only ones tested are those in the included dashboards.
 4. Each page on the dashboard is put into an html DIV container with class="gridester".
