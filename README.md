@@ -19,7 +19,7 @@ I'm assuming you know the basics of linux and are comfortable with simple instal
 
 2. Clone or download this dashboard repository into a local folder, e.g. */opt/dashboard*
 
-3. In the service folder of this repository, there is start-up script you can use if you want to run dashing as a service. Modify the paths in this service file with anything that is different on your installation. On Ubuntu, this file can be placed in the */etc/init.d* folder with persmissions set at 755. You will also need to run *update-rc.d* if you want the service to start automatically at boot.
+3. In the service folder of this repository, there is a start-up script you can use if you want to run dashing as a service. Modify the paths in this service file with anything that is different on your installation. On Ubuntu, this file can be placed in the */etc/init.d* folder with persmissions set at 755. You will also need to run *update-rc.d* if you want the service to start automatically at boot.
 
 4. Edit the *lib/ohapp.rb* file, and make sure that your **openhab server name** and **port** are correctly specified
 
@@ -54,24 +54,25 @@ I'm assuming you know the basics of linux and are comfortable with simple instal
     * Wind_Direction
     * Wind_Gust
 
-These are defined as in the Weather binding wiki for openHAB. If you do want to use different names, then the *lib/ohapp.rb* file accordingly.
+These are defined as in the Weather binding wiki for openHAB. If you do want to use different names, then edit the *lib/ohapp.rb* file accordingly.
 
 General instructions on creating widgets and dashboards are given on the dashing website. In addition, and specifically for this openHAB setup, the main points to note are:
+
 1. Each widget is defined in the dashboard file (e.g. the *dashboards/default.erb* file) using html list items (`<li>...</li>`). 
 
 2. The widget is linked to a corresponding openHAB item via the **data-device** list item parameter. This must match exactly the item name in openHAB. (You may have noticed that for most of the list items in the included dashboards, the **data-id** parameter also has the same value as the **data-device** paramater - this is not a requrement and has just been used this way for simplicity; the **data-id** is basically a unique ID for that specific widget on the dashboard).
 
 3. The **data-view** parameter of the list item specifies the type of widget. All the widget types available are in the widgets folder, and prefixed with 'Oh' - e.g. Ohdimmer, Ohswitch etc. **NOTE that not all of the widgets have been tested**. These have been taken from FlorianZ's original repo for SmartThings and kept here in case I have a future need. The only ones tested are those in the included dashboards.
 
-4. Each page on the dashboard is put into an html DIV container with class="gridester".
+4. Each page on the dashboard is put into an html DIV container with class="gridster".
 
 # Android Tablet Specific Notes
-I have the android tablet switching off after a defined timeout period but automatically switching on as soon as it detects motion in front of the device. This is done using two apps:
+I have the android tablets switching off after a defined timeout period but automatically switching on as soon as it detects motion in front of the device (via its front-facing camera). This is done using two apps:
 * Tasker https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm
 * Motion Detector https://play.google.com/store/apps/details?id=org.motion.detector
 
 Both of these are paid apps. There may be other ways to achieve the same effect, but I have not explored them. A backup of the Tasker profile for this is included in the folder */opt/dashboard/tasker* (assuming you installed the dashboard in the */opt/dashboard* folder).
 
-Finally, in order to hide the top and bottom status bars on android, you can use the app GMD Fullscreen, https://play.google.com/store/apps/details?id=com.gmd.immersive. This is currently free.
+In order to hide the top and bottom status bars on android, you can use the app GMD Fullscreen, https://play.google.com/store/apps/details?id=com.gmd.immersive. This is currently free.
 
 Finally, on an Android device, you can get rid of the browser's tabs etc, by opening the dashboard in Chrome, and then saving it as a desktop app from Chrome's menu. 
