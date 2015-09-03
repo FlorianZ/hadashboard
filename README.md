@@ -14,11 +14,17 @@ You may also note that there is a CCTV related dashboard/widgets in the reposito
 
 # Installation
 I'm assuming you know the basics of linux and are comfortable with simple installations etc. Everything here has been installed and in daily use on an Ubuntu 14.10 server.
+
 1. Install dashing (http://dashing.io) along with any related components it needs (it should do these automatically if you follow the instructions on their website, although some manual configuration may be necessary depending on what system you are running on and what you already have installed)
+
 2. Clone or download this dashboard repository into a local folder, e.g. */opt/dashboard*
+
 3. In the service folder of this repository, there is start-up script you can use if you want to run dashing as a service. Modify the paths in this service file with anything that is different on your installation. On Ubuntu, this file can be placed in the */etc/init.d* folder with persmissions set at 755. You will also need to run *update-rc.d* if you want the service to start automatically at boot.
+
 4. Edit the *lib/ohapp.rb* file, and make sure that your **openhab server name** and **port** are correctly specified
+
 5. Edit the file *config.ru* in the top level folder and change the **auth_token** value to whatever you want to use to authenticate communications between dashing and openHAB (or leave as is if you prefer!). You can also change the default dashboard here if you have multiple dashboards defined.
+
 6. Copy the rule file from the *dashboard/openhab_rule* folder into your openhab's rule folder (e.g. */opt/openhab/configurations/rules*). Edit the rule file and change the the **auth_token** here to whatever you set it in the previous step (or leave as is if you didn't make any changes in the previous step).
 
 
