@@ -64,7 +64,7 @@ I have the android tablet switching off after a defined timeout period but autom
 * Tasker https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm
 * Motion Detector https://play.google.com/store/apps/details?id=org.motion.detector
 
-Both of these are paid apps. There may be other ways to achieve the same effect, but I have not explored them. Tasker profiles for this is included in the folder */opt/dashboard/Tasker* (assuming you installed the dashboard in the */opt/dashboard* folder).
+Both of these are paid apps. There may be other ways to achieve the same effect, but I have not explored them. A backup of the Tasker profile for this is included in the folder */opt/dashboard/tasker* (assuming you installed the dashboard in the */opt/dashboard* folder).
 
 Finally, in order to hide the top and bottom status bars on android, you can use the app GMD Fullscreen, https://play.google.com/store/apps/details?id=com.gmd.immersive. This is currently free.
 
