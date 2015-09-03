@@ -3,7 +3,7 @@ class Dashing.Ohtext extends Dashing.Widget
     super
     @queryState()
 
-  @accessor 'value',
+  @accessor 'state',
     get: -> @_state ? "Unknown"
     set: (key, value) -> @_state = value
     
@@ -14,7 +14,7 @@ class Dashing.Ohtext extends Dashing.Widget
       deviceType: 'text'
       (data) =>
         json = JSON.parse data
-        @set 'value', json.state
+        @set 'state', json.state
 
   ready: ->
 
