@@ -2,7 +2,7 @@
 
 ![Image of openHAB Dashboard](https://github.com/smar000/openhab-dashboard/blob/master/tmp/image.jpg)
 
-This is a dashboard type interface for OpenHAB (http://www.openhab.org), a superb open source home automation system.  It is a fork from FlorianZ's SmartThings dashboard (https://github.com/FlorianZ/hadashboard), basically replacing the SmartThings related calls to OpenHAB equivalents/work-arounds. For those interested, there is a great discussion on the SmartThings forum (link available in FlorianZ's github repo).
+This is a dashing (http://dashing.io/) based dashboard interface for OpenHAB (http://www.openhab.org), a superb open source home automation system.  It is a fork from FlorianZ's SmartThings dashboard (https://github.com/FlorianZ/hadashboard), basically replacing the SmartThings related calls to OpenHAB equivalents/work-arounds. For those interested, there is a great discussion on the SmartThings forum (link available in FlorianZ's github repo).
 
 I have it running on wall-mounted Nexus 7's, providing a much easier UI for users in my home with quick access to the most commonly used items.
 
@@ -25,7 +25,9 @@ I'm assuming you know the basics of linux and are comfortable with simple instal
 # Configuring the Dashboard(s) 
 
 1. First, on the OpenHAB side, in your items file, create a group called *gDashboard*
+
 2. Next, add all items that you want to use in your dashboard(s) to this new *gDashboard* group.
+
 3. If you want to use the dashboard's weather widget and have this updating from openHAB using the code as is, you will need to ensure that your weather items in openHAB are named as follows:
     * Weather_Temperature
     * Weather_Conditions
