@@ -62,7 +62,7 @@ General instructions on creating widgets and dashboards are given on the dashing
 
 2. The widget is linked to a corresponding openHAB item via the **data-device** list item parameter. This must match exactly the item name in openHAB. (You may have noticed that for most of the list items in the included dashboards, the **data-id** parameter also has the same value as the **data-device** paramater - this is not a requrement and has just been used this way for simplicity; the **data-id** is basically a unique ID for that specific widget on the dashboard).
 
-3. The **data-view** parameter of the list item specifies the type of widget. All the widget types available are in the widgets folder, and prefixed with 'Oh' - e.g. Ohdimmer, Ohswitch etc. **NOTE that not all of the widgets have been tested**. These have been taken from FlorianZ's original repo for SmartThings and kept here in case I have a future need. The only ones tested are those in the included dashboards.
+3. The **data-view** parameter of the list item specifies the type of widget. All the widget types available are in the widgets folder, and the openHAB specific ones are prefixed with 'Oh' - e.g. Ohdimmer, Ohswitch etc. **NOTE that not all of the widgets have been tested**. These have been taken from FlorianZ's original repo for SmartThings and kept here in case I have a future need. The only ones tested are those in the included dashboards.
 
 4. Each page on the dashboard is put into an html DIV container with class="gridster".
 
