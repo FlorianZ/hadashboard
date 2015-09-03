@@ -1,0 +1,45 @@
+<script type='text/javascript'>
+$(function() {
+
+Dashing.cycleGridsterLayout('[[{"col":1,"row":1,"size_x":2,"size_y":1},{"col":5,"row":4,"size_x":2,"size_y":1},{"col":5,"row":1,"size_x":3,"size_y":3},{"col":1,"row":2,"size_x":3,"size_y":3},{"col":4,"row":3,"size_x":1,"size_y":1},{"col":3,"row":1,"size_x":1,"size_y":1},{"col":4,"row":1,"size_x":1,"size_y":2},{"col":7,"row":4,"size_x":1,"size_y":1},{"col":7,"row":5,"size_x":1,"size_y":1}]]')
+});
+</script>
+<% content_for :title do %>openHAB Dashboard<% end %>
+
+<div class="gridster">
+  <ul>
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="clock" data-view="Clock"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="weather" data-view="Ohweathertoday"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="3" data-sizey="3">
+      <div data-id="camera1" data-view="Cameras" data-title="" ></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="3" data-sizey="3">
+      <div data-id="camera3" data-view="Cameras" data-title="" style="background-color:transparent; max-height: 250px !important"></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="camera2" data-view="Cameras" data-title="" style="background-color:transparent"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="camera4" data-view="Cameras" data-title="" style="background-color:transparent; height: 120px !important"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="2">
+      <div data-id="camera5" data-view="Cameras" data-title="" style="background-color:transparent"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="link-default-dashboard" data-view="Text" data-icon="arrow-right" data-title="Main Control Panel"  onclick="location.href='http://openhab:3030/default'" style="background-color:#364B59"></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="reload" data-view="Reload" data-title="Refresh" ></div>
+    </li>
+
+  </ul>
+</div>

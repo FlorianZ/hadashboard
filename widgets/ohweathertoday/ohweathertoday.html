@@ -1,0 +1,16 @@
+<p class="primary-climacon colored" data-bind="climacon[icon] | raw"></p>
+
+<p class="primary-info colored" data-bind="now_temp"></p>
+<p class="primary-unit colored">&deg;C</p>
+
+<br>
+
+<p class="secondary-info colored" data-bind="temp_high | append '&deg;'"></p>
+<p class="secondary-info colored">/</p>
+<p class="secondary-info colored" data-bind="temp_low | append '&deg;'"></p>
+
+<p class="secondary-icon colored">&#xe045</p>
+<p class="secondary-info colored" data-bind="precip | append '%'"></p>
+
+<p class="secondary-icon colored">&#xe041</p>
+<p class="secondary-info colored" data-bind="humidity | append '%'"></p>

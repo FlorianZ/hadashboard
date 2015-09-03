@@ -1,0 +1,34 @@
+// ----------------------------------------------------------------------------
+// Widget-ohcontact styles
+// ----------------------------------------------------------------------------
+.widget-ohroomstatus {
+
+  .title {
+    color: #fff;
+  }
+
+  .icon-open {
+  	color: #ff00aa;
+  }
+
+  .icon-closed {
+  	color: #888888;
+  }
+
+  .temperature {
+  	color: #00aaff;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .unit {
+    color: #00aaff;
+    font-size: 250%;
+    font-weight: 400;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+
+}

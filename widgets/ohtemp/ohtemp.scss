@@ -1,0 +1,26 @@
+// ----------------------------------------------------------------------------
+// Widget-ohtemp styles
+// ----------------------------------------------------------------------------
+.widget-ohtemp {
+
+  .title {
+    color: #fff;
+  }
+
+  .value {
+  	color: #00aaff;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 350%;
+  }
+
+  .unit {
+    color: #00aaff;
+    font-size: 120%;
+    font-weight: 400;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+}

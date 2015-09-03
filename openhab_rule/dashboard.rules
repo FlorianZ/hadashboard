@@ -1,0 +1,36 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.joda.time.*
+import java.util.*
+import java.util.concurrent.locks.*
+
+var Map lastStateMap = new HashMap()
+var Lock lock = new ReentrantLock()
+
+rule "Post changes to Dashing Dashboard"
+when
+	Item gDashboard received update
+then
+	lock.lock()
+	//logInfo("Dashboard","Dashing group rule triggered.")
+	gDashboard?.members.forEach[t | 
+			var lastState = lastStateMap.put(t.name, t.state)
+			if (lastState != t.state || lastState == null) {
+				
+				val DASHING_TOKEN = '"auth_token" : "openH4b"'
+				val DASHING_URI = "http://localhost:3030/widgets/"
+
+				///logInfo("Dashboard","Item " + item.name + " changed.")
+
+				logInfo("Dashboard","Item " + t.name + " has changed state from " +lastState.toString + " to: " + t.state.toString)
+				var uri = DASHING_URI + t.name
+				var json = '{' + DASHING_TOKEN + ', "state" : "' + t.state.toString + '"}'
+				
+				//logInfo ("Dashboard", "POSTING: " + json) 
+				//logInfo ("Dashboard", "URI: " + uri + "; JSON = " + json ) 
+				sendHttpPostRequest(uri, "HTTP.CONTENT_TYPE_JSON", json)
+			}
+		]
+	lock.unlock()
+end
