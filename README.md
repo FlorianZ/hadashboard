@@ -13,7 +13,7 @@ When going through the installation details below, you may notice that I am not 
 You may also note that there is a CCTV related dashboard/widgets in the repository. This has nothing to do with openHAB and is a seperate system we use in our home. I have left it in as an example in case anyone is interested.
 
 # Installation
-I'm assuming you know the basics of linux and are comfortable with simple installations etc. Everything here has been installed and in daily use on an Ubuntu 14.10 server.
+I'm assuming you know the basics of linux and are comfortable with simple installations etc. Everything here has been installed and is in daily use on an Ubuntu 14.10 server.
 
 1. Install dashing (http://dashing.io) along with any related components it needs (it should do these automatically if you follow the instructions on their website, although some manual configuration may be necessary depending on what system you are running on and what you already have installed)
 
