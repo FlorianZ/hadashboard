@@ -2,8 +2,8 @@ require 'net/https'
 require 'json'
 
 #
-# Object for REST access to openHAB
-#
+# Object grants REST-ful access to a ST SmartApp endpoint. This
+# object also handles authorization with SmartThings.
 # 
 class OHApp
   OPENHAB_SERVER = "localhost"
@@ -100,9 +100,9 @@ class OHApp
           @tomorrowPrecipitation=value.to_f.round           
         when "Weather_Wind_Speed"
           @windSpeed=value.to_f.round 
-        when "Wind_Direction"
+        when "Weather_Wind_Direction"
           @windDirection=value
-        when "Wind_Gust"
+        when "Weather_Wind_Gust"
           @windGust=value.to_f.round 
       end
     end

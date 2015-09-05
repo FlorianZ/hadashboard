@@ -8,11 +8,11 @@ class Dashing.Ohcontact extends Dashing.Widget
     set: (key, value) -> @_state = value
 
   @accessor 'icon',
-    get: -> if @get('state') == 'open' then 'expand' else 'compress'
+    get: -> if (@get('state') == 'open' || @get('state') == 'on') then 'expand' else 'compress'
     set: Batman.Property.defaultAccessor.set
 
   @accessor 'icon-style', ->
-    if (@get('state').toUpperCase() == 'OPEN' || @get('state') == 'ON') then 'icon-open' else 'icon-closed'
+    if (@get('state') == 'open' || @get('state') == 'on') then 'icon-open' else 'icon-closed'
 
   queryState: ->
     $.get '/openhab/dispatch',
@@ -21,24 +21,11 @@ class Dashing.Ohcontact extends Dashing.Widget
       deviceType: 'contact'
       (data) =>
         json = JSON.parse data
-        @set 'state', json.state
+        @set 'state', json.state.toLowerCase()
 
   ready: ->
-    @setColor(@get('state'))
+
 
   onData: (data) ->
-    # Handle incoming data
-    # You can access the html node of this widget with `@node`
-    # Example: $(@node).fadeOut().fadeIn() will make the node flash each time data comes in.
-    @setColor(@get('state'))
-    $(@node).fadeOut().fadeIn()  
+  	@set 'state', @get('state').toLowerCase() #openHAB states may come through in upper case, so reset property here as well
 
-  setColor: (status) ->
-    if status
-      switch status.toUpperCase()
-          when 'RUN' then $(@node).css("background-color", "#29a334") #green
-          when 'FAIL' then $(@node).css("background-color", "#b80028") #red
-          when 'PEND' then $(@node).css("background-color", "#ec663c") #orange
-          when 'HOLD' then $(@node).css("background-color", "#4096ee") #blue
-          when 'OPEN' then $(@node).css("background-color", "#b80028") #red
-          when 'CLOSED' then $(@node).css("background-color", "#333") #default
