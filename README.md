@@ -51,8 +51,8 @@ I'm assuming you know the basics of linux and are comfortable with simple instal
     * Weather_Precipitation
     * Weather_Precipitation_1
     * Weather_Wind_Speed
-    * Wind_Direction
-    * Wind_Gust
+    * Weather_Wind_Direction
+    * Weather_Wind_Gust
 
 These are defined as in the Weather binding wiki for openHAB. If you do want to use different names, then edit the *lib/ohapp.rb* file accordingly.
 
