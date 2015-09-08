@@ -32,7 +32,7 @@ I'm assuming you know the basics of linux and are comfortable with simple instal
 
 1. First, on the OpenHAB side, in your items file, create a group called *gDashboard*
 
-2. Next, add all items that you want to use in your dashboard(s) to this new *gDashboard* group.
+2. Next, add all items that you want to use in your dashboard(s) to this new *gDashboard* group EXCEPT for the weather items (weather is updated through a 5 minute scheduler event as defined in the *jobs/openhab.rb* file)
 
 3. If you want to use the dashboard's weather widget and have this updating from openHAB using the code as is, you will need to ensure that your weather items in openHAB are named as follows:
     * Weather_Temperature
