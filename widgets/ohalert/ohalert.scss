@@ -19,11 +19,11 @@ $widget-background-alert-color: #eeae32;
   	color: #888888;
   }
   
-  &.status-off {
+  &.state-off {
     background-color: $widget-background-color !important;
   }
  
-  &.status-on {
+  &.state-on {
     background-color: $widget-background-alert-color !important; //#ff9933 !important;
   }
 

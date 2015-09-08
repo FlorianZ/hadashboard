@@ -4,8 +4,8 @@ class Dashing.Ohalert extends Dashing.Widget
     @queryState()
 
   @accessor 'state',
-    get: -> @_state ? "Unknown"
-    set: (key, value) -> @_state = value
+    get: -> (@_state) ? "Unknown"
+    set: (key, value) -> @_state = value.toLowerCase()
 
   @accessor 'isAlertState', ->
     (@get('state') == 'open' || @get('state') == 'on')
@@ -25,25 +25,23 @@ class Dashing.Ohalert extends Dashing.Widget
       deviceType: 'contact'
       (data) =>
         json = JSON.parse data
-        @set 'state', json.state.toLowerCase()
+        @set 'state', json.state
 
   ready: ->
     @setCSSClass(@get('state'))
     
 
   onData: (data) ->
-    @set 'state', @get('state').toLowerCase() #openHAB states may come through in upper case, so reset property here as well
     @setCSSClass(@get('state'))
+
     $(@node).fadeOut().fadeIn()  
     
   
   setCSSClass: (status) ->
     if status
-      #console.log("State: ", status)      
-
-	    # clear existing "status-*" classes
+      # clear existing "state-*" classes
       $(@get('node')).attr 'class', (i,c) ->
-        c.replace /\bstatus-\S+/g, ''
+        c.replace /\bstate-\S+/g, ''
 
       #Add new class based on status
-      $(@node).addClass "status-#{status}"
+      $(@node).addClass "state-#{status}"
