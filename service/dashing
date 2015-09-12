@@ -1,7 +1,7 @@
 #!/bin/bash
 # Dashing service
 # Add this file to /etc/init.d/
-# $ sudo cp dashboard /etc/init.d/
+# $ sudo cp dashing /etc/init.d/
 # Update variables DASHING_DIR, GEM_HOME, & PATH to suit your installation
 # $ sudo nano /etc/init.d/dashboard
 # Make executable
