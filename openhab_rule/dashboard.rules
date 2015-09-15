@@ -22,15 +22,30 @@ then
 				val DASHING_URI = "http://localhost:3030/widgets/"
 
 				///logInfo("Dashboard","Item " + item.name + " changed.")
-
 				logInfo("Dashboard","Item " + t.name + " has changed state from " +lastState.toString + " to: " + t.state.toString)
 				var uri = DASHING_URI + t.name
-				var json = '{' + DASHING_TOKEN + ', "state" : "' + t.state.toString + '"}'
-				
+				var json = '{' + DASHING_TOKEN + ', '
+
+				if (t.state.toString.startsWith("JSON")){
+					json = json +  t.state.toString.substring(5) + '}'
+				} else{
+					json = json + ' "state" : ' + t.state.toString + '"}'
+				}
+
 				//logInfo ("Dashboard", "POSTING: " + json) 
-				//logInfo ("Dashboard", "URI: " + uri + "; JSON = " + json ) 
+				logInfo ("Dashboard", "URI: " + uri + "; JSON = " + json ) 
 				sendHttpPostRequest(uri, "HTTP.CONTENT_TYPE_JSON", json)
 			}
 		]
 	lock.unlock()
+end
+
+rule "Central Heating Dashboard widget update"
+when
+	Item CH_Indoor_Temp received update or
+	Item CH_Target_Temp received update
+then
+	//logInfo("Dashboard","Updating heating status Dashboard widget")
+	var String status = 'JSON "temperature" : ' + CH_Indoor_Temp.state.toString + ', "target" : ' + CH_Target_Temp.state.toString 
+	postUpdate(CH_Dashboard,status)
 end
