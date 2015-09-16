@@ -29,7 +29,7 @@ then
 				if (t.state.toString.startsWith("JSON")){
 					json = json +  t.state.toString.substring(5) + '}'
 				} else{
-					json = json + ' "state" : ' + t.state.toString + '"}'
+					json = json + ' "state" : "' + t.state.toString + '"}'
 				}
 
 				//logInfo ("Dashboard", "POSTING: " + json) 
