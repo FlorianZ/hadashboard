@@ -73,7 +73,6 @@ class Dashing.Ohdimmer extends Dashing.ClickableWidget
     $.post '/openhab/dispatch',
       deviceId: @get('device'),
       command: newState     
-      @toggleState()
 
   ready: ->
 
