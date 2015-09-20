@@ -26,13 +26,16 @@ then
 				var uri = DASHING_URI + t.name
 				var json = '{' + DASHING_TOKEN + ', '
 
-				if (t.state.toString.startsWith("JSON")){
-					json = json +  t.state.toString.substring(5) + '}'
+				if (t.state.toString.startsWith("{")){
+					var internalJSON = t.state.toString.substring(1) //remove opening '{' as the string will be concatenated with our prefix items
+					//internalJSON = internalJSON.substring(0,internalJSON.length() - 1)
+					json = json +  t.state.toString.substring(1) 
+					logInfo ("Dashboard","[Debug] json = " + json)
 				} else{
 					json = json + ' "state" : "' + t.state.toString + '"}'
 				}
 
-				//logInfo ("Dashboard", "POSTING: " + json) 
+				logInfo ("Dashboard", "POSTING: " + json) 
 				logInfo ("Dashboard", "URI: " + uri + "; JSON = " + json ) 
 				sendHttpPostRequest(uri, "HTTP.CONTENT_TYPE_JSON", json)
 			}
@@ -45,7 +48,9 @@ when
 	Item CH_Indoor_Temp received update or
 	Item CH_Target_Temp received update
 then
+	//Need to ensure that the new status string is a valid json, as otherwise when dashing gets the state property directly, it will fail
+	
 	//logInfo("Dashboard","Updating heating status Dashboard widget")
-	var String status = 'JSON "temperature" : ' + CH_Indoor_Temp.state.toString + ', "target" : ' + CH_Target_Temp.state.toString 
+	var String status = '{"temperature" : ' + CH_Indoor_Temp.state.toString + ', "target" : ' + CH_Target_Temp.state.toString  + '}'
 	postUpdate(CH_Dashboard,status)
 end
