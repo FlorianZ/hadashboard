@@ -1,0 +1,1 @@
+Similar to ohdimmer widget. Only difference is that it increments/decrements by 5 instead of 10, and that turning it ON from an OFF state will set it to 20 instead of 100. For music volume control.
