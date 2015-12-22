@@ -2,10 +2,10 @@ class Dashing.Ohmeter extends Dashing.Widget
   constructor: ->
     super
     @queryState()
-    @observe 'value', (value) ->
+    @observe 'state', (value) ->
       $(@node).find(".ohmeter").val(value).trigger('change')
     
-  @accessor 'value', Dashing.AnimatedValue    
+  @accessor 'state', Dashing.AnimatedValue    
 
   queryState: ->
     $.get '/openhab/dispatch',
@@ -14,7 +14,7 @@ class Dashing.Ohmeter extends Dashing.Widget
       deviceType: 'power'
       (data) =>
         json = JSON.parse data
-        @set 'value', json.state
+        @set 'state', json.state
 
   ready: ->
     ohmeter = $(@node).find(".ohmeter")
