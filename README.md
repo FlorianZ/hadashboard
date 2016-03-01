@@ -54,7 +54,7 @@ I'm assuming you know the basics of linux and are comfortable with simple instal
     * Weather_Wind_Direction
     * Weather_Wind_Gust
 
-These are defined as in the Weather binding wiki for openHAB. If you do want to use different names, then edit the *lib/ohapp.rb* file accordingly.
+These are defined as in the Weather binding wiki for openHAB (*note that all the weather items MUST be in an item group "Weather"*). If you do want to use different names, then edit the *lib/ohapp.rb* file accordingly.
 
 General instructions on creating widgets and dashboards are given on the dashing website. In addition, and specifically for this openHAB setup, the main points to note are:
 
