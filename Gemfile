@@ -4,8 +4,6 @@ ruby '2.2.4'
 gem 'dashing'
 gem 'thor'
 
-gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
-
 # Authentication
 gem 'oa-openid'
 gem 'omniauth-heroku', '~> 0.2.0.pre'
