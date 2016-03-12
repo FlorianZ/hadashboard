@@ -1,0 +1,125 @@
+<% content_for :title do %>openHAB Dashboard<% end %>
+
+<div class="gridster">
+  <ul>
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="clock" data-view="Clock"></div>
+    </li>
+
+    <li data-row="1" data-col="3" data-sizex="2" data-sizey="2">
+      <div data-id="weather" data-view="Ohweather"></div>
+    </li>
+
+    <li data-row="1" data-col="5" data-sizex="1" data-sizey="1">
+      <div data-id="GF_Living" data-view="Ohswitch" data-title="Living Room Lights" data-device="GF_Living"></div>
+    </li>
+
+    <li data-row="1" data-col="6" data-sizex="2" data-sizey="1">
+      <div data-id="Light_FF_Landing_Spots" data-view="Ohdimmer" data-title="Upstairs Landing" data-device="Light_FF_Landing_Spots"></div>
+    </li>
+
+    <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="Light_GF_Porch" data-view="Ohswitch" data-title="Front Porch Light" data-device="Light_GF_Porch"></div>
+    </li>
+
+    <li data-row="2" data-col="2" data-sizex="1" data-sizey="1">
+      <div data-id="GF_Outdoors" data-view="Ohswitch" data-title="Outdoor Lights" data-device="GF_Outdoors"></div>
+    </li>
+
+    <li data-row="2" data-col="5" data-sizex="1" data-sizey="1">
+      <div data-id="GF_Front" data-view="Ohswitch" data-title="Front Room Lights" data-device="GF_Front"></div>
+    </li>
+
+    <li data-row="2" data-col="7" data-sizex="2" data-sizey="1">
+      <div data-id="Light_GF_Hallway" data-view="Ohdimmer" data-title="Hallway" data-device="Light_GF_Hallway"></div>
+    </li>
+
+    <li data-row="3" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="Indoor_Lights_Security_Mode_Enabled" data-view="Ohswitch" data-title="Away Mode" data-device="Indoor_Lights_Security_Mode_Enabled"></div>
+    </li>
+
+    <li data-row="3" data-col="2" data-sizex="1" data-sizey="1">
+      <div data-id="Door_Sensor_UtilityRoom" data-view="Ohalert" data-title="Utility Room Door" data-device="Door_Sensor_UtilityRoom"></div>
+    </li>
+  
+    <li data-row="3" data-col="3" data-sizex="2" data-sizey="2">
+      <div data-id="camera3" data-view="Cameras" data-title="" style="background-color:transparent; height: 300px !important"></div>
+    </li>
+
+    <li data-row="3" data-col="5" data-sizex="2" data-sizey="2">
+      <div data-id="camera1" data-view="Cameras" data-title="" style="background-color:transparent; height: 300px !important"></div>
+    </li>
+
+    <li data-row="3" data-col="7" data-sizex="1" data-sizey="1">
+      <div data-id="link-default-dashboard" data-view="Text" data-icon="arrow-right" data-title="CCTV Cameras"  onclick="location.href='http://openhab:3030/playroom'" style="background-color:#364B59"></div>
+    </li>
+
+    <li data-row="4" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="Garage_Door_Status" data-view="Ohalert" data-title="Garage Door" data-device="Garage_Door_Status"></div>
+    </li>
+
+    <li data-row="4" data-col="2" data-sizex="1" data-sizey="1">
+      <div data-id="CH_Dashboard" data-view="Ohheating" data-title="Heating" data-device="CH_Dashboard" data-suffix="&deg;C"></div>
+    </li> 
+
+    <li data-row="4" data-col="7" data-sizex="1" data-sizey="1">
+      <div data-id="cpage1" data-view="Changepage" data-icon="arrow-right" data-title="Room Lighting" data-page="2" data-stagger="false" data-fasttransition="true" style="background-color:#085C61"></div>
+    </li>
+
+
+  </ul>
+</div>
+
+<div class="gridster">
+  <ul>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="Light_GF_Living_Table" data-view="Ohswitch" data-title="Living Room Table Lamp" data-device="Light_GF_Living_Table"></div>
+    </li>
+
+    <li data-row="1" data-col="2" data-sizex="2" data-sizey="1">
+      <div data-id="Light_GF_Living_Floor" data-view="Ohdimmer" data-title="Living Floor Standing" data-device="Light_GF_Living_Floor"></div>
+    </li>
+
+    <li data-row="1" data-col="4" data-sizex="2" data-sizey="1">
+      <div data-id="Light_GF_Living_Spots" data-view="Ohdimmer" data-title="Living Room Spots" data-device="Light_GF_Living_Spots"></div>
+    </li>
+
+    <li data-row="1" data-col="6" data-sizex="2" data-sizey="1">
+      <div data-id="Light_GF_Living_Diffused" data-view="Ohdimmer" data-title="Living Room Ceiling" data-device="Light_GF_Living_Diffused"></div>
+    </li>
+
+    <li data-row="2" data-col="4" data-sizex="2" data-sizey="1">
+      <div data-id="Light_GF_Front_Spots" data-view="Ohdimmer" data-title="Front Room Spots" data-device="Light_GF_Front_Spots"></div>
+    </li>
+
+    <li data-row="2" data-col="6" data-sizex="2" data-sizey="1">
+      <div data-id="Light_GF_Front_Diffused" data-view="Ohdimmer" data-title="Front Room Ceiling" data-device="Light_GF_Front_Diffused"></div>
+    </li>
+
+
+    <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="Light_GF_PlayRoom_Floor" data-view="Ohswitch" data-title="Playroom Floor Light" data-device="Light_GF_PlayRoom_Floor"></div>
+    </li>
+
+    <li data-row="3" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="Light_FF_MasterBed_DimMode" data-view="Ohswitch" data-title="Master Bedroom Table Lamps" data-device="Light_FF_MasterBed_DimMode"></div>
+    </li>
+
+    <li data-row="4" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="Home_Occupied" data-view="Ohcontact" data-title="Home Occupied" data-device="Home_Occupied"></div>
+    </li>
+
+    <li data-row="4" data-col="2" data-sizex="2" data-sizey="1">
+      <div data-id="clock2" data-view="Clock"></div>
+    </li>
+
+    <li data-row="4" data-col="6" data-sizex="1" data-sizey="1">
+      <div data-id="reload" data-view="Reload" data-title="Refresh" ></div>
+    </li>
+    <li data-row="4" data-col="7" data-sizex="1" data-sizey="1">
+      <div data-id="cpage3" data-view="Changepage" data-icon="arrow-left" data-title="Back" data-page="1" data-fasttransition="true" style="background-color:#085C61"></div>
+    </li>
+    
+ </ul>
+</div>

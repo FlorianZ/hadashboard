@@ -1,0 +1,30 @@
+// ----------------------------------------------------------------------------
+// Widget-ohalert styles
+// ----------------------------------------------------------------------------
+$widget-background-color: #333; 
+$widget-background-alert-color: #eeae32;
+
+.widget-ohalert {
+
+  .title {
+    color: #fff;
+  }
+
+  .icon-open {
+  	// color: #ff00aa;
+    color: #aaff00;
+  }
+
+  .icon-closed {
+  	color: #888888;
+  }
+  
+  &.state-off {
+    background-color: $widget-background-color !important;
+  }
+ 
+  &.state-on {
+    background-color: $widget-background-alert-color !important; //#ff9933 !important;
+  }
+
+}

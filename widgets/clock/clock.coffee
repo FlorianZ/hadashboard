@@ -9,9 +9,14 @@ class Dashing.Clock extends Dashing.Widget
     h = today.getHours()
     m = today.getMinutes()
     m = @formatTime(m)
-    @set('time', @formatHours(h) + ":" + m + " " + @formatAmPm(h))
-    @set('date', today.toLocaleDateString())
 
+    options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+    #options.timeZoneName = 'short';
+
+    @set('time', @formatHours(h) + ":" + m + " " + @formatAmPm(h))
+    @set('date', today.toLocaleDateString('en-GB', options)) #today.toLocaleDateString())
+    
+    
   formatTime: (i) ->
     if i < 10 then "0" + i else i
 
