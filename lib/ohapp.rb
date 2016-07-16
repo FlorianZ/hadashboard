@@ -7,7 +7,8 @@ require 'json'
 # 
 class OHApp
   OPENHAB_SERVER = "localhost"
-  OPENHAB_PORT = 7070
+  OPENHAB_PORT = 8080
+  OPENHAB_V2   = false
 
   attr_reader :temperature, :currentConditions, :humidity, :pressure, :precipitation, :windSpeed, :temperatureLow, 
     :temperatureHigh, :weatherIcon, :weatherCode, :tomorrowTemperatureLow, :tomorrowTemperatureHigh, :tomorrowWeatherIcon, :tomorrowPrecipitation,
@@ -47,10 +48,19 @@ class OHApp
   end
 
   def sendCommand(itemID, newState, data)
-    puts "[DEBUG] posting REST command: '/CMD?#{itemID}=#{newState}'"
+    puts "[DEBUG] PUT to REST api: '/rest/items/#{itemID} - data: #{newState}'"
     http = Net::HTTP.new(OPENHAB_SERVER, OPENHAB_PORT)
     http.use_ssl = false
-    response = http.request(Net::HTTP::Get.new("/CMD?#{itemID}=#{newState}"))
+    if OPENHAB_V2 
+      #openHAB 2.0 rest API is slightly different to v1.x
+      headers = "'Content-Type' => 'text/plain'"
+      request = Net::HTTP::Post.new("/rest/items/#{itemID}", initheader = {'Content-Type' =>'text/plain'})
+      request.body = newState
+      response = http.request(request)
+    else
+      #openHAB 1.x endpoint
+      response = http.request(Net::HTTP::Get.new("/CMD?#{itemID}=#{newState}")) 
+    end      
     puts response.body()
     response.body()
   end

@@ -1,0 +1,18 @@
+[Unit]
+Description=openHAB 2 SSE Client for Dashing
+Before=systemd-user-sessions.service
+After=dashing.service
+Requires=dashing.service
+
+[Service]
+TimeoutStartSec=0
+
+ExecStart=/usr/bin/ruby /opt/dashing/oh2dashing.rb
+User=root
+RestartSec=60
+Restart=on-failure
+
+User=root
+
+[Install]
+WantedBy=multi-user.target

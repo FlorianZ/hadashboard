@@ -25,14 +25,16 @@ I'm assuming you know the basics of linux and are comfortable with simple instal
 
 5. Edit the file *config.ru* in the top level folder and change the **auth_token** value to whatever you want to use to authenticate communications between dashing and openHAB (or leave as is if you prefer!). You can also change the default dashboard here if you have multiple dashboards defined.
 
-6. Copy the rule file from the *dashboard/openhab_rule* folder into your openhab's rule folder (e.g. */opt/openhab/configurations/rules*). Edit the rule file and change the the **auth_token** here to whatever you set it in the previous step (or leave as is if you didn't make any changes in the previous step).
+6. *If you are using openHAB 1.x*, copy the rule file from the *dashboard/openHAB/OH1.8/openhab_rule* folder into your openhab's rule folder (e.g. */opt/openhab/configurations/rules*). Edit the rule file and change the the **auth_token** here to whatever you set it in the previous step (or leave as is if you didn't make any changes in the previous step).
+
+7. *For openHAB 2.0*, see the notes at the bottom of this README file.
 
 
 # Configuring the Dashboard(s) 
 
 1. First, on the OpenHAB side, in your items file, create a group called *gDashboard*
 
-2. Next, add all items that you want to use in your dashboard(s) to this new *gDashboard* group EXCEPT for the weather items (weather is updated through a 5 minute scheduler event as defined in the *jobs/openhab.rb* file)
+2. Next, add all items that you want to use in your dashboard(s) to this new *gDashboard* group EXCEPT for the weather items (weather is updated through a 5 minute scheduler event as defined in the *jobs/openhab.rb* file) (Update: This is no longer necessary if you are using openHAB 2, along with the SSE client discussed below.)
 
 3. If you want to use the dashboard's weather widget and have this updating from openHAB using the code as is, you will need to ensure that your weather items in openHAB are named as follows:
     * Weather_Temperature
@@ -54,7 +56,7 @@ I'm assuming you know the basics of linux and are comfortable with simple instal
     * Weather_Wind_Direction
     * Weather_Wind_Gust
 
-These are defined as in the Weather binding wiki for openHAB (*note that all the weather items MUST be in an item group "Weather"*). If you do want to use different names, then edit the *lib/ohapp.rb* file accordingly.
+These are defined as in the Weather binding wiki for openHAB (*note that all the weather items MUST be in an item group "Weather"* - this applies to both openHAB 1.x and 2.0). If you do want to use different names, then edit the *lib/ohapp.rb* file accordingly.
 
 General instructions on creating widgets and dashboards are given on the dashing website. In addition, and specifically for this openHAB setup, the main points to note are:
 
@@ -76,3 +78,18 @@ Both of these are paid apps. There may be other ways to achieve the same effect,
 In order to hide the top and bottom status bars on android, you can use the app GMD Fullscreen, https://play.google.com/store/apps/details?id=com.gmd.immersive. This is currently free.
 
 Finally, on an Android device, you can get rid of the browser's tabs etc, by opening the dashboard in Chrome, and then saving it as a desktop app from Chrome's menu. 
+
+# openHAB 2.0 
+As openHAB 2 supports Server Sent Events (SSE), there is a rough and ready Ruby SSE client in the folder *dashboard/openHAB/OH2.0*. This client is built on the eventmachine library, em-eventsource (https://github.com/AF83/em-eventsource). The SSE client subscribes to all item change events in openHAB, and so removes the need to use the *gDashboard* group or the openHAB rule used for openHAB 1.x.
+
+To use the dashboard with openHAB 2:
+1. Install dashing using the process described above, carrying out steps 1 to 5.
+
+2. Install *em-eventmachine* (this can be either by (a) running *gem install em-eventsource* or (b) by adding the line *gem "em-eventsource", "~> 0.2.0"* to the *Gemfile* and running *bundle* again)  
+
+3. Edit the file *dashboard/lib/ohapp.rb* and change the line that says *OPENHAB_V2   = false* to *OPENHAB_V2   = true*
+
+4. Start the SSE client from *dashboard/openHAB/2.0/oh2dashing.rb* 
+
+5. Once everything is working correctly, the SSE Client can be run as a service. A sample *systemd* unit file is also given in the *dashboard/openHAB/2.0* for systems using *systemd*.
+
