@@ -83,6 +83,7 @@ Finally, on an Android device, you can get rid of the browser's tabs etc, by ope
 As openHAB 2 supports Server Sent Events (SSE), there is a rough and ready Ruby SSE client in the folder *dashboard/openHAB/OH2.0*. This client is built on the eventmachine library, em-eventsource (https://github.com/AF83/em-eventsource). The SSE client subscribes to all item change events in openHAB, and so removes the need to use the *gDashboard* group or the openHAB rule used for openHAB 1.x.
 
 To use the dashboard with openHAB 2:
+
 1. Install dashing using the process described above, carrying out steps 1 to 5.
 
 2. Install *em-eventmachine* (this can be either by (a) running *gem install em-eventsource* or (b) by adding the line *gem "em-eventsource", "~> 0.2.0"* to the *Gemfile* and running *bundle* again)  
