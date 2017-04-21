@@ -201,6 +201,15 @@ For example, if you want to deploy multiple devices, you could have one dashboar
 Please refer to the Dashing website with regards to instructions on multiple dashboards, the default dashboard and cycling through dashboards.
 
 
+# Changing Theme
+In order to change the theme for your dashboard, you will need to update 1 line in assets/stylesheets/themes/current.scss
+
+Specifically, update the following to include the filename of your theme that exists in the same directory.
+
+``` bash
+@import "grey-grey.scss"
+```
+
 # Troubleshooting
 ### My Dashboard is not updating or devices do not respond to interaction.
 If your dashboard is not updating or devices have stopped responding to interaction, first try to refresh your browser. If this did not help, navigate to **http://*your-app-name*.herokuapps.com/smartthings/authorize** and re-authorize with the SmartApp (installation step 6) 

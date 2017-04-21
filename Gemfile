@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
-ruby '2.2.4'
+ruby '2.3.3'
 
-gem 'dashing'
+gem 'dashing',  '>=1.3.6'
 gem 'thor'
 
 # Authentication
 gem 'oa-openid'
-gem 'omniauth-heroku', '~> 0.2.0.pre'
+gem 'omniauth-heroku'
 gem 'oauth2'
 
 # JSON
