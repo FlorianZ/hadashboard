@@ -1,8 +1,8 @@
 <h1 class="title" data-bind="title"></h1>
-
 <h2 data-bind-class="icon-style"><i data-bind-class="icon | prepend 'fa fa-'"></i></h2>
 <span class="toggle-area" id="switch"></span>
-<p class="level" data-bind="level"></p>
-<p class="unit">%</p>
-<p class="secondary-icon minus"><i class="fa fa-minus" id="level-down"></i></p>
-<p class="secondary-icon plus"><i class="fa fa-plus" id="level-up"></i></p>
+<div id="slider">
+  <output for="dimmer" id="level" data-bind="level">50</output>
+  <p class="unit">%</p>
+  <input type="range" min="5" max="100" value="50" step="5" id="dimmer" class="dimmer" data-bind="level">
+</div>
