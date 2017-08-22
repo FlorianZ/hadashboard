@@ -58,14 +58,9 @@ This will create a new web app with a random name. The name will be output to th
 
 Your new app will later be reachable at **http://*your-app-name*.herokuapp.com**. We have not deployed your app yet, and before we do we will need to make sure that only you have access to your dashboard, and set up a few **Config Variables**:
 
-To make sure that your dashboard is not publicly viewable, and that only you have access to it, the hadashboard code is set up to use your Heroku credentials (from step 1) for authentication. It uses OAuth to verify your identity, so we must grant the hadashboard client OAuth access. To do so, install the heroku-oauth CLI plugin:
+To make sure that your dashboard is not publicly viewable, and that only you have access to it, the hadashboard code is set up to use your Heroku credentials (from step 1) for authentication. 
 
-``` bash
-$ heroku plugins:install https://github.com/heroku/heroku-oauth
-Installing heroku-oauth... done
-```
-
-Then, create a client for hadashboard. Make sure to replace *your-app-name* with the name of your app, as returned by `heroku create` earlier.
+Next, create a client for hadashboard. Make sure to replace *your-app-name* with the name of your app, as returned by `heroku create` earlier.
 
 ``` bash
 $ heroku clients:create -s "hadashboard" https://your-app-name.herokuapp.com/auth/heroku/callback
