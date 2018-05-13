@@ -38,9 +38,9 @@ Using the Heroku CLI, log in to your Heroku account with the email address and p
 $ heroku login
 Enter your Heroku credentials.
 Email: your@email.com
-Password: 
+Password:
 Could not find an existing public key.
-Would you like to generate one? [Yn] 
+Would you like to generate one? [Yn]
 Generating new SSH public key.
 Uploading ssh public key /Users/user/.ssh/id_rsa.pub
 ```
@@ -58,7 +58,7 @@ This will create a new web app with a random name. The name will be output to th
 
 Your new app will later be reachable at **http://*your-app-name*.herokuapp.com**. We have not deployed your app yet, and before we do we will need to make sure that only you have access to your dashboard, and set up a few **Config Variables**:
 
-To make sure that your dashboard is not publicly viewable, and that only you have access to it, the hadashboard code is set up to use your Heroku credentials (from step 1) for authentication. 
+To make sure that your dashboard is not publicly viewable, and that only you have access to it, the hadashboard code is set up to use your Heroku credentials (from step 1) for authentication.
 
 Next, create a client for hadashboard. Make sure to replace *your-app-name* with the name of your app, as returned by `heroku create` earlier.
 
@@ -91,7 +91,7 @@ $ heroku config:set \
 - **ST_CLIENT_ID**: Set this to the SmartApp **'OAuth Client ID'** from step 3.
 - **ST_CLIENT_SECRET**: Set this to the SmartApp **'OAuth Client Secret'** from step 3.
 
-Lastly, we will add a PostgreSQL database. Heroku makes this trivial by simple configuring an add-on:
+After Heroku has been configured, we will add a PostgreSQL database. Heroku makes this trivial by simple configuring an add-on:
 
 ``` bash
 $ heroku addons:add heroku-postgresql:hobby-dev
@@ -106,6 +106,8 @@ Heroku may require up to 5 minutes to set up the database for you. You can run t
 $ heroku pg:wait
 Waiting for database HEROKU_POSTGRESQL_GOLD... done
 ```
+
+Lastly, we need to update the URL in which our application will make requests to ST. You can find this by signing into your ST developer account. Go to https://graph.api.smartthings.com/ and sign in. Then click **My Locations** and choose a hub. You will be redirected to the details of that hub. If you look at the URL in your browser, you'll see that it is no longer "graph.api" and is something like "graph-na04-useast2.api". This is specific to the location of your account. Copy this, then go the file **lib > stapp.rb**. You'll find a TODO there to update this URL. Paste it there.
 
 ## 5. Deploy to Heroku
 To deploy the hadashboard app, all we need to do is push the git repository to Heroku. This will automatically install all the dependencies on the server, and restart the app.
@@ -124,7 +126,7 @@ Total 301 (delta 120), reused 301 (delta 120)
 -----> Using Ruby version: ruby-2.0.0
 -----> Installing dependencies using 1.6.3
        ...
-       
+
 -----> Discovering process types
        Procfile declares types -> (none)
        Default types for Ruby  -> console, rake, web
@@ -150,7 +152,7 @@ Note, that currently authorization only persists for the lifetime of the executi
 
 
 # Changing Widgets
-The hadashboard is a Dashing app, so make sure to read all the instructions on http://dashing.io to learn how to add widgets to your dashboard, as well as how to create new widgets. 
+The hadashboard is a Dashing app, so make sure to read all the instructions on http://dashing.io to learn how to add widgets to your dashboard, as well as how to create new widgets.
 
 Essentially, you will have to modify the `dashboards/main.erb` file. After modifying this file, you must commit the changes to the git repository:
 
@@ -207,7 +209,7 @@ Specifically, update the following to include the filename of your theme that ex
 
 # Troubleshooting
 ### My Dashboard is not updating or devices do not respond to interaction.
-If your dashboard is not updating or devices have stopped responding to interaction, first try to refresh your browser. If this did not help, navigate to **http://*your-app-name*.herokuapps.com/smartthings/authorize** and re-authorize with the SmartApp (installation step 6) 
+If your dashboard is not updating or devices have stopped responding to interaction, first try to refresh your browser. If this did not help, navigate to **http://*your-app-name*.herokuapps.com/smartthings/authorize** and re-authorize with the SmartApp (installation step 6)
 You will have to re-authorize with the SmartApp whenever you make changes to backend files (usually .rb or .erb) or the SmartApp Groovy code.
 If your dashboard stops updating or devices have stopped responding without making any changes, make sure to file a bug using the issue tracker.
 
