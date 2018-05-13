@@ -4,10 +4,11 @@ require 'json'
 #
 # Object grants REST-ful access to a ST SmartApp endpoint. This
 # object also handles authorization with SmartThings.
-# 
+#
 class STApp
   def initialize(client_id, client_secret, redirect_uri)
     @client = OAuth2::Client.new(client_id, client_secret, {
+      # TODO: Update from "graph" to your location specific URL
       site: 'https://graph.api.smartthings.com',
       authorize_url: '/oauth/authorize',
       token_url: '/oauth/token'
@@ -27,7 +28,7 @@ class STApp
   # authorization token for use with subsequent requests.
   def acquireToken(auth_code)
     @token = @client.auth_code.get_token(
-      auth_code, 
+      auth_code,
       redirect_uri: @redirect_uri,
       scope: 'app')
     storeToken(@token)
@@ -47,7 +48,7 @@ class STApp
 
     result = @token.request(
       verb, @endpoint + '/' + url, {
-        body: JSON.generate(data), 
+        body: JSON.generate(data),
         headers: {'Content-Type'=>"application/json"} })
     result.body()
   end
@@ -78,7 +79,7 @@ class STApp
       token = OAuth2::AccessToken.from_hash(
         @client,
         JSON.parse(s.value))
-      refreshToken(token)   
+      refreshToken(token)
     end
   end
 
