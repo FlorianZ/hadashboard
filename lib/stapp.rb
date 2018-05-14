@@ -8,7 +8,7 @@ require 'json'
 class STApp
   def initialize(client_id, client_secret, redirect_uri)
     @client = OAuth2::Client.new(client_id, client_secret, {
-      site: 'https://graph.api.smartthings.com',
+      site: 'https://graph-na04-useast2.api.smartthings.com',
       authorize_url: '/oauth/authorize',
       token_url: '/oauth/token'
     })
